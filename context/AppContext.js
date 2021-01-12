@@ -23,6 +23,11 @@ const AppContext = (props) => {
 
 
     React.useEffect(() => {
+        if (localStorage.getItem('token')) {
+            Settoken(localStorage.getItem('token'))
+        }
+    }, [])
+    React.useEffect(() => {
 
         setsocket(io('http://localhost:5000'))
         axios.get('/banned')
