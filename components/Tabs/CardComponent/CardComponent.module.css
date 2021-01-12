@@ -1,0 +1,15 @@
+.textContent {
+    padding-left: 20px;
+    color: '#404040';
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    line-height: 26px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: Source Sans Pro, Helvetica Neue, sans-serif;
+    white-space: pre-wrap;
+
+}

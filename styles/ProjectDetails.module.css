@@ -1,0 +1,26 @@
+.FirstInputComment {
+    font-size: 18px;
+}
+
+.SecondInputComment {
+    margin-top: 10px;
+    min-height: 200px;
+    font-size: 16px;
+
+}
+
+.commentSection {
+    margin: auto;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+
+.Navbar {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: inset rgba(255, 255, 255, 0.1) 0px 1px 0px, inset rgba(255, 255, 255, 0.04) 0px 0px 0px 1px, rgba(0, 0, 0, 0.25) 0px 1px 4px;
+    border-radius: 3px;
+    background-color: #262626;
+    text-align: left;
+    min-height: 30px;
+    position: relative;
+
+}

@@ -1,0 +1,126 @@
+.itemsTitle {
+    font-size: 15px;
+    color: #808080;
+    font-family: sans-serif;
+    font-weight: 600;
+}
+
+.settingsCards {
+    background-color: white;
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    min-height: 200px;
+}
+
+.itemsValue {
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+
+}
+
+
+
+.inputField {
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+    border-radius: 0 0 0 0;
+    background-color: white;
+    width: min-content;
+    height: fit-content;
+}
+
+.projectInputfield {
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+    border-radius: 0 0 0 0;
+    background-color: white;
+    width: min-content;
+    margin: auto;
+    height: fit-content;
+}
+
+.textareaField {
+    min-height: 150px;
+    font-size: 15px;
+    color: black;
+    font-weight: 500;
+    font-family: sans-serif;
+    border-radius: 0 0 0 0;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.sectionTitel {
+    font-size: 18px;
+    font-weight: 500;
+
+}
+
+.addimageContainer {
+    background-color: rgb(0, 0, 0);
+    height: 100%;
+    padding-top: 30px;
+}
+
+.addimagetext {
+
+    font-size: 11px;
+    font-family: inherit;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+}
+
+.deleteIcon {
+    color: white;
+    position: absolute;
+    left: 150px;
+    top: 10px;
+}
+
+.addimageIcon {
+    color: rgb(9, 194, 9);
+    margin: auto;
+    size: 20px;
+}
+
+.newsProfileName {
+    margin-left: 20px;
+    margin-top: 20px;
+    vertical-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.newsContent {
+    width: 100%;
+    height: 100%;
+    font-family: sans-serif;
+    font-size: 15px;
+    padding: 20px;
+    padding: 20px;
+    overflow: auto;
+}
+
+.newsTitle {
+
+    font-family: sans-serif;
+    font-size: 17px;
+    margin-top: 0;
+    padding-left: 20px;
+}
+
+.dateContent {
+    font-size: 12px;
+    margin-top: -20px;
+    padding-left: 70px;
+}

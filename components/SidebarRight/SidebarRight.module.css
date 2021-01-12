@@ -1,0 +1,53 @@
+.sidebar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 45px;
+    background-color: transparent;
+    height: 95vh;
+}
+
+.content {
+    margin-top: 100px;
+    margin-right: 30px;
+
+}
+
+.items {
+
+    text-decoration: none;
+    color: #2CA8FF;
+    transition: color .2s ease-out;
+    display: block;
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.textItem {
+
+    text-decoration: none;
+    color: black;
+    transition: color .2s ease-out;
+    display: block;
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: .75rem;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.titles {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+    font-weight: 300;
+    color: #1a1a1a;
+}
+
+.items:hover {
+    text-decoration: none;
+    color: #e83e8c;
+}

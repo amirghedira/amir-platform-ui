@@ -1,0 +1,57 @@
+.row {
+
+    width: 100%;
+
+}
+
+.col {
+    width: 100%;
+}
+
+.contentBar {
+    margin-left: 20px;
+}
+
+.infotext {
+
+    font-size: 12px;
+    margin-right: 5px;
+}
+
+.Topicautor {
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.linkTopic {
+
+    margin-left: 20px;
+}
+
+.link {
+    font-size: 18px;
+    font-weight: 700;
+
+}
+
+.items {
+
+    text-decoration: none;
+    color: rgba(26, 26, 26, .6);
+    transition: color .2s ease-out;
+    display: block;
+    padding: .5rem 1rem;
+    background-color: transparent;
+    font-size: .875rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.titles {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    text-align: left;
+    font-weight: 300;
+    color: #1a1a1a;
+}
