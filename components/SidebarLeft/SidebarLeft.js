@@ -16,11 +16,16 @@ const Sidebar = (props) => {
                         <Row>
                             <Col>
                                 <Link href="/topics/questions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-question-circle"></i>{' '}Questions</Link>
+                                    <i style={{ color: 'black' }} className="far fa-question-circle">
+                                        Questions
+                                    </i>
+                                </Link>
 
                                 <Link href="/add-topic/questions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-comments"></i>
-                                    {' '}Post a question</Link>
+                                    <i style={{ color: 'black' }} className="far fa-comments">
+                                        Post a question
+                                    </i>
+                                </Link>
 
                             </Col>
 
@@ -36,12 +41,15 @@ const Sidebar = (props) => {
                         <Row >
                             <Col>
                                 <Link href="/topics/suggestions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="fas fa-lightbulb"></i>
-                                    {' '}Suggestions</Link>
+                                    <i style={{ color: 'black' }} className="fas fa-lightbulb">
+                                        Suggestions
+                                    </i>
+                                </Link>
                                 <Link href="/add-topic/suggestions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-comments"></i>
-
-                                    {' '}Post a Suggestion</Link>
+                                    <i style={{ color: 'black' }} className="far fa-comments">
+                                        Post a Suggestion
+                                    </i>
+                                </Link>
                             </Col>
 
                         </Row>

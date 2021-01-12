@@ -8,7 +8,7 @@ import SidebarRight from '../components/SidebarRight/SidebarRight'
 function Index() {
 
   const context = React.useContext(GlobalContext);
-  const [width, setwitdh] = React.useState(0);
+  const [width, setwitdh] = React.useState(1200);
   React.useEffect(() => {
     document.title = 'Home'
   }, [context])

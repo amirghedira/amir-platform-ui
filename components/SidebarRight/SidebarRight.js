@@ -74,7 +74,7 @@ const Sidebar = (props) => {
 
                             <Col style={{ display: 'flex' }}>
                                 {!topicCounts ?
-                                    <img src={loadingimage} style={{ height: '25px', width: '25px' }} alt='...' />
+                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
                                     :
                                     <a href="/topics/questions" style={{ margin: 'auto' }} className={classes.items}>{topicCounts.questions}</a>}
                             </Col>
@@ -94,7 +94,7 @@ const Sidebar = (props) => {
 
                             <Col style={{ display: 'flex' }}>
                                 {!topicCounts ?
-                                    <img src={loadingimage} style={{ height: '25px', width: '25px' }} alt='...' />
+                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
                                     :
                                     <a href="/topics/suggestions" style={{ margin: 'auto' }} className={classes.items}>{topicCounts.suggestions}</a>}
                             </Col>
@@ -114,7 +114,7 @@ const Sidebar = (props) => {
 
                             <Col xs="6" xl="6">
                                 {!topicCounts || !context.projects ?
-                                    <img src={loadingimage} style={{ height: '25px', width: '25px' }} alt='...' />
+                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
                                     :
                                     mostSeen ?
                                         <a href={`/project/${mostSeen._id}`} className={classes.items}>{mostSeen.name}</a>
@@ -140,7 +140,7 @@ const Sidebar = (props) => {
 
                             <Col xs="6" xl="6">
                                 {!topicCounts ?
-                                    <img src={loadingimage} style={{ height: '25px', width: '25px' }} alt='...' />
+                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
                                     :
                                     mostDownload ?
                                         <a href={`/project/${mostDownload._id}`} className={classes.items}>{mostDownload.name}</a>

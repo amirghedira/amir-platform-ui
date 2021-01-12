@@ -24,6 +24,7 @@ const TopicPage = ({ Topics, Type }) => {
 
 
     React.useEffect(() => {
+        console.log(Topics)
         SetcurrentPosts(Topics.slice(indexofFirstPost, indexofLastPost))
     }, [])
     const handleFunction = function () {
@@ -152,175 +153,173 @@ const TopicPage = ({ Topics, Type }) => {
         }
         return Pagenumber
     }
-    if (isLoading)
-        return null
-    else
-        return (
-            <div>
-                <Row style={{ margin: '0' }}>
-                    <Col style={{ padding: '0' }}>
-                        <Nav className={classes.Navbar} expand="lg">
-                            <NavItem >
+    return (
+        <div>
+            <Row style={{ margin: '0' }}>
+                <Col style={{ padding: '0' }}>
+                    <Nav className={classes.Navbar} expand="lg">
+                        <NavItem >
 
-                                <NavLink style={{ marginTop: '-6px' }} tag={Link} to='/home'>
-                                    <strong style={{ fontSize: width < 455 ? '10px' : null }}> Home </strong>
-                                </NavLink>
-                            </NavItem>
+                            <Link style={{ marginTop: '-6px' }} href='/'>
+                                <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> Home </strong>
 
-                            <NavItem >
-                                <NavLink style={{ marginTop: '-10px' }} to='/topics/questions' >
-                                    <img style={{ height: '36px', width: '36px', marginTop: '-6px' }} alt='...' src={'/chevron.png'} />
-                                    <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> {Type} </strong>
-                                </NavLink>
+                            </Link>
+                        </NavItem>
 
-                            </NavItem>
-                        </Nav>
+                        <NavItem >
+                            <NavLink style={{ marginTop: '-10px' }} to='/topics/questions' >
+                                <img style={{ height: '36px', width: '36px', marginTop: '-6px' }} alt='...' src={'/chevron.png'} />
+                                <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> {Type} </strong>
+                            </NavLink>
+
+                        </NavItem>
+                    </Nav>
+                </Col>
+            </Row>
+
+            <Container className={classes.container}>
+                <ToastContainer />
+
+                <Row className={classes.createTopic}>
+                    <Col>
+                        <h3 className={classes.sectionTitle}>{Type}</h3>
                     </Col>
-                </Row>
-
-                <Container className={classes.container}>
-                    <ToastContainer />
-
-                    <Row className={classes.createTopic}>
-                        <Col>
-                            <h3 className={classes.sectionTitle}>{Type}</h3>
-                        </Col>
-                        <Col style={{ justifyContent: 'flex-end', display: 'flex' }}>
-                            <Link href={`/add-topic/${Type}`}>
-                                <Button color="info" >
-                                    <i className="fas fa-comments fa-2x" style={{ marginRight: '10px', fontSize: '16px' }}></i>
+                    <Col style={{ justifyContent: 'flex-end', display: 'flex' }}>
+                        <Link href={`/add-topic/${Type}`}>
+                            <Button color="info" >
+                                <i className="fas fa-comments fa-2x" style={{ marginRight: '10px', fontSize: '16px' }}></i>
                                     Create new Topic
 
                             </Button>
-                            </Link>
+                        </Link>
 
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            {Topics.length > postsPerPage ?
-                                <Nav className={classes.PaginationBar} expand="lg">
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {Topics.length > postsPerPage ?
+                            <Nav className={classes.PaginationBar} expand="lg">
 
-                                    <Pagination
-                                        className="pagination pagination-primary"
-                                        listClassName="pagination-primary"
-                                    >                                {
-                                            getPageNumber().map(number => {
-                                                return (
-                                                    <PaginationItem key={number} className={currentPage === number ? "active" : ''}>
-                                                        <PaginationLink style={{ color: currentPage === number ? 'black' : 'white' }} onClick={() => setcurrentPage(number)}>
-                                                            {number}
-                                                        </PaginationLink>
-                                                    </PaginationItem>
-                                                )
-                                            })
-                                        }
-                                    </Pagination>
-                                </Nav> : null}
-                        </Col>
-                    </Row>
-                    <Row className={classes.sectionList}>
-                        {currentPosts.length > 0 ?
-                            <Col>
-                                {
-                                    currentPosts.slice(0).reverse().map(topic => {
-                                        if (topic.pin)
+                                <Pagination
+                                    className="pagination pagination-primary"
+                                    listClassName="pagination-primary"
+                                >                                {
+                                        getPageNumber().map(number => {
                                             return (
-                                                <Topicitem
-                                                    key={topic._id}
-                                                    id={topic._id}
-                                                    title={topic.title}
-                                                    autor={topic.autor}
-                                                    date={topic.date}
-                                                    replies={topic.replies.length}
-                                                    type={Type}
-                                                    token={context.token}
-                                                    pinnedstate={topic.pin}
-                                                    lockedstate={topic.state}
-                                                    closeOpenFunction={() => { editTopicStateHandler(topic._id, !topic.state) }}
-                                                    deleteTopicFunction={() => { deleteTopicHandler(topic._id) }}
-                                                    pinFunction={() => pinUnpinTopicHandler(topic._id, !topic.pin)}
-
-                                                />
-
+                                                <PaginationItem key={number} className={currentPage === number ? "active" : ''}>
+                                                    <PaginationLink style={{ color: currentPage === number ? 'black' : 'white' }} onClick={() => setcurrentPage(number)}>
+                                                        {number}
+                                                    </PaginationLink>
+                                                </PaginationItem>
                                             )
-                                        else return null
-                                    })
-                                }
-                                {currentPosts.slice(0).reverse().map(topic => {
-                                    if (!topic.pin)
+                                        })
+                                    }
+                                </Pagination>
+                            </Nav> : null}
+                    </Col>
+                </Row>
+                <Row className={classes.sectionList}>
+                    {currentPosts.length > 0 ?
+                        <Col>
+                            {
+                                currentPosts.slice(0).reverse().map(topic => {
+                                    if (topic.pin)
                                         return (
                                             <Topicitem
                                                 key={topic._id}
                                                 id={topic._id}
                                                 title={topic.title}
-                                                autor={topic.autor === 'admin' ? context.UserProfile.name : topic.autor}
+                                                autor={topic.autor}
                                                 date={topic.date}
                                                 replies={topic.replies.length}
                                                 type={Type}
                                                 token={context.token}
-                                                pinnedstate={topic.pinned}
+                                                pinnedstate={topic.pin}
                                                 lockedstate={topic.state}
                                                 closeOpenFunction={() => { editTopicStateHandler(topic._id, !topic.state) }}
                                                 deleteTopicFunction={() => { deleteTopicHandler(topic._id) }}
-                                                pinFunction={() => pinUnpinTopicHandler(topic._id, !topic.pinned)}
+                                                pinFunction={() => pinUnpinTopicHandler(topic._id, !topic.pin)}
 
                                             />
+
                                         )
                                     else return null
                                 })
-                                }
+                            }
+                            {currentPosts.slice(0).reverse().map(topic => {
+                                if (!topic.pin)
+                                    return (
+                                        <Topicitem
+                                            key={topic._id}
+                                            id={topic._id}
+                                            title={topic.title}
+                                            autor={topic.autor === 'admin' ? context.UserProfile.name : topic.autor}
+                                            date={topic.date}
+                                            replies={topic.replies.length}
+                                            type={Type}
+                                            token={context.token}
+                                            pinnedstate={topic.pinned}
+                                            lockedstate={topic.state}
+                                            closeOpenFunction={() => { editTopicStateHandler(topic._id, !topic.state) }}
+                                            deleteTopicFunction={() => { deleteTopicHandler(topic._id) }}
+                                            pinFunction={() => pinUnpinTopicHandler(topic._id, !topic.pinned)}
+
+                                        />
+                                    )
+                                else return null
+                            })
+                            }
+
+                        </Col>
+                        :
+                        getBanStatus() ?
+                            <Banned />
+                            :
+                            <Col style={{ marginTop: '50px' }}>
+                                <div style={{ display: 'flex', marginBottom: '20px' }}>
+                                    <h4 style={{ margin: 'auto' }}> There are no topics in this section yet</h4>
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                    <Link href={`/add-topic/${Type}`} style={{ margin: 'auto' }} >
+
+                                        <Button color="info">
+                                            Start the first topic
+                                </Button>
+                                    </Link>
+                                </div>
 
                             </Col>
-                            :
-                            getBanStatus() ?
-                                <Banned />
-                                :
-                                <Col style={{ marginTop: '50px' }}>
-                                    <div style={{ display: 'flex', marginBottom: '20px' }}>
-                                        <h4 style={{ margin: 'auto' }}> There are no topics in this section yet</h4>
-                                    </div>
-                                    <div style={{ display: 'flex' }}>
-                                        <Link href={`/add-topic/${Type}`} style={{ margin: 'auto' }} >
 
-                                            <Button color="info">
-                                                Start the first topic
-                                </Button>
-                                        </Link>
-                                    </div>
+                    }
+                </Row>
+                <Row>
+                    <Col>
+                        {Topics.length > postsPerPage ?
+                            <Nav className={classes.PaginationBar} expand="lg">
 
-                                </Col>
+                                <Pagination
+                                    className="pagination pagination-primary"
+                                    listClassName="pagination-primary"
+                                >                                {
+                                        getPageNumber().map(number => {
+                                            return (
+                                                <PaginationItem key={number} className={currentPage === number ? "active" : ''}>
+                                                    <PaginationLink style={{ color: currentPage === number ? 'black' : 'white' }} onClick={() => setcurrentPage(number)}>
+                                                        {number}
+                                                    </PaginationLink>
+                                                </PaginationItem>
+                                            )
+                                        })
+                                    }
+                                </Pagination>
+                            </Nav> : null}
+                    </Col>
+                </Row>
 
-                        }
-                    </Row>
-                    <Row>
-                        <Col>
-                            {Topics.length > postsPerPage ?
-                                <Nav className={classes.PaginationBar} expand="lg">
+            </Container>
+        </div>
 
-                                    <Pagination
-                                        className="pagination pagination-primary"
-                                        listClassName="pagination-primary"
-                                    >                                {
-                                            getPageNumber().map(number => {
-                                                return (
-                                                    <PaginationItem key={number} className={currentPage === number ? "active" : ''}>
-                                                        <PaginationLink style={{ color: currentPage === number ? 'black' : 'white' }} onClick={() => setcurrentPage(number)}>
-                                                            {number}
-                                                        </PaginationLink>
-                                                    </PaginationItem>
-                                                )
-                                            })
-                                        }
-                                    </Pagination>
-                                </Nav> : null}
-                        </Col>
-                    </Row>
-
-                </Container>
-            </div>
-
-        )
+    )
 }
 
 export const getServerSideProps = async (context) => {
@@ -328,12 +327,11 @@ export const getServerSideProps = async (context) => {
     if (context.params.type === 'suggestions'
         || context.params.type === 'questions') {
         const result = await Axios.get(`https://mywebrestapi.herokuapp.com/topic/${context.params.type}`)
-        console.log(result.data.result)
         return {
             props: {
                 Type: context.params.type,
                 Topics: result.data.result
-            }, // will be passed to the page component as props
+            },
         }
 
     }
