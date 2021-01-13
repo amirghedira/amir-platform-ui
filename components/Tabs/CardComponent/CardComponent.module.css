@@ -9,7 +9,26 @@
     line-height: 26px;
     font-size: 14px;
     font-weight: 400;
-    font-family: Source Sans Pro, Helvetica Neue, sans-serif;
     white-space: pre-wrap;
+    font-family: 'Poppins', sans-serif;
+
 
 }
+
+.finishAndEditContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 5px 10px 5px 10px;
+
+    
+}
+
+
+
+@media only screen and (max-width: 767px) {
+    .finishAndEditContainer {
+        justify-content: center;
+    }
+}
+  

@@ -8,35 +8,20 @@ import Link from 'next/link'
 import Banned from '../../components/Banned/Banned'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Axios from 'axios';
 
-const TopicPage = ({ Topics, Type }) => {
+const TopicsPage = ({ Topics, Type }) => {
 
     const context = React.useContext(GlobalContext)
-    const [isLoading, SetisLoading] = React.useState(true)
     const [currentPosts, SetcurrentPosts] = React.useState({})
     const [currentPage, setcurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
     const indexofLastPost = currentPage * postsPerPage;
     const indexofFirstPost = indexofLastPost - postsPerPage;
-    const [width, setwitdh] = React.useState(1000)
 
 
 
     React.useEffect(() => {
-        console.log(Topics)
         SetcurrentPosts(Topics.slice(indexofFirstPost, indexofLastPost))
-    }, [])
-    const handleFunction = function () {
-        setwitdh(window.innerWidth)
-    }
-
-    React.useEffect(() => {
-
-        window.addEventListener('resize', handleFunction)
-        return () => {
-            window.removeEventListener('resize', handleFunction);
-        }
     }, [])
 
     React.useEffect(() => {
@@ -158,18 +143,17 @@ const TopicPage = ({ Topics, Type }) => {
             <Row style={{ margin: '0' }}>
                 <Col style={{ padding: '0' }}>
                     <Nav className={classes.Navbar} expand="lg">
-                        <NavItem >
-
-                            <Link style={{ marginTop: '-6px' }} href='/'>
-                                <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> Home </strong>
-
-                            </Link>
+                        <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                            <NavLink href='/' tag={Link}>
+                                <strong style={{ color: '#2CA8FF', fontSize: '12px', cursor: 'pointer' }}> Home </strong>
+                            </NavLink>
                         </NavItem>
-
-                        <NavItem >
-                            <NavLink style={{ marginTop: '-10px' }} to='/topics/questions' >
-                                <img style={{ height: '36px', width: '36px', marginTop: '-6px' }} alt='...' src={'/chevron.png'} />
-                                <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> {Type} </strong>
+                        <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                            <NavLink >
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
+                                    <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Type} </strong>
+                                </div>
                             </NavLink>
 
                         </NavItem>
@@ -322,20 +306,4 @@ const TopicPage = ({ Topics, Type }) => {
     )
 }
 
-export const getServerSideProps = async (context) => {
-
-    if (context.params.type === 'suggestions'
-        || context.params.type === 'questions') {
-        const result = await Axios.get(`https://mywebrestapi.herokuapp.com/topic/${context.params.type}`)
-        return {
-            props: {
-                Type: context.params.type,
-                Topics: result.data.result
-            },
-        }
-
-    }
-}
-
-
-export default TopicPage;
+export default TopicsPage

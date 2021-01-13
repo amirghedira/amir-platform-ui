@@ -16,31 +16,14 @@ const AddTopic = (props) => {
     const [Type, SetType] = React.useState(null);
     const [isRedirectCancel, setRedirectCancel] = React.useState(false)
     const [isRedirectPost, setRedirectPost] = React.useState({ state: false, path: null })
-    const [isLoading, Setisloading] = React.useState(true)
-    const [width, setwidth] = React.useState(1000)
     const context = React.useContext(GlobalContext)
     const router = useRouter()
 
-
-
-
-    const handleFunction = function () {
-        setwidth(window.innerWidth)
-    }
-    React.useEffect(() => {
-        window.addEventListener('resize', handleFunction)
-        return () => {
-            window.removeEventListener('resize', handleFunction);
-        }
-    }, [])
 
     React.useEffect(() => {
         if (props.type === 'suggestions' || props.type === 'questions') {
             SetType(props.type)
             document.title = 'Create new ' + props.type
-            if (context.memberInfo && context.UserProfile) {
-                Setisloading(false)
-            }
         }
         else
             context.ErrorAccureHandler();
@@ -103,26 +86,26 @@ const AddTopic = (props) => {
                 <Row style={{ margin: '0' }}>
                     <Col style={{ padding: '0' }}>
                         <Nav className={classes.Navbar} expand="lg">
-                            <NavItem style={{ marginRight: '-10px' }}>
-                                <NavLink style={{ marginTop: '-6px' }} href='/' tag={Link}>
-                                    <strong style={{ fontSize: width < 455 ? '10px' : null }}> Home </strong>
+                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                <NavLink href='/' tag={Link}>
+                                    <strong style={{ color: '#2CA8FF', fontSize: '12px', cursor: 'pointer' }}> Home </strong>
                                 </NavLink>
                             </NavItem>
 
-                            <NavItem style={{ marginRight: '-10px' }}>
-                                <NavLink style={{ marginTop: '-10px' }} href={`/topics/${Type}`} tag={Link}>
-                                    <div>
-                                        <img style={{ height: '36px', width: '36px', marginTop: '-6px' }} alt='...' src={'/chevron.png'} />
-                                        <strong style={{ fontSize: width < 455 ? '10px' : null }} > {Type} </strong>
+                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                <NavLink href={`/topics/${Type}`} tag={Link}>
+                                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                        <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
+                                        <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Type} </strong>
                                     </div>
                                 </NavLink>
 
                             </NavItem>
-                            <NavItem style={{ marginRight: '-10px' }}>
-                                <NavLink style={{ marginTop: '-10px' }}>
-                                    <div>
-                                        <img style={{ height: '36px', width: '36px', marginTop: '-6px' }} alt='...' src={'/chevron.png'} />
-                                        <strong style={{ color: '#2CA8FF', fontSize: width < 455 ? '10px' : null }}> Create new Topic </strong>
+                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                <NavLink >
+                                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                        <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
+                                        <strong style={{ color: '#2CA8FF', fontSize: '12px' }}> Create new Topic </strong>
                                     </div>
                                 </NavLink>
 
@@ -138,18 +121,17 @@ const AddTopic = (props) => {
                 <Container style={{ marginBottom: '70px' }}>
 
                     <Row className={classes.commentSection}>
-                        {width > 992 ?
-                            <Col xs="1" style={{ display: 'flex' }}>
-                                <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
-                                    {context.token ?
-                                        <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px' }} alt="" />
-                                        :
-                                        <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="" />
+                        <Col xs="3" md='1' style={{ display: 'flex' }}>
+                            <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
+                                {context.token ?
+                                    <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px' }} alt="" />
+                                    :
+                                    <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="" />
 
-                                    }
-                                </div>
-                            </Col>
-                            : null}
+                                }
+                            </div>
+                        </Col>
+
                         <Col>
                             <Row style={{ marginTop: '10px', marginBottom: '30px' }}>
                                 <Col style={{ padding: '0' }} >

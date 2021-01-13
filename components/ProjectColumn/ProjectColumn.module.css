@@ -24,7 +24,13 @@
 .sidebarTitle {
     font-family: "Poppins", sans-serif;
     font-style: initial;
+    font-weight: 600;
     font-size: inherit;
+}
+
+.projecttitle{
+    font-weight: 800;
+    color: black;
 }
 
 .button {

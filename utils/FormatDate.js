@@ -35,7 +35,7 @@ const FormateDate = (props) => {
     }
     else
         return (
-            <Moment format="DD MMMM YYYY, ">{props.children}</Moment>
+            <Moment format="DD MMMM YYYY">{props.children}</Moment>
         )
 }
 

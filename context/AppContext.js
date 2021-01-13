@@ -16,7 +16,6 @@ const AppContext = (props) => {
     const [memberInfo, setMemberInfo] = React.useState(null)
     const [BannedUsers, SetBannedUsers] = React.useState(null)
     const [Notifications, setNotifications] = React.useState(null)
-    const [goload, setgoload] = React.useState(false)
     const [socket, setsocket] = React.useState(null)
     const [subscription, setsubscription] = React.useState(null)
     const [Erroraccured, setErrorAccured] = React.useState(false)
@@ -29,45 +28,28 @@ const AppContext = (props) => {
     }, [])
     React.useEffect(() => {
 
-        setsocket(io('http://localhost:5000'))
-        axios.get('/banned')
+        setsocket(io('https://mywebrestapi.herokuapp.com'))
+        axios.get('/user/connected-user')
             .then(result => {
                 SetBannedUsers(result.data.banned)
+                setProjects(result.data.projects)
+                setNotifications(result.data.notifications)
+                SetUserProfile(result.data.user)
+                fetch("https://api.ipgeolocation.io/getip")
+                    .then(response => {
+                        return response.json();
+                    })
+                    .then(res => {
+                        setMemberInfo({ ip: res.ip })
+                    })
+                    .catch(err => {
+                        ErrorAccureHandler(500, "Connection to server has timedout")
+                    })
             })
             .catch(err => {
                 ErrorAccureHandler(500, "Connection to server has timedout")
             })
-        fetch("https://api.ipgeolocation.io/getip")
-            .then(response => {
-                return response.json();
-            })
-            .then(res => {
-                setMemberInfo({ ip: res.ip })
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-        axios.get('/project')
-            .then(result => {
-                setProjects(result.data.result)
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-        axios.get('/user')
-            .then(result => {
-                SetUserProfile(result.data)
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-        axios.get('/notification')
-            .then(result => {
-                setNotifications(result.data.result)
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
+
     }, [])
     React.useEffect(() => {
         const publicVadidKey = 'BMUYV7TShfXpU5edFVCfBEO0JwC-kCujoxV6q4pp3WHipuDPF2OE4bMd4LYYsNjKdn9GMtIlxW6vMQinu9qBkUg'
@@ -241,123 +223,8 @@ const AppContext = (props) => {
 
 
     }
-    const addprojectImageHandler = (projectid, images) => {
 
-        const fd = new FormData();
-        if (images)
-            for (const key of Object.keys(images)) {
-                fd.append('projectimages', images[key])
-            }
-        axios.patch('/project/addprojectimages/' + projectid, fd)
-            .then(result => {
-                const index = projects.findIndex(project => { return project._id === projectid })
-                UpdateProjects(index, {
-                    ...projects[index],
-                    imagesurl: [...projects[index].imagesurl, result.data.imageurl]
-                })
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
 
-    }
-    const deleteProjectImageHandler = (projectid, image) => {
-
-        const index = projects.findIndex(project => { return project._id === projectid })
-        const imageindex = projects[index].imagesurl.findIndex(projectimage => { return projectimage === image });
-        const newimages = projects[index].imagesurl;
-        newimages.splice(imageindex, 1);
-        axios.patch('/project/deleteprojectimage/' + projectid, { imagetodelete: image, newimages: newimages })
-            .then(result => {
-                UpdateProjects(index, {
-                    ...projects[index],
-                    imagesurl: newimages
-                })
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-
-    }
-    const deleteCommentHandler = (projectid, commentid) => {
-
-        const index = projects.findIndex((project) => { return project._id === projectid })
-        const commentIndex = projects[index].Comments.findIndex(comment => { return comment._id === commentid })
-        let newComments = projects[index].Comments
-        newComments.splice(commentIndex, 1)
-        axios.patch('/project/deletecomment/' + projectid, { Comments: newComments, commentsCount: newComments.length })
-            .then(() => {
-                const newProject = {
-                    ...projects[index],
-                    Comments: newComments,
-                    commentsCount: newComments.length
-                }
-                UpdateProjects(index, newProject)
-                axios.delete(`/notification/${commentid}`)
-                    .then()
-                    .catch(err => {
-                        ErrorAccureHandler(500, "Connection to server has timedout");
-                    })
-
-            })
-
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout");
-            })
-    }
-    const postCommentHandler = (projectId, obj) => {
-
-        const index = projects.findIndex(project => { return project._id === projectId })
-
-        const NewComment = { ip: obj.ip, content: obj.content, autor: obj.autor }
-        axios.post('/project/postcomments/' + projects[index]._id, { comment: NewComment, commentsCount: projects[index].commentsCount + 1 })
-            .then(result => {
-                UpdateProjects(index,
-                    {
-                        ...projects[index],
-                        Comments: [...projects[index].Comments, { ...NewComment, _id: result.data._id, date: result.data.date }],
-                        commentsCount: projects[index].commentsCount + 1
-                    }
-
-                )
-                if (obj.autor !== 'admin')
-                    axios.post('/notification', { id: result.data._id, content: `user ${obj.autor} has commented ${projects[index].name} project`, link: `/project/${projects[index]._id}` })
-                        .then(result => { })
-                        .catch(err => {
-                            ErrorAccureHandler(500, "Connection to server has timedout");
-                        })
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout");
-            })
-    }
-    const UpdateDownloadCount = (projectid) => {
-        const index = projects.findIndex((project) => { return project._id === projectid })
-        axios.patch('/project/updatedownloads/' + projectid, { downloadcount: projects[index].downloadcount + 1 })
-            .then(result => {
-                const newProject =
-                {
-                    ...projects[index],
-                    downloadcount: projects[index].downloadcount + 1
-
-                }
-                UpdateProjects(index, newProject)
-            })
-            .catch(err => { ErrorAccureHandler(500, "Connection to server has timedout") })
-    }
-    const UpdateGitViewer = (projectid) => {
-        const index = projects.findIndex((project) => { return project._id === projectid })
-        axios.patch('/project/updategitviewers/' + projectid, { gitviewers: projects[index].gitViewers + 1 })
-            .then(result => {
-                const newProject = {
-                    ...projects[index],
-                    gitViewers: projects[index].gitViewers + 1
-                }
-                UpdateProjects(index, newProject)
-            })
-            .catch(err => { ErrorAccureHandler(500, "Connection to server has timedout") })
-
-    }
     const UpdateProfile = (newprofile) => {
         SetUserProfile(newprofile)
     }
@@ -371,7 +238,6 @@ const AppContext = (props) => {
                 newBannedUsers.splice(index, 1);
                 socket.emit('sendbannedmembers', newBannedUsers)
                 SetBannedUsers(newBannedUsers);
-                setgoload(!goload)
                 toast.success('User is successfully unbanned!', { position: toast.POSITION.BOTTOM_RIGHT })
             })
             .catch(err => {
@@ -522,7 +388,6 @@ const AppContext = (props) => {
         NewProjects[index] = newProject
         socket.emit('sendprojects', NewProjects)
         setProjects(NewProjects)
-        setgoload(!goload)
 
     }
     if (Erroraccured)
@@ -543,13 +408,7 @@ const AppContext = (props) => {
                     projects: projects,
                     addProjectHandler: addProjectHandler,
                     deleteprojectHandler: deleteprojectHandler,
-                    addprojectImage: addprojectImageHandler,
-                    deleteProjectImage: deleteProjectImageHandler,
                     UpdateProjects: UpdateProjects,
-                    UpdateGitViewer: UpdateGitViewer,
-                    postComment: postCommentHandler,
-                    deleteCommentHandler: deleteCommentHandler,
-                    UpdateDownloadCount: UpdateDownloadCount,
                     BannedUsers: BannedUsers,
                     banMember: BanMemberHandler,
                     unbanMember: unBanMemberHandler,
@@ -564,8 +423,10 @@ const AppContext = (props) => {
 
                 }
             }>
+
                 {props.children}
-                <ToastContainer />
+                < ToastContainer />
+
             </GlobalContext.Provider>
         )
 }

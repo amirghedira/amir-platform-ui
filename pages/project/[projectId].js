@@ -10,8 +10,6 @@ import {
     TabPane,
 
 } from 'reactstrap'
-import axios from '../../utils/axios'
-import defaultAxios from 'axios'
 import Editmodal from '../../components/Editmodal/Editmodal'
 import DeleteModal from '../../components/DeleteModal/DeleteModal'
 import ProjectField from '../../components/ProjectField/ProjectField';
@@ -21,12 +19,15 @@ import GlobalContext from '../../context/GlobalContext'
 import 'react-toastify/dist/ReactToastify.css';
 import PostCard from '../../components/PostCard/PostCard';
 import CommentSection from '../../components/CommentSection/CommentSection'
+import axios from '../../utils/axios';
+import axiosInstance from '../../utils/axios';
+import Axios from 'axios';
 
 
-const Details = ({ project }) => {
+const Details = (props) => {
     const context = React.useContext(GlobalContext)
     //Loading Handlers
-    const [isLoadingPage, SetisLoadingPage] = React.useState(true)
+    const [project, setProject] = React.useState(props.project)
     const [isloadingOverview, SetisLoadingOverview] = React.useState(false)
     const [isloadingwhat, SetisLoadingWhat] = React.useState(false)
     const [isloadingplatform, SetisLoadingPlatform] = React.useState(false)
@@ -56,6 +57,7 @@ const Details = ({ project }) => {
     const inputFile = React.useRef(null)
 
 
+
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
         document.body.classList.add("profile-page");
@@ -78,10 +80,42 @@ const Details = ({ project }) => {
 
     }
 
+    const updateDownloadHandler = () => {
+        axios.patch('/project/updatedownloads/' + projectid, { downloadcount: projects[index].downloadcount + 1 })
+            .then(result => {
+
+                setProject(
+                    {
+                        ...project,
+                        downloadcount: project.downloadcount + 1
+
+                    }
+                )
+            })
+            .catch(err => { context.ErrorAccureHandler(500, "Connection to server has timedout") })
+    }
+
     const submitCommentHandler = (obj) => {
 
         if (project.commentsCount === 0 || context.memberInfo.ip !== project.Comments[project.commentsCount - 1].ip) {
-            context.postComment(project._id, { ...obj, ip: context.memberInfo.ip })
+
+            axios.post('/project/postcomments/' + project._id, { comment: NewComment, commentsCount: project.commentsCount + 1 })
+                .then(async (result) => {
+                    setProject(
+                        {
+                            ...project,
+                            Comments: [...project.Comments, { ...NewComment, _id: result.data._id, date: result.data.date }],
+                            commentsCount: project.commentsCount + 1
+                        }
+
+                    )
+                    if (obj.autor !== 'admin')
+                        await axios.post('/notification', { id: result.data._id, content: `user ${obj.autor} has commented ${project.name} project`, link: `/project/${project._id}` })
+
+                })
+                .catch(err => {
+                    context.ErrorAccureHandler(500, "Connection to server has timedout");
+                })
 
         } else {
 
@@ -90,6 +124,53 @@ const Details = ({ project }) => {
 
 
 
+    }
+
+    const addprojectImageHandler = (images) => {
+        const fd = new FormData();
+        if (images)
+            for (const key of Object.keys(images)) {
+                fd.append('projectimages', images[key])
+            }
+        axios.patch('/project/addprojectimages/' + project._id, fd)
+            .then(result => {
+                setProject({
+                    ...project,
+                    imagesurl: [...projects[index].imagesurl, result.data.imageurl]
+                })
+            })
+            .catch(err => {
+                ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+
+    }
+
+    const UpdateGitViewerHandler = () => {
+        axios.patch('/project/updategitviewers/' + project._id, { gitviewers: project.gitViewers + 1 })
+            .then(result => {
+                const newProject = {
+                    ...project,
+                    gitViewers: project.gitViewers + 1
+                }
+                setProject(newProject)
+            })
+            .catch(err => { context.ErrorAccureHandler(500, "Connection to server has timedout") })
+    }
+
+    const deleteProjectImageHandler = (image) => {
+        const imageindex = project.imagesurl.findIndex(projectimage => { return projectimage === image });
+        const newimages = project.imagesurl;
+        newimages.splice(imageindex, 1);
+        axios.patch('/project/deleteprojectimage/' + project._id, { imagetodelete: image, newimages: newimages })
+            .then(result => {
+                setProject({
+                    ...project,
+                    imagesurl: newimages
+                })
+            })
+            .catch(err => {
+                ErrorAccureHandler(500, "Connection to server has timedout")
+            })
     }
     const editFieldHandler = (infos) => {
         let loadingComponent = null
@@ -154,7 +235,29 @@ const Details = ({ project }) => {
 
     }
     const deleteCommentHandler = (commentid) => {
-        context.deleteCommentHandler(project._id, commentid);
+
+        const commentIndex = project.Comments.findIndex(comment => { return comment._id === commentid })
+        let newComments = project.Comments
+        newComments.splice(commentIndex, 1)
+        axios.patch('/project/deletecomment/' + project._id, { Comments: newComments, commentsCount: newComments.length })
+            .then(() => {
+                const newProject = {
+                    ...project,
+                    Comments: newComments,
+                    commentsCount: newComments.length
+                }
+                setProject({ ...newProject })
+                axios.delete(`/notification/${commentid}`)
+                    .then()
+                    .catch(err => {
+                        ErrorAccureHandler(500, "Connection to server has timedout");
+                    })
+
+            })
+
+            .catch(err => {
+                ErrorAccureHandler(500, "Connection to server has timedout");
+            })
         Deletemodalclosehandler();
 
     }
@@ -172,7 +275,7 @@ const Details = ({ project }) => {
                                     pills
                                     role="tablist"
                                 >
-                                    <NavItem>
+                                    <NavItem className={classes.navItem}>
                                         <NavLink
                                             className={pills === "1" ? "active" : ""}
                                             onClick={() => {
@@ -180,14 +283,12 @@ const Details = ({ project }) => {
                                                 setMenuButtonClicked({ comment: false, photo: true, main: false });
                                             }}
                                         >
-                                            <h4
-                                                style={{ margin: 'auto', color: MenuButtonClicked.photo ? 'white' : 'black' }}
-                                            >
+                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.photo ? 'white' : 'black' }}>
                                                 photos
                                                 </h4>
                                         </NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    <NavItem className={classes.navItem}>
                                         <NavLink
                                             className={pills === "2" ? "active" : ""}
                                             onClick={() => {
@@ -195,22 +296,21 @@ const Details = ({ project }) => {
                                                 setMenuButtonClicked({ comment: false, photo: false, main: true });
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.main ? 'white' : 'black' }}>
+                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.main ? 'white' : 'black' }}>
                                                 Main
                                                 </h4>
                                         </NavLink>
                                     </NavItem>
-                                    <NavItem>
+                                    <NavItem className={classes.navItem}>
                                         <NavLink
                                             className={pills === "3" ? "active" : ""}
                                             onClick={() => {
                                                 setPills("3");
                                                 setMenuButtonClicked({ comment: true, photo: false, main: false });
 
-                                            }}
-                                        >
-                                            <h4
-                                                style={{ margin: 'auto', color: MenuButtonClicked.comment ? 'white' : 'black' }}>
+                                            }}>
+
+                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.comment ? 'white' : 'black' }}>
                                                 Comments
                                                 </h4>
                                         </NavLink>
@@ -234,7 +334,7 @@ const Details = ({ project }) => {
 
                                                         <input
                                                             style={{ display: 'none' }}
-                                                            onChange={(event) => { context.addprojectImage(project._id, event.target.files) }}
+                                                            onChange={(event) => { addprojectImageHandler(event.target.files) }}
                                                             ref={inputFile}
                                                             multiple
                                                             type="file" />
@@ -243,70 +343,40 @@ const Details = ({ project }) => {
                                                 </Row>
                                                 : null
                                         }
-                                        <Row className="collections">
-                                            <Col md="6">
+                                        <Row>
+                                            {
+                                                project.imagesurl.map((image, i) => {
 
-                                                {
-                                                    project.imagesurl.map((image, i) => {
-                                                        if (i < project.imagesurl.length / 2) {
-                                                            return (
-                                                                <div key={i}>
+                                                    return (
+                                                        <Col xs="12" md="6" key={i}>
 
-                                                                    {
-                                                                        context.token ?
-                                                                            <Button color="danger" onClick={() => { context.deleteProjectImage(project._id, image) }}>Delete</Button>
+                                                            {
+                                                                context.token ?
+                                                                    <Button color="danger" onClick={() => { deleteProjectImageHandler(image) }}>Delete</Button>
 
-                                                                            : null
-                                                                    }                                                                        <img
-                                                                        alt="..."
-                                                                        className="img-raised"
-                                                                        src={image}
-                                                                        onClick={() => { showprojectimageHandler(image) }}
-                                                                        style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
-                                                                    ></img>
+                                                                    : null
+                                                            }
+                                                            <img
+                                                                alt="..."
+                                                                className="img-raised"
+                                                                src={image}
+                                                                onClick={() => { showprojectimageHandler(image) }}
+                                                                style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
+                                                            ></img>
 
-                                                                </div>
-                                                            )
-                                                        }
-                                                        else
-                                                            return null
-                                                    })}
-                                            </Col>
-                                            <Col md="6">
-                                                {project.imagesurl.map((image, i) => {
-                                                    if (i >= project.imagesurl.length / 2) {
-                                                        return (
-                                                            <div key={i}>
-                                                                {
-                                                                    context.token ?
-                                                                        <Button color="danger" onClick={() => { context.deleteProjectImage(project._id, image) }}>Delete</Button>
+                                                        </Col>
+                                                    )
 
-                                                                        : null
-                                                                }                                                                       <img
-                                                                    alt="..."
-                                                                    className="img-raised"
-                                                                    src={image}
-                                                                    onClick={() => { showprojectimageHandler(image) }}
-                                                                    style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
-                                                                ></img>
 
-                                                            </div>
-                                                        )
-                                                    }
-
-                                                    else
-                                                        return null
                                                 })}
-                                            </Col>
-
                                         </Row>
                                     </Col>
                                 </TabPane>
                                 <TabPane tabId="pills2">
                                     <Row >
                                         <Col className="ml-auto mr-auto" md="10" xl="3" >
-                                            <ProjectColumn project={project} githubButtonFunction={() => { context.UpdateGitViewer(project._id) }}
-                                                downloadButtonFunction={() => { context.UpdateDownloadCount(project._id) }}
+                                            <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
+                                                downloadButtonFunction={updateDownloadHandler}
                                                 editFunction={editHandler} logstatus={context.token} />
                                         </Col>
                                         <Col className="ml-auto mr-auto" md="10" xl="9">
@@ -376,7 +446,7 @@ const Details = ({ project }) => {
                                         <Col className={classes.commentSection}>
                                             <CommentSection
                                                 token={context.token}
-                                                image={context.token ? context.UserProfile.profileimage : null}
+                                                image={context.UserProfile?.profileimage}
                                                 submitCommment={submitCommentHandler}
                                                 errormessage={errorMessages}
                                                 active={true}
@@ -416,11 +486,11 @@ const Details = ({ project }) => {
 export const getServerSideProps = async (context) => {
 
     const projectId = context.params.projectId
-    const res = await defaultAxios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
+    const res = await Axios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
     return {
         props: {
             project: res.data.result
-        }, // will be passed to the page component as props
+        }
     }
 }
 

@@ -5,24 +5,12 @@ import GlobalContext from "../context/GlobalContext";
 import { Row, Col } from "reactstrap";
 import SidebarLeft from '../components/SidebarLeft/SidebarLeft'
 import SidebarRight from '../components/SidebarRight/SidebarRight'
-function Index() {
+import classes from '../styles/index.module.css'
+import Axios from "axios";
+import axios from '../utils/axios'
+function Index(props) {
 
-  const context = React.useContext(GlobalContext);
-  const [width, setwitdh] = React.useState(1200);
-  React.useEffect(() => {
-    document.title = 'Home'
-  }, [context])
-  const handelFunction = function () {
-    setwitdh(window.innerWidth)
-  }
-
-  React.useEffect(() => {
-    window.addEventListener('resize', handelFunction)
-
-    return () => {
-      window.removeEventListener('resize', handelFunction);
-    }
-  }, []);
+  const [projects, setProjects] = React.useState(props.projects)
 
   React.useEffect(() => {
     document.title = 'Home'
@@ -35,33 +23,53 @@ function Index() {
       document.body.classList.remove("sidebar-collapse");
     };
   }, [])
+
+  const savechangesHandler = (info) => {
+    const index = projects.findIndex(project => { return project._id === info.id })
+    const Newproject = {
+      ...projects[index],
+      summary: info.content
+    }
+    axios.patch('/project/' + info.id, { propName: 'summary', value: info.content })
+      .then(result => {
+        const NewProjects = [...projects]
+        NewProjects[index] = Newproject
+        setProjects([...NewProjects])
+      })
+      .catch(err => { context.ErrorAccureHandler(); })
+
+  }
+
   return (
     <div>
       <div className="wrapper">
-        <div >
-          {width > 767 ?
-            <Row>
-              <Col xs="2">
-                <SidebarLeft />
-              </Col>
-              <Col>
-                <Tabs />
-              </Col>
-              <Col xs="2">
-                <SidebarRight />
-              </Col>
-            </Row>
-            :
-            <Tabs />
-
-          }
-
-
-          <Support />
-        </div>
+        <Row>
+          <Col className={classes.sideBar} xs="2">
+            <SidebarLeft />
+          </Col>
+          <Col>
+            <Tabs projects={projects} savechanges={savechangesHandler} />
+          </Col>
+          <Col className={classes.sideBar} xs="2">
+            <SidebarRight projects={projects} topicsCount={props.topicsCount} />
+          </Col>
+        </Row>
+        <Support />
       </div>
     </div>
   );
+}
+
+export const getServerSideProps = async () => {
+
+  const result = await Axios.get(`https://mywebrestapi.herokuapp.com/project`)
+  const resultCount = await Axios.get('https://mywebrestapi.herokuapp.com/topic/counttopic')
+  return {
+    props: {
+      projects: result.data.result,
+      topicsCount: resultCount.data.result
+    },
+  }
 }
 
 export default Index;

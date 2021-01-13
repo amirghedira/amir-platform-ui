@@ -34,7 +34,11 @@ const Topicitem = (props) => {
                                 null
 
                         }
-                        <Link className={classes.link} href={'/' + props.type + '/' + props.id}>{props.title}</Link>
+                        <Link href={'/' + props.type + '/' + props.id}>
+                            <a className={classes.linkCustom}>
+                                {props.title}
+                            </a>
+                        </Link>
                     </Row>
                     <Row className={classes.contentBar}>
                         <p className={classes.infotext}> {'Started By'}</p>

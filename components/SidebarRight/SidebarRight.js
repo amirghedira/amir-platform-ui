@@ -1,34 +1,27 @@
 import React from 'react';
 import classes from './SidebarRight.module.css';
 import { Row, Col } from 'reactstrap';
-import GlobalContext from '../../context/GlobalContext'
-import axios from '../../utils/axios'
+import Link from 'next/link'
+
 const Sidebar = (props) => {
-    const context = React.useContext(GlobalContext)
-    const [topicCounts, SetTopicCounts] = React.useState(null)
     const [mostDownload, SetMostDownload] = React.useState(null)
     const [mostSeen, SetMostseen] = React.useState(null)
 
+
     React.useEffect(() => {
-        axios.get('/topic/counttopic')
-            .then(result => {
-                SetTopicCounts(result.data.result)
-            })
-    }, [])
-    React.useEffect(() => {
-        if (context.projects) {
-            if (context.projects.length > 0) {
-                let mostdownloaded = context.projects[0];
-                for (let project of context.projects) {
+        if (props.projects) {
+            if (props.projects.length > 0) {
+                let mostdownloaded = props.projects[0];
+                for (let project of props.projects) {
                     if (project.downloadcount > mostdownloaded.downloadcount)
                         mostdownloaded = project
                 }
                 SetMostDownload(mostdownloaded)
 
             } else SetMostDownload(null)
-            if (context.projects.length > 0) {
-                let mostseenproject = context.projects[0];
-                for (let project of context.projects) {
+            if (props.projects.length > 0) {
+                let mostseenproject = props.projects[0];
+                for (let project of props.projects) {
                     if (project.gitViewers > mostseenproject.gitViewers)
                         mostseenproject = project
                 }
@@ -38,7 +31,7 @@ const Sidebar = (props) => {
         }
 
 
-    }, [context.projects])
+    }, [props.projects])
     return (
         <div className={classes.sidebar}>
             <Row>
@@ -51,11 +44,9 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col style={{ display: 'flex' }}>
-                                {!topicCounts || !context.projects ?
-                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
-                                    :
-                                    <p style={{ margin: 'auto' }} className={classes.textItem}>{context.projects.length}</p>
-                                }
+
+                                <p style={{ margin: 'auto' }} className={classes.textItem}>{props.projects.length}</p>
+
 
                             </Col>
 
@@ -73,10 +64,9 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col style={{ display: 'flex' }}>
-                                {!topicCounts ?
-                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
-                                    :
-                                    <a href="/topics/questions" style={{ margin: 'auto' }} className={classes.items}>{topicCounts.questions}</a>}
+                                <Link href="/topics/questions">
+                                    <a style={{ margin: 'auto' }} className={classes.items}>{props.topicsCount.questions}</a>
+                                </Link>
                             </Col>
 
                         </Row>
@@ -93,10 +83,10 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col style={{ display: 'flex' }}>
-                                {!topicCounts ?
-                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
-                                    :
-                                    <a href="/topics/suggestions" style={{ margin: 'auto' }} className={classes.items}>{topicCounts.suggestions}</a>}
+                                <Link href="/topics/suggestions">
+                                    <a style={{ margin: 'auto' }} className={classes.items}>{props.topicsCount.suggestions}</a>
+
+                                </Link>
                             </Col>
 
                         </Row>
@@ -113,16 +103,17 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col xs="6" xl="6">
-                                {!topicCounts || !context.projects ?
-                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
+
+
+                                {mostSeen ?
+                                    <Link href={`/project/${mostSeen._id}`}>
+                                        <a className={classes.items}>{mostSeen.name}</a>
+                                    </Link>
                                     :
-                                    mostSeen ?
-                                        <a href={`/project/${mostSeen._id}`} className={classes.items}>{mostSeen.name}</a>
-                                        :
-
-                                        <p className={classes.textItem}>No projects yet!</p>
-
+                                    <p className={classes.textItem}>No projects yet!</p>
                                 }
+
+
                             </Col>
 
                         </Row>
@@ -139,14 +130,14 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col xs="6" xl="6">
-                                {!topicCounts ?
-                                    <img src={'/loading.gif'} style={{ height: '25px', width: '25px' }} alt='...' />
-                                    :
+                                {
                                     mostDownload ?
-                                        <a href={`/project/${mostDownload._id}`} className={classes.items}>{mostDownload.name}</a>
+                                        <Link href={`/project/${mostDownload._id}`}>
+                                            <a className={classes.items}>{mostDownload.name}</a>
+                                        </Link>
+
                                         :
                                         <p className={classes.textItem}>No projects yet!</p>
-
                                 }
                             </Col>
 

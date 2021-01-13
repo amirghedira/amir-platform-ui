@@ -19,6 +19,7 @@ const CommentSection = (props) => {
     }
 
     React.useEffect(() => {
+        setwitdh(window.innerWidth)
         window.addEventListener('resize', handleFunction)
         return () => {
             window.removeEventListener('resize', handleFunction);

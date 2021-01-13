@@ -19,11 +19,11 @@ import {
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
-import axios from "axios";
+import axios from "../../utils/axios";
+import Axios from "axios";
 
 const ProfilePage = ({ UserProfile }) => {
     const [pills, setPills] = React.useState("2");
-    const [isLoading, Setloading] = React.useState(true);
     const [showImage, setShowimage] = React.useState(null)
     const [MenuButtonClicked, setMenuButtonClicked] = React.useState({
         photos: false,
@@ -75,10 +75,10 @@ const ProfilePage = ({ UserProfile }) => {
                         </Row>
                         <Row>
                             <Col>
-                                <h3 className="title">
+                                <h3 className={classes.aboutMeText}>
                                     About me
-              </h3>
-                                <pre className="description" style={{ fontWeight: '300', fontSize: '1.1em', lineHeight: '1.4em', whiteSpace: 'pre-wrap' }}>
+                                </h3>
+                                <pre className={classes.description}>
                                     {UserProfile.aboutme}
                                 </pre>
                             </Col>
@@ -92,7 +92,7 @@ const ProfilePage = ({ UserProfile }) => {
                                         pills
                                         role="tablist"
                                     >
-                                        <NavItem>
+                                        <NavItem className={classes.navItem}>
                                             <NavLink
                                                 className={pills === "1" ? "active" : ""}
                                                 onClick={() => {
@@ -104,10 +104,10 @@ const ProfilePage = ({ UserProfile }) => {
                                                     })
                                                 }}
                                             >
-                                                <h4 style={{ margin: 'auto', color: MenuButtonClicked.photos ? 'white' : 'black' }}>Photos</h4>
+                                                <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.photos ? 'white' : 'black' }}>Photos</h4>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem>
+                                        <NavItem className={classes.navItem}>
                                             <NavLink
                                                 className={pills === "2" ? "active" : ""}
                                                 onClick={() => {
@@ -119,10 +119,10 @@ const ProfilePage = ({ UserProfile }) => {
                                                     })
                                                 }}
                                             >
-                                                <h4 style={{ margin: 'auto', color: MenuButtonClicked.moreinfo ? 'white' : 'black' }}>More info</h4>
+                                                <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.moreinfo ? 'white' : 'black' }}>More info</h4>
                                             </NavLink>
                                         </NavItem>
-                                        <NavItem>
+                                        <NavItem className={classes.navItem}>
                                             <NavLink
                                                 className={pills === "3" ? "active" : ""}
                                                 onClick={() => {
@@ -134,7 +134,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                     })
                                                 }}
                                             >
-                                                <h4 style={{ margin: 'auto', color: MenuButtonClicked.news ? 'white' : 'black' }}>News</h4>
+                                                <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.news ? 'white' : 'black' }}>News</h4>
                                             </NavLink>
                                         </NavItem>
                                     </Nav>
@@ -186,33 +186,33 @@ const ProfilePage = ({ UserProfile }) => {
                                             <Row className="collections">
                                                 <Col>
                                                     <div style={{ margin: '20px' }}>
-                                                        <h4>Personal information</h4>
+                                                        <h4 className={classes.categoryText} >Personal information</h4>
                                                         <hr style={{ backgroundColor: '#bfbfbf' }} />
                                                         <Row style={{ paddingLeft: '20px', paddingTop: '30px' }}>
                                                             <Col>
                                                                 <Row style={{ marginBottom: '30px' }}>
                                                                     <Col style={{ display: 'flex', alignItems: 'center' }}>
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Gender</h4>
+                                                                        <h4 className={classes.fieldName}>Gender</h4>
                                                                     </Col>
                                                                     <Col style={{ display: 'flex', alignItems: 'center' }} >
                                                                         <i className="fas fa-venus-mars fa-2x" style={{ marginRight: '10px', color: 'red' }}></i>
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>
+                                                                        <h4 className={classes.fieldValue}>
                                                                             {UserProfile.gender}</h4>
                                                                     </Col>
                                                                 </Row>
                                                                 <Row style={{ marginBottom: '30px' }}>
                                                                     <Col style={{ display: 'flex', alignItems: 'center' }} >
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Birthday</h4>
+                                                                        <h4 className={classes.fieldName}>Birthday</h4>
                                                                     </Col>
                                                                     <Col style={{ display: 'flex', alignItems: 'center' }}>
                                                                         <i className="fas fa-birthday-cake fa-2x" style={{ color: 'pink', marginRight: '20px' }}></i>
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>
+                                                                        <h4 className={classes.fieldValue}>
                                                                             {UserProfile.birthday}</h4>
                                                                     </Col>
                                                                 </Row>
                                                                 <Row style={{ marginBottom: '30px' }}>
                                                                     <Col xs="2" style={{ display: 'flex', alignItems: 'center' }} >
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Skills</h4>
+                                                                        <h4 className={classes.fieldName}>Skills</h4>
                                                                     </Col>
                                                                     <Col >
                                                                         <Row style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -239,13 +239,13 @@ const ProfilePage = ({ UserProfile }) => {
 
                                                     </div>
                                                     <div style={{ margin: '20px' }}>
-                                                        <h4>Contact Methods</h4>
+                                                        <h4 className={classes.categoryText}>Contact Methods</h4>
                                                         <hr style={{ backgroundColor: '#bfbfbf' }} />
                                                         <Row style={{ paddingLeft: '20px' }}>
                                                             <Col>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Email</h4>
+                                                                        <h4 className={classes.fieldName}>Email</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
 
@@ -256,7 +256,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 </Row>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Github</h4>
+                                                                        <h4 className={classes.fieldName}>Github</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
                                                                         <a style={{ margin: 'auto' }} href={UserProfile.github} target='_blank' rel="noopener noreferrer" >
@@ -267,7 +267,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 </Row>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Skype</h4>
+                                                                        <h4 className={classes.fieldName}>Skype</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
 
@@ -279,7 +279,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 </Row>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Facebook</h4>
+                                                                        <h4 className={classes.fieldName}>Facebook</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
                                                                         <a style={{ margin: 'auto' }} href={UserProfile.facebook} target='_blank' rel="noopener noreferrer" >
@@ -289,7 +289,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 </Row>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>LinkedIn</h4>
+                                                                        <h4 className={classes.fieldName}>LinkedIn</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
                                                                         <a style={{ margin: 'auto' }} href={UserProfile.linkedin} target='_blank' rel="noopener noreferrer" >
@@ -300,7 +300,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 </Row>
                                                                 <Row className={classes.mainRow}>
                                                                     <Col className={classes.mainCol} xs="1">
-                                                                        <h4 style={{ fontWeight: 'normal', margin: '0' }}>Phone</h4>
+                                                                        <h4 className={classes.fieldName}>Phone</h4>
                                                                     </Col>
                                                                     <Col className={classes.mainCol}>
                                                                         <h4 style={{ fontWeight: 'normal', margin: 'auto' }}>
@@ -387,7 +387,7 @@ const ProfilePage = ({ UserProfile }) => {
 }
 
 export const getServerSideProps = async () => {
-    const res = await axios.get('https://mywebrestapi.herokuapp.com/user')
+    const res = await Axios.get('https://mywebrestapi.herokuapp.com/user')
     return {
         props: {
             UserProfile: res.data

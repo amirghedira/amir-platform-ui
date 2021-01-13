@@ -8,51 +8,76 @@ const Sidebar = (props) => {
             <Row>
                 <Col className={classes.content} >
                     <Row style={{ marginBottom: '20px' }}>
-                        <Row>
-                            <p className={classes.titles}>
-                                <i className="far fa-arrow-alt-circle-right"></i>
-                                {' '} Questions/Answer</p>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Link href="/topics/questions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-question-circle">
-                                        Questions
-                                    </i>
-                                </Link>
+                        <Col>
+                            <Row style={{ marginBottom: '20px' }} >
+                                <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                    <i className="far fa-arrow-alt-circle-right" style={{ fontSize: '17px' }}></i>
+                                    <p className={classes.titles}>Questions/Answer</p>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginLeft: '10px' }}>
+                                <Col>
+                                    <Row style={{ marginBottom: '10px' }}>
+                                        <Col>
+                                            <Link href="/topics/questions" className={classes.items}>
+                                                <div className={classes.navItemContainer}>
+                                                    <i className={`far fa-question-circle ${classes.icon}`}></i>
+                                                    <h5 className={classes.navItemText}>Questions</h5>
+                                                </div>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: '10px' }}>
+                                        <Col>
+                                            <Link href="/add-topic/questions" className={classes.items}>
+                                                <div className={classes.navItemContainer}>
+                                                    <i className={`far fa-comments ${classes.icon}`}></i>
+                                                    <h5 className={classes.navItemText}>Post a question</h5>
+                                                </div>
+                                            </Link>
+                                        </Col>
+                                    </Row>
 
-                                <Link href="/add-topic/questions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-comments">
-                                        Post a question
-                                    </i>
-                                </Link>
+                                </Col>
 
-                            </Col>
+                            </Row>
 
-                        </Row>
-
+                        </Col>
                     </Row>
                     <Row style={{ marginBottom: '20px' }}>
-                        <Row >
-                            <p className={classes.titles}>
-                                <i className="far fa-arrow-alt-circle-right"></i>
-                                {' '}Suggestions</p>
-                        </Row>
-                        <Row >
-                            <Col>
-                                <Link href="/topics/suggestions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="fas fa-lightbulb">
-                                        Suggestions
-                                    </i>
-                                </Link>
-                                <Link href="/add-topic/suggestions" className={classes.items}>
-                                    <i style={{ color: 'black' }} className="far fa-comments">
-                                        Post a Suggestion
-                                    </i>
-                                </Link>
-                            </Col>
+                        <Col>
+                            <Row style={{ marginBottom: '20px' }} >
+                                <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                    <i className="far fa-arrow-alt-circle-right" style={{ fontSize: '17px' }}></i>
+                                    <p className={classes.titles}>Suggestions</p>
+                                </Col>
+                            </Row>
+                            <Row style={{ marginLeft: '10px' }}>
+                                <Col>
+                                    <Row style={{ marginBottom: '10px' }}>
+                                        <Col>
+                                            <Link href="/topics/suggestions" className={classes.items}>
+                                                <div className={classes.navItemContainer}>
+                                                    <i className={`fas fa-lightbulb ${classes.icon}`}></i>
+                                                    <h5 className={classes.navItemText}>Suggestions</h5>
+                                                </div>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                    <Row style={{ marginBottom: '10px' }}>
+                                        <Col>
+                                            <Link href="/add-topic/suggestions" className={classes.items}>
+                                                <div className={classes.navItemContainer}>
+                                                    <i className={`far fa-comments ${classes.icon}`}></i>
+                                                    <h5 className={classes.navItemText}>Post a Suggestion</h5>
+                                                </div>
+                                            </Link>
+                                        </Col>
+                                    </Row>
+                                </Col>
 
-                        </Row>
+                            </Row>
+                        </Col>
 
                     </Row>
                 </Col>

@@ -28,16 +28,12 @@ const CardComponent = (props) => {
     const [focusedReadmore, setfocusedReadmore] = React.useState(false);
     const [focusedGithub, setfocusedGithub] = React.useState(false);
     const [EditPost, setEditPost] = React.useState(false);
-    const [isLoading, setIsloading] = React.useState(true)
 
-    React.useEffect(() => {
-        if (context.UserProfile)
-            setIsloading(false)
-    }, [context.UserProfile])
     const pStyle = {
         witdh: '50px',
         height: '50px',
-        marginLeft: '10px'
+        marginLeft: '10px',
+        boxShadow: 'none'
     };
 
     let badge = null;
@@ -50,9 +46,11 @@ const CardComponent = (props) => {
             <Col key={props._id} className="ml-auto mr-auto" md="12" xl="8" >
                 <Card>
                     <CardHeader>
-                        <Nav expand="lg" style={{ witdh: '40px', height: '60px', backgroundColor: 'white', marginTop: '10px' }}>
-                            <div style={{ marginTop: '6px', display: 'flex' }}>
-                                <Link href={'/amirghedira'}>
+                        <Row style={{ padding: '10px' }}>
+
+
+                            <Col style={{ display: 'flex', alignItems: 'center' }}>
+                                {context.UserProfile && <Link href={'/amirghedira'}>
 
                                     <img
                                         alt="..."
@@ -60,21 +58,21 @@ const CardComponent = (props) => {
                                         style={pStyle}
                                         src={context.UserProfile?.profileimage}
                                     />
-                                </Link>
-                                <div>
-                                    <h3 style={{ color: 'black', fontSize: '17px', fontWeight: '500', paddingLeft: '10px', marginTop: '15px' }}>
+                                </Link>}
+                                <div style={{ marginLeft: '10px' }}>
+                                    <h3 style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
                                         {props.projectname}
                                     </h3>
-                                    <h5 style={{ color: '#808080', fontSize: '12px', marginLeft: "10px", marginTop: '-25px' }}>Posted:{' '}
+                                    <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted:{' '}
                                         <FormatDate>{props.date}</FormatDate></h5>
+
                                 </div>
 
-                            </div>
-                            <div style={{ flex: '1' }}>
-                            </div>
-                            <div>
+                            </Col>
 
-                                <div style={{ display: 'flex', marginTop: '20px', marginRight: '10px' }}>
+                            <Col xs="12" md="3" className={classes.finishAndEditContainer}>
+
+                                <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <div>
                                         {badge}
                                     </div>
@@ -110,10 +108,8 @@ const CardComponent = (props) => {
                                     </div>
                                 </div>
 
-                            </div>
-
-
-                        </Nav>
+                            </Col>
+                        </Row>
                     </CardHeader>
                     <CardBody style={{ minHeight: '300px', minWidth: '40px', paddingTop: '30px' }}>
                         {EditPost ?

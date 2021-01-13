@@ -7,10 +7,10 @@ import Link from 'next/link'
 const PostCard = (props) => {
     const context = React.useContext(GlobalContext)
     const isadmin = props.autor === 'admin' ? true : false;
-    const [width, setwitdh] = React.useState(1000)
-
+    const [width, setwitdh] = React.useState(0)
 
     React.useEffect(() => {
+        setwitdh(window.innerWidth)
         window.addEventListener('resize', handleFunction)
         return () => {
             window.removeEventListener('resize', handleFunction);
@@ -40,7 +40,7 @@ const PostCard = (props) => {
                             <NavItem style={{ display: width > 525 ? 'flex' : 'flex', width: '170px' }}>
                                 {
                                     <NavLink href='/amirghedira' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'}>
-                                        <div>
+                                        <div style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <strong className={classes.postname} style={{ textAlign: 'center', color: 'white', width: '120px', maxWidth: '120px' }}>{
                                                 isadmin ? context.UserProfile?.name : props.autor} </strong>
                                             {width < 525 ?

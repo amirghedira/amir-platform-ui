@@ -9,6 +9,49 @@
     align-items: 'center';
 }
 
+.categoryText{
+    font-size: 19px;
+    font-weight: 800;
+    color: black;
+
+}
+.description{
+    font-weight: 400;
+    line-height: 1.4em;
+    white-space: pre-wrap;
+    font-size: 1em;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    color: rgb(100, 100, 100);
+    font-family: 'Poppins', sans-serif;
+
+}
+.aboutMeText{
+    font-size: 24px;
+    font-weight: 800;
+    color: black;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 20px 20px 0px 20px;
+}
+.itemContentText{
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+}
+.fieldName{
+    font-size: 15px;
+    margin: 0;
+    font-weight: 600;
+}
+.fieldValue{
+    font-size: 15px;
+    margin: 0;
+}
+.navItem{
+    cursor: pointer;
+}
 
 .newsProfileName {
     margin-left: 20px;
