@@ -268,7 +268,7 @@ const IndexNavbar = () => {
                                     </Link>
                                 </NavLink>
                             </NavItem>
-                            {false ?
+                            {context.token ?
                                 <NavItem>
                                     <Nav
                                         className="nav-pills-info nav-pills-just-icons"
@@ -297,30 +297,32 @@ const IndexNavbar = () => {
                                                         context.Notifications.length > 0 ?
                                                             context.Notifications.slice(0).reverse().map(notification => {
                                                                 return (
-                                                                    <Link key={notification._id} href={notification.link}
-                                                                        style={{ color: 'black' }}
-                                                                        onClick={() => {
-                                                                            setCollapseOpen(false)
+                                                                    <React.Fragment>
+                                                                        <Link key={notification._id} href={notification.link}
+                                                                            style={{ color: 'black' }}
+                                                                            onClick={() => {
+                                                                                setCollapseOpen(false)
 
-                                                                        }}>
-                                                                        <DropdownItem
-                                                                            style={{
-                                                                                minHeight: '50px',
-                                                                                backgroundColor:
-                                                                                    !notification.read && !collapseOpen ? '#f2f2f2' : notification.read && !collapseOpen ? 'white' :
-                                                                                        !notification.read && collapseOpen ? '#999999' : 'b3b3b3'
-                                                                                , margin: '0'
-                                                                            }}
-                                                                            onClick={() => { context.makeasRead(notification._id) }}>
+                                                                            }}>
+                                                                            <DropdownItem
+                                                                                style={{
+                                                                                    minHeight: '50px',
+                                                                                    backgroundColor:
+                                                                                        !notification.read && !collapseOpen ? '#f2f2f2' : notification.read && !collapseOpen ? 'white' :
+                                                                                            !notification.read && collapseOpen ? '#999999' : 'b3b3b3'
+                                                                                    , margin: '0'
+                                                                                }}
+                                                                                onClick={() => { context.makeasRead(notification._id) }}>
 
-                                                                            {notification.read ?
-                                                                                <p style={{ width: '300px', overflow: 'hidden', whiteSpace: 'pre-wrap' }}>{notification.content}</p>
-                                                                                :
-                                                                                <strong style={{ maxWidth: '200px' }}> {notification.content}</strong>
-                                                                            }
-                                                                        </DropdownItem>
+                                                                                {notification.read ?
+                                                                                    <p style={{ width: '300px', overflow: 'hidden', whiteSpace: 'pre-wrap' }}>{notification.content}</p>
+                                                                                    :
+                                                                                    <strong style={{ maxWidth: '200px' }}> {notification.content}</strong>
+                                                                                }
+                                                                            </DropdownItem>
+                                                                        </Link>
                                                                         <hr style={{ margin: '0', backgroundColor: '#cccccc' }} />
-                                                                    </Link>
+                                                                    </React.Fragment>
                                                                 )
                                                             })
 

@@ -565,7 +565,7 @@ const AppContext = (props) => {
                 }
             }>
                 {props.children}
-                {/* <ToastContainer /> */}
+                <ToastContainer />
             </GlobalContext.Provider>
         )
 }
