@@ -5,15 +5,15 @@ import {
     DropdownMenu,
     UncontrolledDropdown, Label, Table
 } from 'reactstrap';
-import axios from '../utils/axios'
-import classes from '../styles/AccountSettings.module.css'
-import InputField from '../components/InputField/InputField'
+import axios from '../../utils/axios'
+import classes from './AccountSettings.module.css'
+import InputField from '../../components/InputField/InputField'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import GlobalContext from '../context/GlobalContext'
+import GlobalContext from '../../context/GlobalContext'
 import TextareaAutosize from 'react-autosize-textarea';
-import FormatDate from '../utils/FormatDate'
+import FormatDate from '../../utils/FormatDate'
 
 const AccountSettings = () => {
     const context = React.useContext(GlobalContext)

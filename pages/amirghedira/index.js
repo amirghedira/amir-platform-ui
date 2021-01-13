@@ -1,6 +1,6 @@
 import React from "react";
 import Lightbox from 'react-image-lightbox';
-import FormatDate from '../utils/FormatDate'
+import FormatDate from '../../utils/FormatDate'
 import 'react-image-lightbox/style.css';
 // reactstrap components
 import {
@@ -16,9 +16,9 @@ import {
 } from "reactstrap";
 
 // core components
-import ProfilePageHeader from "../components/Headers/ProfilePageHeader.js";
-import GlobalContext from '../context/GlobalContext'
-import classes from '../styles/Profilepage.module.css'
+import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
+import GlobalContext from '../../context/GlobalContext'
+import classes from './Profilepage.module.css'
 import axios from "axios";
 
 const ProfilePage = ({ UserProfile }) => {

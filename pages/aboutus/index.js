@@ -1,4 +1,4 @@
-import classes from '../styles/Aboutus.module.css'
+import classes from './Aboutus.module.css'
 import { Row, Container, Col } from 'reactstrap'
 import React from 'react'
 import Link from 'next/link'

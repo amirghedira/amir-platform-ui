@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from '../../styles/TopicsPage.module.css';
+import classes from './TopicsPage.module.css';
 import Topicitem from '../../components/Topicitem/Topicitem'
 import { Container, Row, Col, Button, PaginationLink, PaginationItem, Pagination, Nav, NavItem, NavLink } from 'reactstrap'
 import GlobalContext from '../../context/GlobalContext';

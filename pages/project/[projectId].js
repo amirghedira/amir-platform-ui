@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from '../../styles/ProjectDetails.module.css'
+import classes from './ProjectDetails.module.css'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import {
