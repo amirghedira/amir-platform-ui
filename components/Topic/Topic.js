@@ -181,9 +181,9 @@ const Topic = ({ Topic, type }) => {
                         <div style={{ margin: '0' }}>
                             {
                                 Topic.autor === 'admin' ?
-                                    <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="" />
+                                    <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="Amir ghedira" />
                                     :
-                                    <img src={"/default-avatar.png"} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="" />
+                                    <img src={"/default-avatar.png"} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="javascript programmer" />
                             }
                         </div>
 

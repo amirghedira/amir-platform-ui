@@ -7,7 +7,7 @@ import GlobalContext from '../../context/GlobalContext'
 import Banned from '../../components/Banned/Banned'
 import axios from '../../utils/axios'
 import { useRouter } from 'next/router'
-
+import Head from 'next/head'
 
 const AddTopic = (props) => {
     const [errmessage, SeterrorMessage] = React.useState('');
@@ -18,18 +18,6 @@ const AddTopic = (props) => {
     const [isRedirectPost, setRedirectPost] = React.useState({ state: false, path: null })
     const context = React.useContext(GlobalContext)
     const router = useRouter()
-
-
-    React.useEffect(() => {
-        if (props.type === 'suggestions' || props.type === 'questions') {
-            SetType(props.type)
-            document.title = 'Create new ' + props.type
-        }
-        else
-            context.ErrorAccureHandler();
-
-    }, [context, props.type])
-
 
     const submitTopicHandler = (obj) => {
 
@@ -82,155 +70,161 @@ const AddTopic = (props) => {
         return (<Banned />)
     else
         return (
-            <div>
-                <Row style={{ margin: '0' }}>
-                    <Col style={{ padding: '0' }}>
-                        <Nav className={classes.Navbar} expand="lg">
-                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
-                                <NavLink href='/' tag={Link}>
-                                    <strong style={{ color: '#2CA8FF', fontSize: '12px', cursor: 'pointer' }}> Home </strong>
-                                </NavLink>
-                            </NavItem>
+            <React.Fragment>
+                <Head>
+                    <title>{'Create new ' + props.type}</title>
+                    <meta name="description" content="Feel free to post a new topic here if you have a question or a suggestion for us, Its a pleasure to answer you!" />
+                </Head>
+                <main>
+                    <Row style={{ margin: '0' }}>
+                        <Col style={{ padding: '0' }}>
+                            <Nav className={classes.Navbar} expand="lg">
+                                <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                    <NavLink href='/' tag={Link}>
+                                        <strong style={{ color: '#2CA8FF', fontSize: '12px', cursor: 'pointer' }}> Home </strong>
+                                    </NavLink>
+                                </NavItem>
 
-                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
-                                <NavLink href={`/topics/${Type}`} tag={Link}>
-                                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                                        <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
-                                        <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Type} </strong>
-                                    </div>
-                                </NavLink>
+                                <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                    <NavLink href={`/topics/${Type}`} tag={Link}>
+                                        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                            <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
+                                            <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Type} </strong>
+                                        </div>
+                                    </NavLink>
 
-                            </NavItem>
-                            <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
-                                <NavLink >
-                                    <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
-                                        <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
-                                        <strong style={{ color: '#2CA8FF', fontSize: '12px' }}> Create new Topic </strong>
-                                    </div>
-                                </NavLink>
+                                </NavItem>
+                                <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
+                                    <NavLink >
+                                        <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                                            <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
+                                            <strong style={{ color: '#2CA8FF', fontSize: '12px' }}> Create new Topic </strong>
+                                        </div>
+                                    </NavLink>
 
-                            </NavItem>
-                        </Nav>
-                    </Col>
-                </Row>
-                <Row className={classes.sectionTitle}>
-                    <Col style={{ padding: '0', margin: 'auto' }}>
-                        <h3>Create New Topic</h3>
-                    </Col>
-                </Row>
-                <Container style={{ marginBottom: '70px' }}>
-
-                    <Row className={classes.commentSection}>
-                        <Col xs="3" md='1' style={{ display: 'flex' }}>
-                            <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
-                                {context.token ?
-                                    <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px' }} alt="" />
-                                    :
-                                    <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="" />
-
-                                }
-                            </div>
+                                </NavItem>
+                            </Nav>
                         </Col>
+                    </Row>
+                    <Row className={classes.sectionTitle}>
+                        <Col style={{ padding: '0', margin: 'auto' }}>
+                            <h3>Create New Topic</h3>
+                        </Col>
+                    </Row>
+                    <Container style={{ marginBottom: '70px' }}>
 
-                        <Col>
-                            <Row style={{ marginTop: '10px', marginBottom: '30px' }}>
-                                <Col style={{ padding: '0' }} >
-                                    <Input
-                                        id="title"
-                                        className={classes.FirstInputComment}
-                                        placeholder="Title"
-                                        style={{
-                                            borderColor: '#e6e6e6',
-                                            borderStyle: 'solid', borderWidth: '1px',
-                                            backgroundColor: 'white',
-                                            borderRadius: '0',
-                                            width: '100%'
-                                        }}
+                        <Row className={classes.commentSection}>
+                            <Col xs="3" md='1' style={{ display: 'flex' }}>
+                                <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
+                                    {context.token ?
+                                        <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px' }} alt="Amir ghedira" />
+                                        :
+                                        <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="Javascript programmer" />
 
-                                    />
-                                </Col>
-                            </Row>
+                                    }
+                                </div>
+                            </Col>
 
-                            <Row style={{ padding: '30px 20px 20px 20px', borderColor: '#e6e6e6', borderWidth: '1px', borderStyle: 'solid' }}>
-                                {
-                                    !context.token ?
+                            <Col>
+                                <Row style={{ marginTop: '10px', marginBottom: '30px' }}>
+                                    <Col style={{ padding: '0' }} >
                                         <Input
-                                            id="username"
+                                            id="title"
                                             className={classes.FirstInputComment}
-                                            placeholder="Your Name"
-                                            onFocus={() => { setcommentTitlefocus(true); SeterrorMessage('') }}
-                                            onBlur={() => { setcommentTitlefocus(false) }}
+                                            placeholder="Title"
                                             style={{
-                                                borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
-                                                boxShadow: commentTitlefocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none',
-                                                borderStyle: 'solid', borderWidth: '2px',
+                                                borderColor: '#e6e6e6',
+                                                borderStyle: 'solid', borderWidth: '1px',
                                                 backgroundColor: 'white',
                                                 borderRadius: '0',
-                                                marginBottom: '20px'
+                                                width: '100%'
                                             }}
 
                                         />
-                                        : null
+                                    </Col>
+                                </Row>
 
-                                }
+                                <Row style={{ padding: '30px 20px 20px 20px', borderColor: '#e6e6e6', borderWidth: '1px', borderStyle: 'solid' }}>
+                                    {
+                                        !context.token ?
+                                            <Input
+                                                id="username"
+                                                className={classes.FirstInputComment}
+                                                placeholder="Your Name"
+                                                onFocus={() => { setcommentTitlefocus(true); SeterrorMessage('') }}
+                                                onBlur={() => { setcommentTitlefocus(false) }}
+                                                style={{
+                                                    borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
+                                                    boxShadow: commentTitlefocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none',
+                                                    borderStyle: 'solid', borderWidth: '2px',
+                                                    backgroundColor: 'white',
+                                                    borderRadius: '0',
+                                                    marginBottom: '20px'
+                                                }}
 
-                                <TextareaAutosize
-                                    className={classes.SecondInputComment}
-                                    id="content"
-                                    placeholder="Write the topic content"
-                                    type="textarea"
-                                    onFocus={() => { setcommentContentfocus(true); SeterrorMessage('') }}
-                                    onBlur={() => { setcommentContentfocus(false) }}
-                                    style={{
-                                        paddingLeft: '20px', width: '100%', paddingTop: '20px', borderColor: commentContentfocus ? '#1ab2ff' : 'transparent', borderStyle: 'solid', borderWidth: '2px'
-                                        , backgroundColor: 'white', boxShadow: commentContentfocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none', borderRadius: '0'
-                                    }}
+                                            />
+                                            : null
 
-                                />
+                                    }
 
-                            </Row>
+                                    <TextareaAutosize
+                                        className={classes.SecondInputComment}
+                                        id="content"
+                                        placeholder="Write the topic content"
+                                        type="textarea"
+                                        onFocus={() => { setcommentContentfocus(true); SeterrorMessage('') }}
+                                        onBlur={() => { setcommentContentfocus(false) }}
+                                        style={{
+                                            paddingLeft: '20px', width: '100%', paddingTop: '20px', borderColor: commentContentfocus ? '#1ab2ff' : 'transparent', borderStyle: 'solid', borderWidth: '2px'
+                                            , backgroundColor: 'white', boxShadow: commentContentfocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none', borderRadius: '0'
+                                        }}
 
-                        </Col>
+                                    />
 
-                    </Row>
+                                </Row>
 
-                    <Row>
+                            </Col>
 
-                        <Label style={{ color: 'red', fontSize: '14px', margin: 'auto', marginTop: '20px' }}>
-                            {errmessage}
-                        </Label>
-                    </Row>
+                        </Row>
 
-                    <Row>
-                        <Col>
-                            <div style={{ display: 'flex', marginTop: '20px' }}>
-                                <div style={{ margin: 'auto' }}>
+                        <Row>
 
-                                    <Button
-                                        color="info"
-                                        onClick={() => submitTopicHandler(
-                                            {
-                                                title: document.getElementById('title').value,
-                                                autor: context.token ? "admin" : document.getElementById('username').value,
-                                                content: document.getElementById('content').value
+                            <Label style={{ color: 'red', fontSize: '14px', margin: 'auto', marginTop: '20px' }}>
+                                {errmessage}
+                            </Label>
+                        </Row>
 
-                                            })}
-                                    >
-                                        Submit
+                        <Row>
+                            <Col>
+                                <div style={{ display: 'flex', marginTop: '20px' }}>
+                                    <div style={{ margin: 'auto' }}>
+
+                                        <Button
+                                            color="info"
+                                            onClick={() => submitTopicHandler(
+                                                {
+                                                    title: document.getElementById('title').value,
+                                                    autor: context.token ? "admin" : document.getElementById('username').value,
+                                                    content: document.getElementById('content').value
+
+                                                })}
+                                        >
+                                            Submit
                                     </Button>
-                                    <Button
-                                        color="danger"
-                                        onClick={() => { setRedirectCancel(true) }}>
-                                        Cancel
+                                        <Button
+                                            color="danger"
+                                            onClick={() => { setRedirectCancel(true) }}>
+                                            Cancel
                                      </Button>
 
-                                </div>
+                                    </div>
 
-                            </div>
-                        </Col>
-                    </Row>
-                </Container>
-            </div >
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>
+                </main >
+            </React.Fragment>
         )
 }
 

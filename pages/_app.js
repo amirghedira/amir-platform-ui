@@ -15,9 +15,10 @@ function MyApp({ Component, pageProps }) {
     <React.Fragment>
 
       <Head>
-        <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#2c2c2c" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="I'am AMIR GHEDIRA,I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies like nodejs mongodb mysql nestjs graphql, Also am a React and Angular fan and i have a good knowledge about them.." />
       </Head>
       <AppContext>
         <IndexHeader />

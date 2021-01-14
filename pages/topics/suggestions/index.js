@@ -1,13 +1,22 @@
 import TopicsPage from "../../../components/TopicsPage/TopicsPage"
 import Axios from 'axios'
-
+import Head from 'next/head'
 
 
 
 const SuggestionsPage = ({ topics }) => {
+    return (
+        <React.Fragment>
+            <Head>
+                <title>Suggestions</title>
+                <meta name="description" content="this section is reserved for all user to propose ideas opnions or even advices to that can improve this website or improve my development skills" />
 
-
-    return <TopicsPage Topics={topics} Type={'suggestions'} />
+            </Head>
+            <main>
+                <TopicsPage Topics={topics} Type={'suggestions'} />
+            </main>
+        </React.Fragment>
+    )
 }
 
 export default SuggestionsPage

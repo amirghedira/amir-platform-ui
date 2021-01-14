@@ -28,7 +28,6 @@ const TopicsPage = ({ Topics, Type }) => {
         document.documentElement.scrollTop = 0;
         document.body.classList.add("index-page");
         document.body.classList.add("sidebar-collapse");
-        document.title = Type;
         document.documentElement.classList.remove("nav-open");
 
         return function cleanup() {

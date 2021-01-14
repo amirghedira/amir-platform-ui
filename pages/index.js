@@ -1,19 +1,18 @@
 import React from "react";
 import Tabs from "../components/Tabs/Tabs";
 import Support from "../components/Support/Support.js";
-import GlobalContext from "../context/GlobalContext";
 import { Row, Col } from "reactstrap";
 import SidebarLeft from '../components/SidebarLeft/SidebarLeft'
 import SidebarRight from '../components/SidebarRight/SidebarRight'
 import classes from '../styles/index.module.css'
 import Axios from "axios";
 import axios from '../utils/axios'
+import Head from 'next/head'
 function Index(props) {
 
   const [projects, setProjects] = React.useState(props.projects)
 
   React.useEffect(() => {
-    document.title = 'Home'
     document.documentElement.scrollTop = 0;
     document.body.classList.add("profile-page");
     document.body.classList.add("sidebar-collapse");
@@ -41,22 +40,28 @@ function Index(props) {
   }
 
   return (
-    <div>
-      <div className="wrapper">
-        <Row>
-          <Col className={classes.sideBar} xs="2">
-            <SidebarLeft />
-          </Col>
-          <Col>
-            <Tabs projects={projects} savechanges={savechangesHandler} />
-          </Col>
-          <Col className={classes.sideBar} xs="2">
-            <SidebarRight projects={projects} topicsCount={props.topicsCount} />
-          </Col>
-        </Row>
-        <Support />
+    <main>
+      <Head>
+        <title>Amir Platform</title>
+      </Head>
+      <div>
+        <div className="wrapper">
+          <Row>
+            <Col className={classes.sideBar} xs="2">
+              <SidebarLeft />
+            </Col>
+            <Col>
+              <Tabs projects={projects} savechanges={savechangesHandler} />
+            </Col>
+            <Col className={classes.sideBar} xs="2">
+              <SidebarRight projects={projects} topicsCount={props.topicsCount} />
+            </Col>
+          </Row>
+          <Support />
+        </div>
       </div>
-    </div>
+    </main>
+
   );
 }
 

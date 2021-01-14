@@ -79,7 +79,7 @@ const CommentSection = (props) => {
                             <Col xs="1" style={{ display: 'flex' }}>
                                 <div style={{ width: '50px', margin: 'auto', marginTop: commentFocused ? '35px' : 'auto' }}>
                                     {props.image ?
-                                        <img src={props.image} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="" />
+                                        <img src={props.image} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="Amir ghedira" />
                                         :
                                         <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="..." />
 
@@ -171,7 +171,7 @@ const CommentSection = (props) => {
                     {width > 992 ?
                         <Col xs="1" style={{ display: 'flex' }}>
                             <div style={{ borderStyle: 'solid', borderColor: '#cccccc', width: '50px', borderWidth: '2px', margin: 'auto', marginTop: 'auto' }}>
-                                <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="" />
+                                <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="JavaScript programmer" />
                             </div>
                         </Col>
                         : null

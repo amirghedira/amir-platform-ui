@@ -33,7 +33,7 @@ const PostCard = (props) => {
                         <Nav className={classes.Navbar} style={{ minHeight: width < 800 ? '80px' : null, height: 'fit-content' }} expand="lg">
                             {width < 800 ?
                                 <NavItem style={{ display: 'flex' }}>
-                                    <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'} style={{ height: '40px', width: '40px', margin: '10px', borderRadius: '100px' }} alt="" />
+                                    <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'} style={{ height: '40px', width: '40px', margin: '10px', borderRadius: '100px' }} alt="JavaScript programmer" />
                                 </NavItem>
                                 : null
                             }
@@ -130,7 +130,7 @@ const PostCard = (props) => {
                             <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
                                 style={{
                                     borderRadius: '400px', height: '150px', width: '150px', margin: 'auto', marginTop: '40px'
-                                }} alt="" />
+                                }} alt="Javascript programmer" />
                         </Col>
                         :
                         null
