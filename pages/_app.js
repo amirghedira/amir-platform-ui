@@ -16,17 +16,8 @@ function MyApp({ Component, pageProps }) {
 
       <Head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-icon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,900&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet" />
+        <meta name="theme-color" content="#2c2c2c" />
       </Head>
       <AppContext>
         <IndexHeader />

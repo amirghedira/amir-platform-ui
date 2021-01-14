@@ -148,7 +148,7 @@ const CardComponent = (props) => {
                         <hr style={{ maxWidth: '90%', marginBottom: '0' }} />
                         <Row style={{ margin: '5px' }}>
 
-                            <Col style={{ dispaly: 'flex', marginLeft: '10px', marginRight: '10px' }} >
+                            <Col style={{ marginLeft: '10px', marginRight: '10px' }} >
                                 <a href={props.filelink} download
                                     onClick={() => { context.UpdateDownloadCount(props._id); }}>
                                     <Button
@@ -163,7 +163,7 @@ const CardComponent = (props) => {
                                 </a>
 
                             </Col>
-                            <Col style={{ dispaly: 'flex', marginLeft: '10px', marginRight: '10px' }}  >
+                            <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
                                 <Link href={"/project/" + props._id} style={{ color: 'black', textDecoration: 'none' }}>
                                     <Button
                                         style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
@@ -179,7 +179,7 @@ const CardComponent = (props) => {
                                 </Link>
                             </Col>
 
-                            <Col style={{ dispaly: 'flex', marginLeft: '10px', marginRight: '10px' }}  >
+                            <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
                                 <a
                                     href={props.github}
                                     target="_blank"
