@@ -19,7 +19,7 @@ import {
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
-import axios from "../../utils/axios";
+import Head from 'next/head'
 import Axios from "axios";
 
 const ProfilePage = ({ UserProfile }) => {

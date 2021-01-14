@@ -20,8 +20,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import PostCard from '../../components/PostCard/PostCard';
 import CommentSection from '../../components/CommentSection/CommentSection'
 import axios from '../../utils/axios';
-import axiosInstance from '../../utils/axios';
 import Axios from 'axios';
+import Head from 'next/head'
 
 
 const Details = (props) => {
@@ -263,222 +263,231 @@ const Details = (props) => {
     }
 
     return (
-        <div style={{ minHeight: '86.2vh' }}>
-            {projectimagemodal}
-            <div className="section" style={{ backgroundColor: 'transparent', marginTop: '40px' }}>
-                <Container>
-                    <Row style={{ maxHeight: 'px' }}>
-                        <Col className="ml-auto mr-auto" md="12" xl="12">
-                            <div className="nav-align-center">
-                                <Nav
-                                    className="nav-pills-info"
-                                    pills
-                                    role="tablist"
-                                >
-                                    <NavItem className={classes.navItem}>
-                                        <NavLink
-                                            className={pills === "1" ? "active" : ""}
-                                            onClick={() => {
-                                                setPills("1");
-                                                setMenuButtonClicked({ comment: false, photo: true, main: false });
-                                            }}
+        <React.Fragment>
+            <Head>
+                <title>{project.name}</title>
+                <meta name="description" content={project.overview} />
+
+            </Head>
+            <main>
+                <div style={{ minHeight: '86.2vh' }}>
+                    {projectimagemodal}
+                    <div className="section" style={{ backgroundColor: 'transparent', marginTop: '40px' }}>
+                        <Container>
+                            <Row style={{ maxHeight: 'px' }}>
+                                <Col className="ml-auto mr-auto" md="12" xl="12">
+                                    <div className="nav-align-center">
+                                        <Nav
+                                            className="nav-pills-info"
+                                            pills
+                                            role="tablist"
                                         >
-                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.photo ? 'white' : 'black' }}>
-                                                photos
+                                            <NavItem className={classes.navItem}>
+                                                <NavLink
+                                                    className={pills === "1" ? "active" : ""}
+                                                    onClick={() => {
+                                                        setPills("1");
+                                                        setMenuButtonClicked({ comment: false, photo: true, main: false });
+                                                    }}
+                                                >
+                                                    <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.photo ? 'white' : 'black' }}>
+                                                        photos
                                                 </h4>
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem className={classes.navItem}>
-                                        <NavLink
-                                            className={pills === "2" ? "active" : ""}
-                                            onClick={() => {
-                                                setPills("2");
-                                                setMenuButtonClicked({ comment: false, photo: false, main: true });
-                                            }}
-                                        >
-                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.main ? 'white' : 'black' }}>
-                                                Main
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem className={classes.navItem}>
+                                                <NavLink
+                                                    className={pills === "2" ? "active" : ""}
+                                                    onClick={() => {
+                                                        setPills("2");
+                                                        setMenuButtonClicked({ comment: false, photo: false, main: true });
+                                                    }}
+                                                >
+                                                    <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.main ? 'white' : 'black' }}>
+                                                        Main
                                                 </h4>
-                                        </NavLink>
-                                    </NavItem>
-                                    <NavItem className={classes.navItem}>
-                                        <NavLink
-                                            className={pills === "3" ? "active" : ""}
-                                            onClick={() => {
-                                                setPills("3");
-                                                setMenuButtonClicked({ comment: true, photo: false, main: false });
+                                                </NavLink>
+                                            </NavItem>
+                                            <NavItem className={classes.navItem}>
+                                                <NavLink
+                                                    className={pills === "3" ? "active" : ""}
+                                                    onClick={() => {
+                                                        setPills("3");
+                                                        setMenuButtonClicked({ comment: true, photo: false, main: false });
 
-                                            }}>
+                                                    }}>
 
-                                            <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.comment ? 'white' : 'black' }}>
-                                                Comments
+                                                    <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.comment ? 'white' : 'black' }}>
+                                                        Comments
                                                 </h4>
-                                        </NavLink>
-                                    </NavItem>
-                                </Nav>
-                            </div>
-                        </Col>
-                        <Col className="ml-auto mr-auto" md="12" style={{ marginTop: '50px' }}>
-                            <TabContent className="gallery" activeTab={"pills" + pills}>
+                                                </NavLink>
+                                            </NavItem>
+                                        </Nav>
+                                    </div>
+                                </Col>
+                                <Col className="ml-auto mr-auto" md="12" style={{ marginTop: '50px' }}>
+                                    <TabContent className="gallery" activeTab={"pills" + pills}>
 
-                                <TabPane tabId="pills1">
-                                    <Col className="ml-auto mr-auto" md="10">
-                                        {
-                                            context.token ?
+                                        <TabPane tabId="pills1">
+                                            <Col className="ml-auto mr-auto" md="10">
+                                                {
+                                                    context.token ?
+                                                        <Row>
+                                                            <Col className={classes.Navbar}>
+                                                                <Button color="warning"
+                                                                    onClick={() => { inputFile.current.click() }}>
+                                                                    <strong>Add new image</strong>
+                                                                </Button>
+
+                                                                <input
+                                                                    style={{ display: 'none' }}
+                                                                    onChange={(event) => { addprojectImageHandler(event.target.files) }}
+                                                                    ref={inputFile}
+                                                                    multiple
+                                                                    type="file" />
+                                                            </Col>
+
+                                                        </Row>
+                                                        : null
+                                                }
                                                 <Row>
-                                                    <Col className={classes.Navbar}>
-                                                        <Button color="warning"
-                                                            onClick={() => { inputFile.current.click() }}>
-                                                            <strong>Add new image</strong>
-                                                        </Button>
+                                                    {
+                                                        project.imagesurl.map((image, i) => {
 
-                                                        <input
-                                                            style={{ display: 'none' }}
-                                                            onChange={(event) => { addprojectImageHandler(event.target.files) }}
-                                                            ref={inputFile}
-                                                            multiple
-                                                            type="file" />
-                                                    </Col>
+                                                            return (
+                                                                <Col xs="12" md="6" key={i}>
 
+                                                                    {
+                                                                        context.token ?
+                                                                            <Button color="danger" onClick={() => { deleteProjectImageHandler(image) }}>Delete</Button>
+
+                                                                            : null
+                                                                    }
+                                                                    <img
+                                                                        alt="..."
+                                                                        className="img-raised"
+                                                                        src={image}
+                                                                        onClick={() => { showprojectimageHandler(image) }}
+                                                                        style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
+                                                                    ></img>
+
+                                                                </Col>
+                                                            )
+
+
+                                                        })}
                                                 </Row>
-                                                : null
-                                        }
-                                        <Row>
+                                            </Col>
+                                        </TabPane>
+                                        <TabPane tabId="pills2">
+                                            <Row >
+                                                <Col className="ml-auto mr-auto" md="10" xl="3" >
+                                                    <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
+                                                        downloadButtonFunction={updateDownloadHandler}
+                                                        editFunction={editHandler} logstatus={context.token} />
+                                                </Col>
+                                                <Col className="ml-auto mr-auto" md="10" xl="9">
+                                                    <ProjectField
+                                                        key='1'
+                                                        sectionname="Overview"
+                                                        propname='overview'
+                                                        loadingstatus={isloadingOverview}
+                                                        logstatus={context.token}
+                                                        editFunction={editHandler}
+                                                        content={project.overview}
+                                                        icon={<i className="fas fa-globe fa-3x" style={{ marginBottom: '20px' }}></i>} />
+                                                    <ProjectField key='2'
+                                                        sectionname="Features / Technologies"
+                                                        propname='features'
+                                                        loadingstatus={isloadingFeatures}
+                                                        logstatus={context.token}
+                                                        editFunction={editHandler}
+                                                        content={project.features}
+                                                        icon={<i className="fas fa-hockey-puck fa-3x" style={{ marginBottom: '20px' }}></i>} />
+
+                                                    <ProjectField key='3'
+                                                        sectionname="Platform & Libraries"
+                                                        propname='platform'
+                                                        loadingstatus={isloadingplatform}
+                                                        logstatus={context.token}
+                                                        editFunction={editHandler}
+                                                        content={project.platform}
+                                                        icon={< i className="fas fa-bookmark fa-3x" style={{ marginBottom: '20px' }
+                                                        }></i >} />
+                                                    < ProjectField key='4'
+                                                        sectionname="What I learned ?"
+                                                        propname='whatlearned'
+                                                        loadingstatus={isloadingwhat}
+                                                        logstatus={context.token}
+                                                        editFunction={editHandler}
+                                                        content={project.whatlearned}
+                                                        icon={< i className="fas fa-graduation-cap fa-3x" style={{ marginBottom: '20px' }
+                                                        }></i >} />
+                                                </Col >
+                                            </Row>
+                                        </TabPane>
+                                        <TabPane tabId="pills3">
                                             {
-                                                project.imagesurl.map((image, i) => {
-
-                                                    return (
-                                                        <Col xs="12" md="6" key={i}>
-
-                                                            {
-                                                                context.token ?
-                                                                    <Button color="danger" onClick={() => { deleteProjectImageHandler(image) }}>Delete</Button>
-
-                                                                    : null
-                                                            }
-                                                            <img
-                                                                alt="..."
-                                                                className="img-raised"
-                                                                src={image}
-                                                                onClick={() => { showprojectimageHandler(image) }}
-                                                                style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
-                                                            ></img>
-
+                                                project.Comments.length > 0 ?
+                                                    project.Comments.map((comment) => {
+                                                        return <PostCard key={comment._id}
+                                                            ip={comment.ip} autor={comment.autor}
+                                                            content={comment.content}
+                                                            date={comment.date}
+                                                            token={context.token}
+                                                            banMemberFunction={() => { context.banMember({ name: comment.autor, ip: comment.ip, content: comment.content }) }}
+                                                            deleteFunction={() => showdeletemodalHandler({ autor: comment.autor, _id: comment._id })} />
+                                                    })
+                                                    :
+                                                    <Row>
+                                                        <Col style={{ display: 'flex', minHeight: '40vh' }}>
+                                                            <div style={{ margin: 'auto' }}>
+                                                                <h5><strong>No comments yet!</strong></h5>
+                                                            </div>
                                                         </Col>
-                                                    )
+                                                    </Row>
 
+                                            }
 
-                                                })}
-                                        </Row>
-                                    </Col>
-                                </TabPane>
-                                <TabPane tabId="pills2">
-                                    <Row >
-                                        <Col className="ml-auto mr-auto" md="10" xl="3" >
-                                            <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
-                                                downloadButtonFunction={updateDownloadHandler}
-                                                editFunction={editHandler} logstatus={context.token} />
-                                        </Col>
-                                        <Col className="ml-auto mr-auto" md="10" xl="9">
-                                            <ProjectField
-                                                key='1'
-                                                sectionname="Overview"
-                                                propname='overview'
-                                                loadingstatus={isloadingOverview}
-                                                logstatus={context.token}
-                                                editFunction={editHandler}
-                                                content={project.overview}
-                                                icon={<i className="fas fa-globe fa-3x" style={{ marginBottom: '20px' }}></i>} />
-                                            <ProjectField key='2'
-                                                sectionname="Features / Technologies"
-                                                propname='features'
-                                                loadingstatus={isloadingFeatures}
-                                                logstatus={context.token}
-                                                editFunction={editHandler}
-                                                content={project.features}
-                                                icon={<i className="fas fa-hockey-puck fa-3x" style={{ marginBottom: '20px' }}></i>} />
-
-                                            <ProjectField key='3'
-                                                sectionname="Platform & Libraries"
-                                                propname='platform'
-                                                loadingstatus={isloadingplatform}
-                                                logstatus={context.token}
-                                                editFunction={editHandler}
-                                                content={project.platform}
-                                                icon={< i className="fas fa-bookmark fa-3x" style={{ marginBottom: '20px' }
-                                                }></i >} />
-                                            < ProjectField key='4'
-                                                sectionname="What I learned ?"
-                                                propname='whatlearned'
-                                                loadingstatus={isloadingwhat}
-                                                logstatus={context.token}
-                                                editFunction={editHandler}
-                                                content={project.whatlearned}
-                                                icon={< i className="fas fa-graduation-cap fa-3x" style={{ marginBottom: '20px' }
-                                                }></i >} />
-                                        </Col >
-                                    </Row>
-                                </TabPane>
-                                <TabPane tabId="pills3">
-                                    {
-                                        project.Comments.length > 0 ?
-                                            project.Comments.map((comment) => {
-                                                return <PostCard key={comment._id}
-                                                    ip={comment.ip} autor={comment.autor}
-                                                    content={comment.content}
-                                                    date={comment.date}
-                                                    token={context.token}
-                                                    banMemberFunction={() => { context.banMember({ name: comment.autor, ip: comment.ip, content: comment.content }) }}
-                                                    deleteFunction={() => showdeletemodalHandler({ autor: comment.autor, _id: comment._id })} />
-                                            })
-                                            :
-                                            <Row>
-                                                <Col style={{ display: 'flex', minHeight: '40vh' }}>
-                                                    <div style={{ margin: 'auto' }}>
-                                                        <h5><strong>No comments yet!</strong></h5>
-                                                    </div>
+                                            <Row style={{ margin: '20px' }}>
+                                                <Col className={classes.commentSection}>
+                                                    <CommentSection
+                                                        token={context.token}
+                                                        image={context.UserProfile?.profileimage}
+                                                        submitCommment={submitCommentHandler}
+                                                        errormessage={errorMessages}
+                                                        active={true}
+                                                        banned={context.getBanStatus()}
+                                                        defaultmessage='Post a comment'
+                                                        clearErrorMsg={() => SetErrorMessqge('')}
+                                                    />
                                                 </Col>
                                             </Row>
-
-                                    }
-
-                                    <Row style={{ margin: '20px' }}>
-                                        <Col className={classes.commentSection}>
-                                            <CommentSection
-                                                token={context.token}
-                                                image={context.UserProfile?.profileimage}
-                                                submitCommment={submitCommentHandler}
-                                                errormessage={errorMessages}
-                                                active={true}
-                                                banned={context.getBanStatus()}
-                                                defaultmessage='Post a comment'
-                                                clearErrorMsg={() => SetErrorMessqge('')}
-                                            />
-                                        </Col>
-                                    </Row>
-                                </TabPane>
-                            </TabContent>
-                        </Col>
-                    </Row>
-                </Container>
-            </div>
-            <Editmodal
-                show={modalprops.show}
-                savechangesfunction={editFieldHandler}
-                handleClose={closehandler}
-                defaultvalue={modalprops.defaultvalue}
-                propname={modalprops.propname}
-                objectedit={modalprops.sectionname}
-            />
-            <DeleteModal
-                show={deletemodalprops.show}
-                deleteCommentFunction={deleteCommentHandler}
-                handleClose={Deletemodalclosehandler}
-                commentorname={deletemodalprops.commentorname}
-                commentorid={deletemodalprops.id}
-            />
-            <ToastContainer />
-        </div >
+                                        </TabPane>
+                                    </TabContent>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
+                    <Editmodal
+                        show={modalprops.show}
+                        savechangesfunction={editFieldHandler}
+                        handleClose={closehandler}
+                        defaultvalue={modalprops.defaultvalue}
+                        propname={modalprops.propname}
+                        objectedit={modalprops.sectionname}
+                    />
+                    <DeleteModal
+                        show={deletemodalprops.show}
+                        deleteCommentFunction={deleteCommentHandler}
+                        handleClose={Deletemodalclosehandler}
+                        commentorname={deletemodalprops.commentorname}
+                        commentorid={deletemodalprops.id}
+                    />
+                    <ToastContainer />
+                </div >
+            </main>
+        </React.Fragment>
 
     )
 }

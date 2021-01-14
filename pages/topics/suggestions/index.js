@@ -1,7 +1,7 @@
 import TopicsPage from "../../../components/TopicsPage/TopicsPage"
 import Axios from 'axios'
 import Head from 'next/head'
-
+import React from 'react'
 
 
 const SuggestionsPage = ({ topics }) => {
