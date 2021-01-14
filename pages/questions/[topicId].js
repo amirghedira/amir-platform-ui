@@ -1,10 +1,22 @@
 
 import Axios from 'axios';
 import Topic from '../../components/Topic/Topic'
-
+import React from 'react'
+import Head from 'next/head'
 const TopicPage = ({ topic }) => {
 
-    return <Topic Topic={topic} type={'questions'} />
+    return (
+        <React.Fragment>
+            <Head>
+                <title>{topic.title}</title>
+                <meta name="description" content={topic.content} />
+
+            </Head>
+            <main>
+                <Topic Topic={topic} type={'questions'} />
+            </main>
+        </React.Fragment>
+    )
 }
 
 
