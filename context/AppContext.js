@@ -54,7 +54,7 @@ const AppContext = (props) => {
     React.useEffect(() => {
         const publicVadidKey = 'BMUYV7TShfXpU5edFVCfBEO0JwC-kCujoxV6q4pp3WHipuDPF2OE4bMd4LYYsNjKdn9GMtIlxW6vMQinu9qBkUg'
         if ('serviceWorker' in navigator)
-            navigator.serviceWorker.register(`${process.env.PUBLIC_URL}/serviceworker.js`, {
+            navigator.serviceWorker.register("/serviceworker.js", {
                 scope: '/'
             })
                 .then(register => {
