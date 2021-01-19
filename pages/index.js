@@ -42,7 +42,13 @@ function Index(props) {
   return (
     <main>
       <Head>
-        <title>Amir Platform</title>
+        <title>{`Amir Platform`}</title>
+        <meta name="title" content={`Amir Platform`} />
+        <link rel="canonical" href={`https://www.amir-ghedira.com`} />
+        <meta property="og:url" content={`https://www.amir-ghedira.com`} />
+        <meta property="og:title" content={'Amir Platform'} />
+        <meta name="og:description" content="I'am AMIR GHEDIRA,I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies like nodejs mongodb mysql nestjs graphql, Also am a React and Angular fan and i have a good knowledge about them.." />
+        <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
       </Head>
       <div>
         <div className="wrapper">
