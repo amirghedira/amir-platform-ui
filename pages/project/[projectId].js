@@ -272,8 +272,11 @@ const Details = (props) => {
                 <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project._id}`} />
                 <meta property="og:title" content={project.name} />
                 <meta property="og:description" content={project.overview} />
-                {project.imagesurl.length > 0 &&
+                {project.imagesurl.length > 0 ?
                     <meta property="og:image" content={project.imagesurl[Math.floor(Math.random() * project.imagesurl.length)]} />
+                    :
+                    <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
+
                 }
 
             </Head>
