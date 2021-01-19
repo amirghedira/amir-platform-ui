@@ -28,3 +28,18 @@
     font-size: 15px;
     margin-right: 10px;
 }
+.searchIcon{
+    font-size: 15px;
+}
+.searchInput{
+    border-radius: 20px;
+    background-color: transparent!important;
+    backdrop-filter: blur(50px);
+    padding-left: 20px;
+    margin: 0;
+    margin-left: 5px;
+    font-size: 14px;
+    border-width: 2px !important;
+    border-style: solid;
+    color: white !important;
+}

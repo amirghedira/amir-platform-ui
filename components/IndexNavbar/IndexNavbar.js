@@ -4,6 +4,7 @@ import GlobalContext from '../../context/GlobalContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { CommonLoading } from 'react-loadingg';
+import { useRouter } from 'next/router'
 import classes from './IndexNavbar.module.css'
 // reactstrap components
 import {
@@ -19,7 +20,8 @@ import {
     DropdownMenu,
     UncontrolledDropdown,
     UncontrolledTooltip,
-    Badge
+    Badge,
+    Input
 } from "reactstrap";
 import Link from "next/link";
 import { RotateCircleLoading } from 'react-loadingg';
@@ -32,6 +34,10 @@ const IndexNavbar = () => {
     const [LoadingImage, SetLoadingImage] = React.useState(true)
     const [navbarColor, setNavbarColor] = React.useState('navbar-transparent');
     const [LoadingNotification, SetLoadingNotification] = React.useState(true)
+    const [focusSearch, setFocusSearch] = React.useState(false)
+    const [searchQuery, setSearchQuery] = React.useState('')
+    const router = useRouter()
+
     React.useEffect(() => {
         if (context.UserProfile)
             SetLoadingImage(false)
@@ -66,6 +72,11 @@ const IndexNavbar = () => {
     const DisconnectHandler = () => {
         toast.success("Successfully disconnected", { position: toast.POSITION.BOTTOM_RIGHT })
         context.disconnectHandler();
+    }
+    const keyPressedHandler = (e) => {
+        if (e.key === 'Enter') {
+            router.push({ pathname: "/search", query: { searchTerm: searchQuery } })
+        }
     }
     const loginHandler = (logininfo) => {
         axios.post('/user/login', { username: logininfo.username, password: logininfo.password })
@@ -192,11 +203,25 @@ const IndexNavbar = () => {
                             onClick={() => {
                                 setCollapseOpen(false)
                             }}>
-                            <Link href="/">
-                                <h5 className={classes.navLink} style={{ cursor: 'pointer' }}>
-                                    Home
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                                <Link href="/">
+                                    <h5 className={classes.navLink} style={{ margin: 0, cursor: 'pointer' }}>
+                                        Home
                                 </h5>
-                            </Link>
+                                </Link>
+                                <div style={{ marginLeft: '20px', display: 'flex', alignItems: 'center' }}>
+                                    <i className={`fas fa-search ${classes.searchIcon}`}></i>
+                                    <Input className={classes.searchInput}
+                                        onKeyPress={keyPressedHandler}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        style={{ borderColor: focusSearch ? '#2CA8FF' : 'white' }}
+                                        onBlur={() => { setFocusSearch(false) }}
+                                        onFocus={() => { setFocusSearch(true) }}
+
+                                        placeholder='Search...' />
+                                </div>
+
+                            </div>
                         </NavbarBrand>
                         <button
                             className="navbar-toggler navbar-toggler"
@@ -217,6 +242,7 @@ const IndexNavbar = () => {
                         isOpen={collapseOpen}
                         navbar>
                         <Nav navbar style={{ display: 'flex', alignItems: 'center' }}>
+
                             <NavItem className={classes.navItem}>
                                 <NavLink
                                     onClick={() => {
