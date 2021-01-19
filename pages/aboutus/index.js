@@ -20,8 +20,15 @@ const Aboutus = () => {
     return (
         <React.Fragment>
             <Head>
-                <title>About Us</title>
-                <meta name="description" content="This website is dedicated to display my current projects , each new projects will be uploaded with in the link to github and also it will be available to be downloaded directly. This platform provide more information about each project made , with full details and provide a comment section in which you can comment each project and give your opinion and your feedback. also any question or suggestion will be taken under consideration." />
+                <title>{`About us | Amir Platform`}</title>
+                <meta name="title" content={`About us | Amir Platform`} />
+                <meta name="description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
+                <link rel="canonical" href={`https://www.amir-ghedira.com/aboutus`} />
+                <meta property="og:url" content={`https://www.amir-ghedira.com/aboutus`} />
+                <meta property="og:title" content={`About us`} />
+                <meta property="og:description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
+                <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
+
 
             </Head>
             <main>

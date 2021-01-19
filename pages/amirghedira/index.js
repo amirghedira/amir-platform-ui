@@ -58,9 +58,15 @@ const ProfilePage = ({ UserProfile }) => {
 
             <Head>
                 <title>
-                    Amir Ghedira
-              </title>
-                <meta name="description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
+                    {`${UserProfile.name} | Amir Platform`}
+                </title>
+                <meta name="title" content={`${UserProfile.name} | Amir Platform`} />
+                <meta name="description" content={UserProfile.aboutme} />
+                <link rel="canonical" href='https://www.amir-ghedira.com/amirghedira' />
+                <meta property="og:url" content='https://www.amir-ghedira.com/amirghedira' />
+                <meta property="og:title" content={UserProfile.name} />
+                <meta property="og:description" content={UserProfile.aboutme} />
+                <meta property="og:image" content={UserProfile.profileimage} />
 
             </Head>
             <main>

@@ -7,9 +7,14 @@ import Head from 'next/head'
 const TopicPage = ({ topic }) => {
     <React.Fragment>
         <Head>
-            <title>{topic.title}</title>
+            <title>{`${topic.title} | Amir Platform`}</title>
+            <meta name="title" content={`${topic.title} | Amir Platform`} />
             <meta name="description" content={topic.content} />
-
+            <link rel="canonical" href={`https://www.amir-ghedira.com/suggestions/${topic._id}`} />
+            <meta property="og:url" content={`https://www.amir-ghedira.com/suggestions/${topic._id}`} />
+            <meta property="og:title" content={`${topic.title}`} />
+            <meta property="og:description" content={topic.content} />
+            <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
         </Head>
         <main>
             <Topic Topic={topic} type={'suggestions'} />

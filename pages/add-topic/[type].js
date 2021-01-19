@@ -13,7 +13,6 @@ const AddTopic = (props) => {
     const [errmessage, SeterrorMessage] = React.useState('');
     const [commentContentfocus, setcommentContentfocus] = React.useState(false)
     const [commentTitlefocus, setcommentTitlefocus] = React.useState(false)
-    const [Type, SetType] = React.useState(null);
     const [isRedirectCancel, setRedirectCancel] = React.useState(false)
     const [isRedirectPost, setRedirectPost] = React.useState({ state: false, path: null })
     const context = React.useContext(GlobalContext)
@@ -38,12 +37,12 @@ const AddTopic = (props) => {
                     autor: obj.autor,
                     content: obj.content,
                     date: new Date(),
-                    type: Type,
+                    type: props.type,
                     replies: []
                 }).then(result => {
-                    setRedirectPost({ state: true, path: `/${Type}/${result.data.id}` })
+                    setRedirectPost({ state: true, path: `/${props.type}/${result.data.id}` })
                     if (obj.autor !== 'admin')
-                        context.addNotificationTopic(result.data.id, obj.autor, Type)
+                        context.addNotificationTopic(result.data.id, obj.autor, props.type)
 
 
                 })
@@ -62,7 +61,7 @@ const AddTopic = (props) => {
     }
 
     if (isRedirectCancel)
-        router.push("/topics/" + Type)
+        router.push("/topics/" + props.type)
     else if (isRedirectPost.state)
         router.push(isRedirectPost.path)
 
@@ -72,8 +71,14 @@ const AddTopic = (props) => {
         return (
             <React.Fragment>
                 <Head>
-                    <title>{'Create new ' + props.type}</title>
+                    <title>{`Create new ${props.type} | Amir Platform`}</title>
+                    <meta name="title" content={`Create new ${props.type} | Amir Platform`} />
                     <meta name="description" content="Feel free to post a new topic here if you have a question or a suggestion for us, Its a pleasure to answer you!" />
+                    <link rel="canonical" href='https://www.amir-ghedira.com/amirghedira' />
+                    <meta property="og:url" content={`https://www.amir-ghedira.com/add-topic/${props.type}`} />
+                    <meta property="og:title" content={`Create new ${props.type}`} />
+                    <meta property="og:description" content="Feel free to post a new topic here if you have a question or a suggestion for us, Its a pleasure to answer you!" />
+                    <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
                 </Head>
                 <main>
                     <Row style={{ margin: '0' }}>
@@ -86,10 +91,10 @@ const AddTopic = (props) => {
                                 </NavItem>
 
                                 <NavItem style={{ height: '100%', display: 'flex', alignItems: 'center' }} >
-                                    <NavLink href={`/topics/${Type}`} tag={Link}>
+                                    <NavLink href={`/topics/${props.type}`} tag={Link}>
                                         <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                                             <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
-                                            <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Type} </strong>
+                                            <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {props.type} </strong>
                                         </div>
                                     </NavLink>
 
@@ -117,7 +122,7 @@ const AddTopic = (props) => {
                             <Col xs="3" md='1' style={{ display: 'flex' }}>
                                 <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
                                     {context.token ?
-                                        <img src={context.UserProfile.profileimage} style={{ height: '50px', width: '50px' }} alt="Amir ghedira" />
+                                        <img src={context.UserProfile?.profileimage} style={{ height: '50px', width: '50px' }} alt="Amir ghedira" />
                                         :
                                         <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="Javascript programmer" />
 
