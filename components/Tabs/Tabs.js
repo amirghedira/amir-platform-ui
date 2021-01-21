@@ -21,6 +21,7 @@ const Tabs = (props) => {
                         _id={project._id}
                         projectname={project.name}
                         date={project.date}
+                        technologie={project.technologie}
                         status={project.status}
                         summary={project.summary}
                         platform={project.platform}

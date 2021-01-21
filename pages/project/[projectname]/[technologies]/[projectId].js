@@ -10,16 +10,16 @@ import {
     TabPane,
 
 } from 'reactstrap'
-import Editmodal from '../../components/Editmodal/Editmodal'
-import DeleteModal from '../../components/DeleteModal/DeleteModal'
-import ProjectField from '../../components/ProjectField/ProjectField';
-import ProjectColumn from '../../components/ProjectColumn/ProjectColumn';
+import Editmodal from '../../../../components/Editmodal/Editmodal'
+import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
+import ProjectField from '../../../../components/ProjectField/ProjectField';
+import ProjectColumn from '../../../../components/ProjectColumn/ProjectColumn';
 import { ToastContainer, toast } from 'react-toastify';
-import GlobalContext from '../../context/GlobalContext'
+import GlobalContext from '../../../../context/GlobalContext'
 import 'react-toastify/dist/ReactToastify.css';
-import PostCard from '../../components/PostCard/PostCard';
-import CommentSection from '../../components/CommentSection/CommentSection'
-import axios from '../../utils/axios';
+import PostCard from '../../../../components/PostCard/PostCard';
+import CommentSection from '../../../../components/CommentSection/CommentSection'
+import axios from '../../../../utils/axios';
 import Axios from 'axios';
 import Head from 'next/head'
 
@@ -110,7 +110,7 @@ const Details = (props) => {
 
                     )
                     if (obj.autor !== 'admin')
-                        await axios.post('/notification', { id: result.data._id, content: `user ${obj.autor} has commented ${project.name} project`, link: `/project/${project._id}` })
+                        await axios.post('/notification', { id: result.data._id, content: `user ${obj.autor} has commented ${project.name} project`, link: `/project/${project.name}/${project.technologie}/${project._id}` })
 
                 })
                 .catch(err => {
@@ -268,8 +268,8 @@ const Details = (props) => {
                 <title>{`${project.name} | Amir Platform`}</title>
                 <meta name="title" content={`${project.name} | Amir Platform`} />
                 <meta name="description" content={project.overview} />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project._id}`} />
-                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project._id}`} />
+                <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
+                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
                 <meta property="og:title" content={project.name} />
                 <meta property="og:description" content={project.overview} />
                 {project.imagesurl.length > 0 ?
@@ -505,6 +505,7 @@ const Details = (props) => {
 
 export const getServerSideProps = async (context) => {
 
+    console.log(context.params)
     const projectId = context.params.projectId
     const res = await Axios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
     return {

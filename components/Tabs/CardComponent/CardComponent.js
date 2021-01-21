@@ -164,7 +164,7 @@ const CardComponent = (props) => {
 
                             </Col>
                             <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                <Link href={"/project/" + props._id} style={{ color: 'black', textDecoration: 'none' }}>
+                                <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                     <Button
                                         style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
                                         onMouseEnter={() => { setfocusedReadmore(true) }}
