@@ -278,7 +278,6 @@ const Details = (props) => {
                     <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
 
                 }
-                <meta name="robots" content="index,follow" />
 
             </Head>
             <main>

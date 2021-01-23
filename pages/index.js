@@ -48,6 +48,8 @@ function Index(props) {
         <meta property="og:url" content={`https://www.amir-ghedira.com`} />
         <meta property="og:title" content={'Amir Platform'} />
         <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
+        <meta name="robots" content="index,follow" />
+
       </Head>
       <div>
         <div className="wrapper">
