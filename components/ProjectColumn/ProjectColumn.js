@@ -6,9 +6,9 @@ const ProjectColumn = (props) => {
     return (
         <div className={classes.firstdiv} >
             <Nav className={classes.itemsNavbar}>
-                <h2 className={classes.projecttitle} style={{ margin: 'auto', padding: '20px', fontSize: '16px' }}>
+                <h1 className={classes.projecttitle} style={{ margin: 'auto', padding: '20px', fontSize: '16px' }}>
                     {props.project.name}
-                </h2>
+                </h1>
             </Nav>
 
             <div className={classes.sidebarContainers}>
