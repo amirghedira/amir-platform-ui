@@ -281,7 +281,7 @@ const Details = (props) => {
 
             </Head>
             <main>
-                <div style={{ minHeight: '86.2vh' }}>
+                <article style={{ minHeight: '86.2vh' }}>
                     {projectimagemodal}
                     <div className="section" style={{ backgroundColor: 'transparent', marginTop: '40px' }}>
                         <Container>
@@ -496,7 +496,7 @@ const Details = (props) => {
                         commentorid={deletemodalprops.id}
                     />
                     <ToastContainer />
-                </div >
+                </article >
             </main>
         </React.Fragment>
 
