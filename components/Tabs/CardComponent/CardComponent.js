@@ -60,9 +60,9 @@ const CardComponent = (props) => {
                                     />
                                 </Link>}
                                 <div style={{ marginLeft: '10px' }}>
-                                    <h3 style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
+                                    <a href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
                                         {props.projectname}
-                                    </h3>
+                                    </a>
                                     <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted:{' '}
                                         <FormatDate>{props.date}</FormatDate></h5>
 
