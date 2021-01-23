@@ -50,15 +50,16 @@ const CardComponent = (props) => {
 
 
                             <Col style={{ display: 'flex', alignItems: 'center' }}>
-                                {context.UserProfile && <Link href={'/amirghedira'}>
+                                {context.UserProfile &&
+                                    <a href={'/amirghedira'}>
 
-                                    <img
-                                        alt="..."
-                                        className="rounded-circle img-raised"
-                                        style={pStyle}
-                                        src={context.UserProfile?.profileimage}
-                                    />
-                                </Link>}
+                                        <img
+                                            alt="..."
+                                            className="rounded-circle img-raised"
+                                            style={pStyle}
+                                            src={context.UserProfile?.profileimage}
+                                        />
+                                    </a>}
                                 <div style={{ marginLeft: '10px' }}>
                                     <a href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
                                         {props.projectname}
