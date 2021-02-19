@@ -52,28 +52,28 @@ const AppContext = (props) => {
 
     }, [])
     React.useEffect(() => {
-        const publicVadidKey = 'BMUYV7TShfXpU5edFVCfBEO0JwC-kCujoxV6q4pp3WHipuDPF2OE4bMd4LYYsNjKdn9GMtIlxW6vMQinu9qBkUg'
-        if ('serviceWorker' in navigator)
-            navigator.serviceWorker.register("/serviceworker.js")
-                .then(register => {
-                    register.pushManager.subscribe({
-                        userVisibleOnly: true,
-                        applicationServerKey: urlBase64ToUint8Array(publicVadidKey)
+        if (token) {
+            const publicVadidKey = 'BMUYV7TShfXpU5edFVCfBEO0JwC-kCujoxV6q4pp3WHipuDPF2OE4bMd4LYYsNjKdn9GMtIlxW6vMQinu9qBkUg'
+            if ('serviceWorker' in navigator)
+                navigator.serviceWorker.register("/serviceworker.js")
+                    .then(register => {
+                        register.pushManager.subscribe({
+                            userVisibleOnly: true,
+                            applicationServerKey: urlBase64ToUint8Array(publicVadidKey)
+                        })
+                            .then(subscription => {
+                                setsubscription(subscription)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     })
-                        .then(subscription => {
-                            setsubscription(subscription)
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        })
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                    .catch(err => {
+                        console.log(err)
+                    })
+        }
 
-
-
-    }, [])
+    }, [token])
 
 
     function urlBase64ToUint8Array(base64String) {
