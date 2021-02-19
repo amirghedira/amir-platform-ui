@@ -52,7 +52,7 @@ const CardComponent = (props) => {
 
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
                                     {context.UserProfile &&
-                                        <a href={'/amirghedira'}>
+                                        <Link href={'/amirghedira'}>
 
                                             <img
                                                 alt="amir ghedira profile image"
@@ -60,11 +60,11 @@ const CardComponent = (props) => {
                                                 style={pStyle}
                                                 src={context.UserProfile?.profileimage}
                                             />
-                                        </a>}
+                                        </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <a href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
+                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
                                             {props.projectname}
-                                        </a>
+                                        </Link>
                                         <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted:{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
 
@@ -166,7 +166,7 @@ const CardComponent = (props) => {
 
                                 </Col>
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <a href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                         <Button
                                             style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
                                             onMouseEnter={() => { setfocusedReadmore(true) }}
@@ -178,11 +178,11 @@ const CardComponent = (props) => {
 
                                             </div>
                                         </Button>
-                                    </a>
+                                    </Link>
                                 </Col>
 
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <a
+                                    <Link
                                         href={props.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -198,7 +198,7 @@ const CardComponent = (props) => {
                                             </div>
 
                                         </Button>
-                                    </a>
+                                    </Link>
                                 </Col>
                             </Row>
                             <hr style={{ maxWidth: '90%', marginTop: '0', marginBottom: '20px' }} />
