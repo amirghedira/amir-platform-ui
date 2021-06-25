@@ -45,7 +45,7 @@ const CardComponent = (props) => {
         <article>
             <Row>
                 <Col key={props._id} className="ml-auto mr-auto" md="12" xl="8" >
-                    <Card>
+                    <Card className={classes.cardContainer}>
                         <CardHeader>
                             <Row style={{ padding: '10px' }}>
 
@@ -62,10 +62,12 @@ const CardComponent = (props) => {
                                             />
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', fontSize: '17px', fontWeight: '500', margin: '0' }}>
-                                            {props.projectname}
+                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`}>
+                                            <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0' }}>
+                                                {props.projectname}
+                                            </span>
                                         </Link>
-                                        <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted:{' '}
+                                        <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
 
                                     </div>
@@ -93,17 +95,17 @@ const CardComponent = (props) => {
                                                     <DropdownMenu right>
                                                         <DropdownItem header tag="a">
                                                             Settings
-                                                   </DropdownItem>
+                                                        </DropdownItem>
                                                         <DropdownItem
                                                             onClick={() => { setEditPost(true) }}
                                                         >
                                                             Edit Post
-                                                  </DropdownItem>
+                                                        </DropdownItem>
                                                         <DropdownItem
                                                             onClick={() => { context.deleteprojectHandler(props._id) }}
                                                         >
                                                             Delete
-                                                  </DropdownItem>
+                                                        </DropdownItem>
                                                     </DropdownMenu>
                                                 </UncontrolledDropdown>
                                             </Nav>) : null}
@@ -135,7 +137,7 @@ const CardComponent = (props) => {
                                         color="danger"
                                         onClick={() => { setEditPost(false) }}
                                     > Cancel
-                                </Button>
+                                    </Button>
                                 </div>
 
                                 :

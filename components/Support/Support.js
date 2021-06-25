@@ -18,6 +18,7 @@ function Download() {
                     <Col className="text-center" lg="8" md="12">
                         <Button
                             className="btn-neutral btn-icon btn-round"
+                            style={{ margin: '0px 5px 0px 5px' }}
                             color="facebook"
                             href="https://www.facebook.com/ghedira.amir"
                             id="tooltip735272548"
@@ -28,9 +29,10 @@ function Download() {
                         </Button>
                         <UncontrolledTooltip delay={0} target="tooltip735272548">
                             Follow me on Facebook
-              </UncontrolledTooltip>
+                        </UncontrolledTooltip>
                         <Button
                             className="btn-neutral btn-icon btn-round"
+                            style={{ margin: '0px 5px 0px 5px' }}
                             color="linkedin"
                             href="https://www.linkedin.com/in/amir-ghedira-1053991a2/"
                             id="tooltip647117716"
@@ -41,9 +43,10 @@ function Download() {
                         </Button>
                         <UncontrolledTooltip delay={0} target="tooltip647117716">
                             Follow me on LinkedIn
-              </UncontrolledTooltip>
+                        </UncontrolledTooltip>
                         <Button
                             className="btn-neutral btn-icon btn-round"
+                            style={{ margin: '0px 5px 0px 5px' }}
                             color="github"
                             href="https://github.com/amirghedira"
                             id="tooltip331904895"
@@ -54,7 +57,7 @@ function Download() {
                         </Button>
                         <UncontrolledTooltip delay={0} target="tooltip331904895">
                             My Github Repository
-              </UncontrolledTooltip>
+                        </UncontrolledTooltip>
                     </Col>
                 </Row>
             </Container>

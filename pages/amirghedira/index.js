@@ -21,6 +21,7 @@ import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
 import Head from 'next/head'
 import Axios from "axios";
+import ReactGitHubCalender from 'react-github-calendar'
 
 const ProfilePage = ({ UserProfile }) => {
     const [pills, setPills] = React.useState("2");
@@ -73,8 +74,8 @@ const ProfilePage = ({ UserProfile }) => {
                 <div className="wrapper">
                     {showImage}
                     <Container style={{
-                        borderRadius: '3px',
-                        marginTop: '50px', marginBottom: '50px', boxShadow: '0px 5px 25px 0px rgba(0, 0, 0, 0.4)', backgroundColor: 'white'
+                        borderRadius: '10px',
+                        marginTop: '50px', marginBottom: '50px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', backgroundColor: 'white'
                     }}>
 
                         < Row >
@@ -92,13 +93,12 @@ const ProfilePage = ({ UserProfile }) => {
                                     <Col>
                                         <h3 className={classes.aboutMeText}>
                                             About me
-                                </h3>
+                                        </h3>
                                         <pre className={classes.description}>
                                             {UserProfile.aboutme}
                                         </pre>
                                     </Col>
                                 </Row>
-
                                 <Row>
                                     <Col className="ml-auto mr-auto" md="6">
                                         <div className="nav-align-center">
@@ -201,6 +201,25 @@ const ProfilePage = ({ UserProfile }) => {
                                                     <Row className="collections">
                                                         <Col>
                                                             <div style={{ margin: '20px' }}>
+                                                                <h4 className={classes.categoryText} >LinkedIn Profile</h4>
+                                                                <hr style={{ backgroundColor: '#bfbfbf' }} />
+                                                                <div className="LI-profile-badge" data-version="v1" data-size="large" data-locale="fr_FR" data-type="horizontal" data-theme="light" data-vanity="amir-ghédira-1053991a2">
+                                                                    <a className="LI-simple-link" href='https://tn.linkedin.com/in/amir-gh%C3%A9dira-1053991a2?trk=profile-badge'>Amir Ghédira</a>
+                                                                </div>
+
+                                                            </div>
+                                                            <div style={{ margin: '20px' }}>
+                                                                <h4 className={classes.categoryText} >LinkedIn Profile</h4>
+                                                                <hr style={{ backgroundColor: '#bfbfbf' }} />
+                                                                <ReactGitHubCalender
+                                                                    username="amirghedira"
+                                                                    years={[2019, 2020, 2021]}
+                                                                    fontSize={16}
+                                                                    blockSize={10} blockMargin={4}
+                                                                    color="hsl(203, 82%, 33%)" />
+
+                                                            </div>
+                                                            <div style={{ margin: '20px' }}>
                                                                 <h4 className={classes.categoryText} >Personal information</h4>
                                                                 <hr style={{ backgroundColor: '#bfbfbf' }} />
                                                                 <Row style={{ paddingLeft: '20px', paddingTop: '30px' }}>
@@ -251,8 +270,8 @@ const ProfilePage = ({ UserProfile }) => {
                                                                         </Row>
                                                                     </Col>
                                                                 </Row>
-
                                                             </div>
+
                                                             <div style={{ margin: '20px' }}>
                                                                 <h4 className={classes.categoryText}>Contact Methods</h4>
                                                                 <hr style={{ backgroundColor: '#bfbfbf' }} />
@@ -340,7 +359,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 UserProfile.news.length > 0 ?
                                                                     UserProfile.news.slice(0).reverse().map((onenews) => {
                                                                         return (
-                                                                            <Row key={onenews._id} style={{ backgroundColor: "white", boxShadow: '0px 5px 25px 0px rgba(0, 0, 0, 0.2)', marginTop: '20px' }}>
+                                                                            <Row key={onenews._id} style={{ backgroundColor: "white", boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', marginTop: '20px' }}>
                                                                                 <Col >
                                                                                     <Row >
                                                                                         <Col >

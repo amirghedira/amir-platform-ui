@@ -10,31 +10,31 @@ import Head from 'next/head'
 import NextNprogress from 'nextjs-progressbar';
 
 function MyApp({ Component, pageProps }) {
-  return (
+    return (
 
-    <React.Fragment>
+        <React.Fragment>
 
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#2c2c2c" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-      </Head>
-      <AppContext>
-        <IndexHeader />
-        <NextNprogress
-          color="#29D"
-          startPosition={0.3}
-          stopDelayMs={200}
-          showSpinner={false}
-          options={{ showSpinner: false }}
-          height="3"
-        />
-        <IndexNavbar />
-        <Component {...pageProps} />
-        <DarkFooter />
-      </AppContext>
-    </React.Fragment>
-  )
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="theme-color" content="#2c2c2c" />
+                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+            </Head>
+            <AppContext>
+                <IndexHeader />
+                <NextNprogress
+                    color="#29D"
+                    startPosition={0.3}
+                    stopDelayMs={200}
+                    showSpinner={false}
+                    options={{ showSpinner: false }}
+                    height="3"
+                />
+                <IndexNavbar />
+                <Component {...pageProps} />
+                <DarkFooter />
+            </AppContext>
+        </React.Fragment>
+    )
 }
 
 export default MyApp

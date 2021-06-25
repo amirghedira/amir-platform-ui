@@ -19,10 +19,17 @@ export default class CustomDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,900&display=swap" rel="stylesheet" />
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
                     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet" />
+                    <link rel="stylesheet" href="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.css"
+                    />
                 </Head>
                 <body>
                     <Main />
                 </body>
+                <script src="https://cdn.rawgit.com/IonicaBizau/github-calendar/gh-pages/dist/github-calendar.min.js"></script>
+                <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+                <script>
+                    new GitHubCalendar(".github", "amirghedira");
+                </script>
                 <NextScript />
             </Html>
         )

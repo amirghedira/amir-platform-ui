@@ -303,7 +303,7 @@ const Details = (props) => {
                                                 >
                                                     <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.photo ? 'white' : 'black' }}>
                                                         photos
-                                                </h4>
+                                                    </h4>
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem className={classes.navItem}>
@@ -316,7 +316,7 @@ const Details = (props) => {
                                                 >
                                                     <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.main ? 'white' : 'black' }}>
                                                         Main
-                                                </h4>
+                                                    </h4>
                                                 </NavLink>
                                             </NavItem>
                                             <NavItem className={classes.navItem}>
@@ -330,7 +330,7 @@ const Details = (props) => {
 
                                                     <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.comment ? 'white' : 'black' }}>
                                                         Comments
-                                                </h4>
+                                                    </h4>
                                                 </NavLink>
                                             </NavItem>
                                         </Nav>
@@ -505,7 +505,6 @@ const Details = (props) => {
 
 export const getServerSideProps = async (context) => {
 
-    console.log(context.params)
     const projectId = context.params.projectId
     const res = await Axios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
     return {

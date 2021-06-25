@@ -155,13 +155,13 @@ const IndexNavbar = () => {
                             }}>
                             <DropdownItem>
                                 Settings
-                             </DropdownItem>
+                            </DropdownItem>
                         </Link>
                         <DropdownItem
                             onClick={() => { setCollapseOpen(false); DisconnectHandler(); }}
                         >
                             Disconnect
-                </DropdownItem>
+                        </DropdownItem>
                     </DropdownMenu>
                 </UncontrolledDropdown>
             </Nav>
@@ -175,11 +175,11 @@ const IndexNavbar = () => {
                     onClick={hideshowHandler}
                     id="login-tooltip"
                 >
-                    <i className="fas fa-user fa-2x" style={{ marginTop: '5px' }}></i>
+                    <i className="fas fa-user" style={{ marginTop: '5px', fontSize: '15px' }}></i>
                 </NavLink>
                 <UncontrolledTooltip target="#login-tooltip">
                     Staff Login
-          </UncontrolledTooltip>
+                </UncontrolledTooltip>
             </NavItem>)
 
     return (
@@ -204,13 +204,18 @@ const IndexNavbar = () => {
                                 setCollapseOpen(false)
                             }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                <Link href="/">
-                                    <h5 className={classes.navLink} style={{ margin: 0, cursor: 'pointer' }}>
-                                        Home
-                                </h5>
-                                </Link>
+                                {navbarColor !== '' ?
+                                    <Link href="/">
+                                        <h5 className={classes.navLink} style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
+                                            Home
+                                        </h5>
+                                    </Link>
+                                    :
+                                    <Link href="/">
+                                        <img className={classes.navIconImage} src={'/nav-icon.png'} alt="nav-icon" style={{ cursor: 'pointer' }} />
+                                    </Link>}
                                 <div style={{ marginLeft: '20px', display: 'flex', alignItems: 'center' }}>
-                                    <i className={`fas fa-search ${classes.searchIcon}`}></i>
+                                    <i className={`fas fa-search ${classes.searchIcon}`} style={{ color: focusSearch ? '#2CA8FF' : 'white' }}></i>
                                     <Input className={classes.searchInput}
                                         onKeyPress={keyPressedHandler}
                                         onChange={(e) => setSearchQuery(e.target.value)}
