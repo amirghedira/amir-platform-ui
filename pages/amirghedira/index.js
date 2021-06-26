@@ -221,7 +221,7 @@ const ProfilePage = ({ UserProfile }) => {
 
                                                             </div>
                                                             <div style={{ margin: '20px' }}>
-                                                                <h4 className={classes.categoryText} >LinkedIn Profile</h4>
+                                                                <h4 className={classes.categoryText} >Github Contribution</h4>
                                                                 <hr style={{ backgroundColor: '#bfbfbf' }} />
                                                                 <ReactGitHubCalender
                                                                     username="amirghedira"
