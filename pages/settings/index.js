@@ -357,8 +357,8 @@ const AccountSettings = () => {
             .catch(err => { context.ErrorAccureHandler() })
     }
     const postProjectHandler = (info) => {
-        if (info.name === '' || info.status === '' || info.platform === '' || info.github === '' || info.summary === '' ||
-            info.started === '' || info.overview === '' || info.whatlearned === '' || info.technologie === '' || info.filelink === '') {
+        if (info.name === '' || info.status === '' || info.platform === ''  || info.summary === '' ||
+            info.started === '' || info.overview === '' || info.whatlearned === '' || info.technologie === '' ) {
             SetProjectErrField({ color: 'red', message: 'Please fill all inputs' });
         }
         else {
