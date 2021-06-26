@@ -22,7 +22,7 @@ import classes from './Profilepage.module.css'
 import Head from 'next/head'
 import Axios from "axios";
 import ReactGitHubCalender from 'react-github-calendar'
-
+import ReactTooltip from 'react-tooltip'
 const ProfilePage = ({ UserProfile }) => {
     const [pills, setPills] = React.useState("2");
     const [showImage, setShowimage] = React.useState(null)
@@ -43,7 +43,19 @@ const ProfilePage = ({ UserProfile }) => {
             document.body.classList.remove("sidebar-collapse");
         };
     }, [])
+    React.useEffect(() => {
+        const script = document.createElement('script');
 
+        script.src = 'https://platform.linkedin.com/badges/js/profile.js';
+        script.async = true;
+        script.defer = true;
+
+        document.body.appendChild(script);
+
+        return () => {
+            document.body.removeChild(script);
+        };
+    }, []);
     const showprojectimageHandler = (image) => {
         setShowimage(
             <Lightbox
@@ -213,10 +225,11 @@ const ProfilePage = ({ UserProfile }) => {
                                                                 <hr style={{ backgroundColor: '#bfbfbf' }} />
                                                                 <ReactGitHubCalender
                                                                     username="amirghedira"
-                                                                    years={[2019, 2020, 2021]}
-                                                                    fontSize={16}
+                                                                    fontSize={14}
                                                                     blockSize={10} blockMargin={4}
-                                                                    color="hsl(203, 82%, 33%)" />
+                                                                    color="hsl(203, 82%, 33%)" >
+                                                                    <ReactTooltip delayShow={50} html />
+                                                                </ReactGitHubCalender>
 
                                                             </div>
                                                             <div style={{ margin: '20px' }}>

@@ -25,6 +25,7 @@
     "react-moment": "^0.9.7",
     "react-syntax-highlighter": "^12.2.1",
     "react-toastify": "^5.5.0",
+    "react-tooltip": "^4.2.21",
     "reactstrap": "8.0.1",
     "socket.io": "^2.3.0"
   }
