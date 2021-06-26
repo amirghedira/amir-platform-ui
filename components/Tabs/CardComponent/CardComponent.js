@@ -40,7 +40,7 @@ const CardComponent = (props) => {
     if (props.status === "Public")
         badge = <Badge color="success" className="mr-1">Public</Badge>
     else
-        badge = <Badge color="warning" className="mr-1">Private</Badge>
+        badge = <Badge color="danger" className="mr-1">Private</Badge>
     return (
         <article>
             <Row>
