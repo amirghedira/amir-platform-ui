@@ -169,7 +169,7 @@ const AccountSettings = () => {
             const fd = new FormData();
             fd.append("cvfile", selectedCvFile);
 
-            axios.patch('/user/updatebgimage', fd, { onUploadProgress: onUploadProgress })
+            axios.patch('/user/upload-cv', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
                     context.UpdateProfile({
                         ...context.UserProfile,
@@ -178,6 +178,7 @@ const AccountSettings = () => {
                     setprogress(0)
                 })
                 .catch(err => {
+                    console.log({ err })
                     context.ErrorAccureHandler()
                 });
 
