@@ -181,7 +181,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                             })
                                                         }}
                                                     >
-                                                        <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.myCv ? 'white' : 'black' }}>My CV</h4>
+                                                        <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.myCv ? 'white' : 'black' }}>Resume</h4>
                                                     </NavLink>
                                                 </NavItem>
                                             </Nav>
