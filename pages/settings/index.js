@@ -482,7 +482,7 @@ const AccountSettings = () => {
                                                 );
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.general ? 'white' : 'black' }}>General</h4>
+                                            <h4 style={{ margin: 'auto', fontSize: '13px', color: MenuButtonClicked.general ? 'white' : 'black' }}>General</h4>
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
@@ -495,7 +495,7 @@ const AccountSettings = () => {
                                                 );
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.photosetting ? 'white' : 'black' }}>Photos Settings</h4>
+                                            <h4 style={{ margin: 'auto', fontSize: '13px', color: MenuButtonClicked.photosetting ? 'white' : 'black' }}>Photos Settings</h4>
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
@@ -508,7 +508,7 @@ const AccountSettings = () => {
                                                 );
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.news ? 'white' : 'black' }}>News</h4>
+                                            <h4 style={{ margin: 'auto', fontSize: '13px', color: MenuButtonClicked.news ? 'white' : 'black' }}>News</h4>
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
@@ -521,7 +521,7 @@ const AccountSettings = () => {
                                                 );
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.addproject ? 'white' : 'black' }}>Add new project</h4>
+                                            <h4 style={{ margin: 'auto', fontSize: '13px', color: MenuButtonClicked.addproject ? 'white' : 'black' }}>Add new project</h4>
                                         </NavLink>
                                     </NavItem>
                                     <NavItem>
@@ -534,7 +534,7 @@ const AccountSettings = () => {
                                                 );
                                             }}
                                         >
-                                            <h4 style={{ margin: 'auto', color: MenuButtonClicked.banlist ? 'white' : 'black' }}>Ban list</h4>
+                                            <h4 style={{ margin: 'auto', fontSize: '13px', color: MenuButtonClicked.banlist ? 'white' : 'black' }}>Ban list</h4>
                                         </NavLink>
                                     </NavItem>
                                 </Nav>
@@ -1023,17 +1023,17 @@ const AccountSettings = () => {
                                                                                     onClick={() => { SetEdittile(true) }}
                                                                                 >
                                                                                     Edit title
-                                                                            </DropdownItem>
+                                                                                </DropdownItem>
                                                                                 <DropdownItem
                                                                                     onClick={() => { Seteditcontent(true) }}
                                                                                 >
                                                                                     Edit post
-                                                                            </DropdownItem>
+                                                                                </DropdownItem>
                                                                                 <DropdownItem
                                                                                     onClick={() => { deleteNewsHandler(onenews.id) }}
                                                                                 >
                                                                                     Delete
-                                                                            </DropdownItem>
+                                                                                </DropdownItem>
                                                                             </DropdownMenu>
                                                                         </UncontrolledDropdown>
                                                                     </Nav>

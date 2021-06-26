@@ -74,7 +74,9 @@ const IndexNavbar = () => {
         context.disconnectHandler();
     }
     const keyPressedHandler = (e) => {
+
         if (e.key === 'Enter') {
+            setSearchQuery('')
             router.push({ pathname: "/search", query: { searchTerm: searchQuery } })
         }
     }
@@ -218,6 +220,7 @@ const IndexNavbar = () => {
                                     <i className={`fas fa-search ${classes.searchIcon}`} style={{ color: focusSearch ? '#2CA8FF' : 'white' }}></i>
                                     <Input className={classes.searchInput}
                                         onKeyPress={keyPressedHandler}
+                                        value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         style={{ borderColor: focusSearch ? '#2CA8FF' : 'white' }}
                                         onBlur={() => { setFocusSearch(false) }}
