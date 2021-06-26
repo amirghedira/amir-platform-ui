@@ -31,7 +31,8 @@ const AccountSettings = () => {
     const [editContent, Seteditcontent] = React.useState(false);
     const [projectImages, setProjectImages] = React.useState(null);
     const [projectErrField, SetProjectErrField] = React.useState('')
-    const [selectedimage, setselectedimage] = React.useState(null);
+    const [selectedimage, setSelectedimage] = React.useState(null);
+    const [selectedCvFile, setSelectedCvFile] = React.useState(null)
     const [NewscontentFocused, setNewscontentFocused] = React.useState(false)
     const [addSkill, setaddSkill] = React.useState(false)
     const [iconFile, setIconfile] = React.useState(null)
@@ -162,6 +163,27 @@ const AccountSettings = () => {
             .catch(err => {
                 context.ErrorAccureHandler();
             })
+    }
+    const saveCvFileHandler = () => {
+        if (selectedCvFile) {
+            const fd = new FormData();
+            fd.append("cvfile", selectedCvFile);
+
+            axios.patch('/user/updatebgimage', fd, { onUploadProgress: onUploadProgress })
+                .then(result => {
+                    context.UpdateProfile({
+                        ...context.UserProfile,
+                        cvFile: result.data.fileUrl
+                    })
+                    setprogress(0)
+                })
+                .catch(err => {
+                    context.ErrorAccureHandler()
+                });
+
+        } else {
+            toast.error('No files entered', { position: toast.POSITION.BOTTOM_RIGHT })
+        }
     }
     const saveimageHandler = () => {
         if (selectedimage) {
@@ -357,8 +379,8 @@ const AccountSettings = () => {
             .catch(err => { context.ErrorAccureHandler() })
     }
     const postProjectHandler = (info) => {
-        if (info.name === '' || info.status === '' || info.platform === ''  || info.summary === '' ||
-            info.started === '' || info.overview === '' || info.whatlearned === '' || info.technologie === '' ) {
+        if (info.name === '' || info.status === '' || info.platform === '' || info.summary === '' ||
+            info.started === '' || info.overview === '' || info.whatlearned === '' || info.technologie === '') {
             SetProjectErrField({ color: 'red', message: 'Please fill all inputs' });
         }
         else {
@@ -942,12 +964,34 @@ const AccountSettings = () => {
                                                 <h4 className={classes.sectionTitel}>Change background image</h4>
                                                 <Row>
                                                     <Col style={{ margin: 'auto' }} >
-                                                        <Input type='file' onChange={event => { setselectedimage(event.target.files[0]) }} />
+                                                        <Input type='file' onChange={event => { setSelectedimage(event.target.files[0]) }} />
                                                     </Col>
                                                 </Row>
                                                 <Row >
                                                     <div style={{ margin: 'auto', marginTop: '40px' }}>
                                                         <Button color="info" onClick={saveimageHandler}>Save</Button>
+                                                    </div>
+
+                                                </Row>
+
+
+                                            </Col>
+                                        </Row>
+                                        <Row className={classes.settingsCards}>
+                                            <Col style={{ margin: '20px' }}>
+                                                <iframe src={selectedCvFile ? URL.createObjectURL(selectedCvFile) : context.UserProfile.cvFile} width="100%" height="500px">
+                                                </iframe>
+                                            </Col>
+                                            <Col xs="5" >
+                                                <h4 className={classes.sectionTitel}>Change CV File</h4>
+                                                <Row>
+                                                    <Col style={{ margin: 'auto' }} >
+                                                        <Input type='file' onChange={event => { setSelectedCvFile(event.target.files[0]) }} />
+                                                    </Col>
+                                                </Row>
+                                                <Row >
+                                                    <div style={{ margin: 'auto', marginTop: '40px' }}>
+                                                        <Button color="info" onClick={saveCvFileHandler}>Save</Button>
                                                     </div>
 
                                                 </Row>

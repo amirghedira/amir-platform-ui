@@ -127,7 +127,8 @@ const ProfilePage = ({ UserProfile }) => {
                                                             setMenuButtonClicked({
                                                                 photos: true,
                                                                 news: false,
-                                                                moreinfo: false
+                                                                moreinfo: false,
+                                                                myCv: false
                                                             })
                                                         }}
                                                     >
@@ -142,7 +143,8 @@ const ProfilePage = ({ UserProfile }) => {
                                                             setMenuButtonClicked({
                                                                 photos: false,
                                                                 news: false,
-                                                                moreinfo: true
+                                                                moreinfo: true,
+                                                                myCv: false
                                                             })
                                                         }}
                                                     >
@@ -157,11 +159,29 @@ const ProfilePage = ({ UserProfile }) => {
                                                             setMenuButtonClicked({
                                                                 photos: false,
                                                                 news: true,
-                                                                moreinfo: false
+                                                                moreinfo: false,
+                                                                myCv: false
+
                                                             })
                                                         }}
                                                     >
                                                         <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.news ? 'white' : 'black' }}>News</h4>
+                                                    </NavLink>
+                                                </NavItem>
+                                                <NavItem className={classes.navItem}>
+                                                    <NavLink
+                                                        className={pills === "4" ? "active" : ""}
+                                                        onClick={() => {
+                                                            setPills("4");
+                                                            setMenuButtonClicked({
+                                                                photos: false,
+                                                                news: false,
+                                                                moreinfo: false,
+                                                                myCv: true
+                                                            })
+                                                        }}
+                                                    >
+                                                        <h4 className={classes.itemContentText} style={{ margin: 'auto', color: MenuButtonClicked.myCv ? 'white' : 'black' }}>My CV</h4>
                                                     </NavLink>
                                                 </NavItem>
                                             </Nav>
@@ -418,6 +438,16 @@ const ProfilePage = ({ UserProfile }) => {
                                                                     :
                                                                     <h3>No recent news</h3>
                                                             }
+                                                        </Col>
+                                                    </Row>
+                                                </Col>
+                                            </TabPane>
+                                            <TabPane tabId="pills4">
+                                                <Col className="ml-auto mr-auto" md="10">
+                                                    <Row className="collections">
+                                                        <Col md="12">
+                                                            <iframe src={UserProfile.cvFile} width="100%" height="500px">
+                                                            </iframe>
                                                         </Col>
                                                     </Row>
                                                 </Col>
