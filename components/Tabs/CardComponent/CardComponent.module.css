@@ -15,6 +15,7 @@
 
 }
 
+
 .cardContainer {
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -28,7 +29,15 @@
 
 }
 
+.cardContentContainer {
+    flex-direction: column;
+}
 
+.projectImage {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+}
 
 
 @media only screen and (max-width: 767px) {

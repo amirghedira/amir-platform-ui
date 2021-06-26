@@ -1,7 +1,6 @@
 import React from 'react'
 import classes from './ProjectDetails.module.css'
 import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css';
 import {
     Container, Row, Col, Button, Nav,
     NavItem,
@@ -36,7 +35,8 @@ const Details = (props) => {
     //========
     const [errorMessages, SetErrorMessqge] = React.useState('');
     const [pills, setPills] = React.useState("2");
-    const [projectimagemodal, setShowprojectimage] = React.useState(null)
+    const [showProjectImage, setShowProjectImage] = React.useState(false)
+    const [displayImageIndex, setDisplayImageIndex] = React.useState(0)
     const [MenuButtonClicked, setMenuButtonClicked] = React.useState({
         comments: false,
         main: true,
@@ -70,18 +70,8 @@ const Details = (props) => {
     }, [])
 
 
-    const showprojectimageHandler = (image) => {
-        setShowprojectimage(
-            <Lightbox
-                mainSrc={image}
-                enableZoom={false}
-                onCloseRequest={() => setShowprojectimage(null)} />
-        )
-
-    }
-
     const updateDownloadHandler = () => {
-        axios.patch('/project/updatedownloads/' + projectid, { downloadcount: projects[index].downloadcount + 1 })
+        axios.patch('/project/updatedownloads/' + project._id, { downloadcount: project.downloadcount + 1 })
             .then(result => {
 
                 setProject(
@@ -136,11 +126,12 @@ const Details = (props) => {
             .then(result => {
                 setProject({
                     ...project,
-                    imagesurl: [...projects[index].imagesurl, result.data.imageurl]
+                    imagesurl: [...project.imagesurl, ...result.data.imageurls]
                 })
             })
             .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
+                console.log(err)
+                context.ErrorAccureHandler(500, "Connection to server has timedout")
             })
 
     }
@@ -282,7 +273,21 @@ const Details = (props) => {
             </Head>
             <main>
                 <article style={{ minHeight: '86.2vh' }}>
-                    {projectimagemodal}
+                    {showProjectImage &&
+                        <Lightbox
+                            mainSrc={project.imagesurl[displayImageIndex]}
+                            enableZoom={false}
+                            nextSrc={project.imagesurl[(displayImageIndex + 1) % project.imagesurl.length]}
+                            prevSrc={project.imagesurl[(displayImageIndex + project.imagesurl.length - 1) % project.imagesurl.length]}
+                            onCloseRequest={() => setShowProjectImage(false)}
+                            onMovePrevRequest={() =>
+                                setDisplayImageIndex((displayImageIndex + project.imagesurl.length - 1) % project.imagesurl.length)
+                            }
+                            onMoveNextRequest={() =>
+                                setDisplayImageIndex((displayImageIndex + 1) % project.imagesurl.length)
+
+                            }
+                            onCloseRequest={() => setShowProjectImage(false)} />}
                     <div className="section" style={{ backgroundColor: 'transparent', marginTop: '40px' }}>
                         <Container>
                             <Row style={{ maxHeight: 'px' }}>
@@ -367,20 +372,17 @@ const Details = (props) => {
 
                                                             return (
                                                                 <Col xs="12" md="6" key={i}>
-
-                                                                    {
-                                                                        context.token ?
-                                                                            <Button color="danger" onClick={() => { deleteProjectImageHandler(image) }}>Delete</Button>
-
-                                                                            : null
-                                                                    }
-                                                                    <img
-                                                                        alt="..."
-                                                                        className="img-raised"
-                                                                        src={image}
-                                                                        onClick={() => { showprojectimageHandler(image) }}
-                                                                        style={{ margin: '10px', width: '100%', maxHeight: '200px' }}
-                                                                    ></img>
+                                                                    <div className={classes.projectImageContainer}>
+                                                                        {context.token && <div className={classes.deleteContainer}>
+                                                                            <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImageHandler(image)}></i>
+                                                                        </div>}
+                                                                        <img
+                                                                            alt="..."
+                                                                            className={`img-raised ${classes.projectImage}`}
+                                                                            src={image}
+                                                                            onClick={() => { setDisplayImageIndex(i + 1); setShowProjectImage(true) }}
+                                                                            style={{ margin: '10px', width: '100%', maxHeight: '200px', cursor: 'pointer', objectFit: 'cover' }} />
+                                                                    </div>
 
                                                                 </Col>
                                                             )

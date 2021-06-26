@@ -19,7 +19,7 @@ import {
 import TextareaAutosize from 'react-autosize-textarea/lib';
 import FormatDate from '../../../utils/FormatDate';
 import classes from './CardComponent.module.css';
-
+import Slider from 'react-slick';
 
 const CardComponent = (props) => {
 
@@ -36,11 +36,20 @@ const CardComponent = (props) => {
         boxShadow: 'none'
     };
 
-    let badge = null;
-    if (props.status === "Public")
-        badge = <Badge color="success" className="mr-1">Public</Badge>
-    else
-        badge = <Badge color="danger" className="mr-1">Private</Badge>
+    const settings = React.useMemo(() => {
+        return {
+            dots: false,
+            infinite: true,
+            centerMode: true,
+            autoPlay: false,
+            focusOnSelect: true,
+            speed: 500,
+            arrows: false,
+            slidesToShow: props.images.length < 3 ? props.images.length : 3,
+            slidesToScroll: 1,
+
+        }
+    }, [props.images]);
     return (
         <article>
             <Row>
@@ -78,7 +87,10 @@ const CardComponent = (props) => {
 
                                     <div style={{ display: 'flex', alignItems: 'center' }}>
                                         <div>
-                                            {badge}
+                                            {props.status === "Public" ?
+                                                <Badge color="success" className="mr-1">Public</Badge>
+                                                :
+                                                <Badge color="danger" className="mr-1">Private</Badge>}
                                         </div>
                                         <div >
                                             {context.token ? (<Nav
@@ -145,6 +157,13 @@ const CardComponent = (props) => {
                                     {props.summary}
                                 </pre>
                             }
+                            <Slider   {...settings} >
+                                {
+                                    props.images.map((image, index) => (
+                                        <img key={index} className={classes.projectImage} onClick={() => { props.onShowImages(index) }} src={image} />
+                                    ))
+                                }
+                            </Slider>
 
 
                         </CardBody>
@@ -152,7 +171,7 @@ const CardComponent = (props) => {
                             <hr style={{ maxWidth: '90%', marginBottom: '0' }} />
                             <Row style={{ margin: '5px' }}>
 
-                                <Col style={{ marginLeft: '10px', marginRight: '10px' }} >
+                                {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }} >
                                     <a href={props.filelink} download
                                         onClick={() => { context.UpdateDownloadCount(props._id); }}>
                                         <Button
@@ -166,7 +185,7 @@ const CardComponent = (props) => {
                                         </Button>
                                     </a>
 
-                                </Col>
+                                </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
                                     <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                         <Button
@@ -183,8 +202,8 @@ const CardComponent = (props) => {
                                     </Link>
                                 </Col>
 
-                                <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <Link
+                                {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
+                                    <a
                                         href={props.github}
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -200,8 +219,8 @@ const CardComponent = (props) => {
                                             </div>
 
                                         </Button>
-                                    </Link>
-                                </Col>
+                                    </a>
+                                </Col>}
                             </Row>
                             <hr style={{ maxWidth: '90%', marginTop: '0', marginBottom: '20px' }} />
 

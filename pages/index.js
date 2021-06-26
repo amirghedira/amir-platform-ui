@@ -54,13 +54,13 @@ function Index(props) {
             <div>
                 <div className="wrapper">
                     <Row>
-                        <Col className={classes.sideBar} xs="2">
-                            <SidebarLeft />
+                        <Col className={classes.sideBarMenu} >
+                            <SidebarLeft xs="2" md="3" lg="2" />
                         </Col>
-                        <Col>
+                        <Col xs="12" sm="12" md="9" lg="8">
                             <Tabs projects={projects} savechanges={savechangesHandler} />
                         </Col>
-                        <Col className={classes.sideBar} xs="2">
+                        <Col className={classes.sideBarProjects} xs="3" lg="2">
                             <SidebarRight projects={projects} topicsCount={props.topicsCount} />
                         </Col>
                     </Row>

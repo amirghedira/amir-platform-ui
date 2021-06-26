@@ -80,41 +80,43 @@ const ProjectColumn = (props) => {
                         {props.project.commentsCount}
                     </span>
                 </div>
-                <div>
-                    <span className={classes.sidebarTitle}>
-                        Download count: {' '}
-                    </span>
-                    <span>
-                        {props.project.downloadcount}
-                    </span>
-                </div>
-                <div>
-                    <span className={classes.sidebarTitle}>
-                        Git viewers: {' '}
-                    </span>
-                    <span>
-                        {props.project.gitViewers}
-                    </span>
-                </div>
+                {props.project.status === "Public" && <React.Fragment>
+                    <div>
+                        <span className={classes.sidebarTitle}>
+                            Download count: {' '}
+                        </span>
+                        <span>
+                            {props.project.downloadcount}
+                        </span>
+                    </div>
+                    <div>
+                        <span className={classes.sidebarTitle}>
+                            Git viewers: {' '}
+                        </span>
+                        <span>
+                            {props.project.gitViewers}
+                        </span>
+                    </div>
+                </React.Fragment>}
 
             </div>
-            <div className={classes.downloadsection}>
+            {props.project.status === 'Public' && <div className={classes.downloadsection}>
                 <a href={props.project.github} target="_blank" rel="noopener noreferrer">
                     <Button className={classes.button} color="warning" onClick={props.githubButtonFunction}>
                         <i className="fab fa-github fa-2x"></i>
                         Github
-            </Button>
+                    </Button>
                 </a>
 
                 <div style={{ flex: '1' }}></div>
                 <a href={props.project.filelink} download onClick={props.downloadButtonFunction}>
                     <Button color="success" className={classes.button}>
                         <i className="fas fa-download fa-2x"></i>
-                           Download
-                </Button>
+                        Download
+                    </Button>
                 </a>
 
-            </div>
+            </div>}
         </div >
     )
 }

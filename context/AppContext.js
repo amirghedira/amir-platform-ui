@@ -347,6 +347,29 @@ const AppContext = (props) => {
                 ErrorAccureHandler(500, "Connection to server has timedout");
             })
     }
+    const UpdateGitViewerHandler = (projectId) => {
+        const _projects = [...projects]
+        const projectIndex = _projects.findIndex(project => project._id === projectId)
+        axios.patch('/project/updategitviewers/' + projectId, { gitviewers: _projects[projectIndex].gitViewers + 1 })
+            .then(result => {
+                _projects[projectIndex].gitViewers += 1
+                setProjects([..._projects])
+            })
+            .catch(err => {
+                console.log({ err })
+            })
+    }
+    const updateDownloadHandler = (projectId) => {
+        const _projects = [...projects]
+        const projectIndex = _projects.findIndex(project => project._id === projectId)
+        axios.patch('/project/updatedownloads/' + projectId, { downloadcount: projects[projectIndex].downloadcount + 1 })
+            .then(result => {
+
+                _projects[projectIndex].downloadcount += 1
+                setProjects([..._projects])
+            })
+            .catch(err => { context.ErrorAccureHandler(500, "Connection to server has timedout") })
+    }
     const addNotificationTopicHandler = (id, autor, Type) => {
         axios.post('/notification', { id: id, content: `user ${autor} has created a new Topic`, link: `/${Type}/${id}` })
             .then(result => {
@@ -417,7 +440,9 @@ const AppContext = (props) => {
                     deleteReplyNotification: deleteReplyNotificationHandler,
                     addNotificationReply: addNotificationReplyHandler,
                     addNotificationTopic: addNotificationTopicHandler,
-                    ErrorAccureHandler: ErrorAccureHandler
+                    ErrorAccureHandler: ErrorAccureHandler,
+                    UpdateGitViewer: UpdateGitViewerHandler,
+                    UpdateDownloadCount: updateDownloadHandler
 
                 }
             }>
