@@ -1135,8 +1135,8 @@ const AccountSettings = () => {
                                                         <Input type="select"
                                                             name="select" id="select"
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}>
-                                                            <option>Finished</option>
-                                                            <option>Unfinished</option>
+                                                            <option>Public</option>
+                                                            <option>Private</option>
                                                         </Input>
                                                     </Col>
                                                 </Row>
