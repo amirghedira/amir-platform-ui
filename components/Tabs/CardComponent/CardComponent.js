@@ -71,8 +71,8 @@ const CardComponent = (props) => {
                                             />
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`}>
-                                            <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0' }}>
+                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} >
+                                            <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
                                             </span>
                                         </Link>
