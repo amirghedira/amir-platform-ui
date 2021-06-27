@@ -895,10 +895,10 @@ const AccountSettings = () => {
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
                                                     <Col xs="3">
-                                                        <h5 className={classes.itemsTitle}>Facebook</h5>
+                                                        <h5 className={classes.itemsTitle}>Youtube</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="facebook" value={context.UserProfile.facebook} editable={editableContact} type="text" />
+                                                        <InputField id="youtube" value={context.UserProfile.youtube} editable={editableContact} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -934,7 +934,7 @@ const AccountSettings = () => {
                                                                 saveContactHandler(
                                                                     [
                                                                         { propName: 'email', value: document.getElementById('email').value },
-                                                                        { propName: 'facebook', value: document.getElementById('facebook').value },
+                                                                        { propName: 'youtube', value: document.getElementById('youtube').value },
                                                                         { propName: 'skype', value: document.getElementById('skype').value },
                                                                         { propName: 'linkedin', value: document.getElementById('linkedin').value },
                                                                         { propName: 'Phone', value: document.getElementById('Phone').value },

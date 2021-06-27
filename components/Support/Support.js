@@ -19,16 +19,16 @@ function Download() {
                         <Button
                             className="btn-neutral btn-icon btn-round"
                             style={{ margin: '0px 5px 0px 5px' }}
-                            color="facebook"
-                            href="https://www.facebook.com/ghedira.amir"
+                            href="https://www.youtube.com/channel/UCptn1tAPBr3GrdPWMziB8Sg"
                             id="tooltip735272548"
+                            color="youtube"
                             size="lg"
                             target="_blank"
                         >
-                            <i className="fab fa-facebook-square"></i>
+                            <i className="fab fa-youtube"></i>
                         </Button>
                         <UncontrolledTooltip delay={0} target="tooltip735272548">
-                            Follow me on Facebook
+                            Follow me on Youtube
                         </UncontrolledTooltip>
                         <Button
                             className="btn-neutral btn-icon btn-round"

@@ -339,18 +339,18 @@ const ProfilePage = ({ UserProfile }) => {
                                                                             <Col className={classes.mainCol}>
 
                                                                                 <a href={`skype:${UserProfile.skype}?chat`} style={{ margin: 'auto' }} >
-                                                                                    <i className="fab fa-skype fa-2x" style={{ size: '30px', color: '#00aff0' }}></i>
+                                                                                    <i className="fab fa-skype fa-2x" style={{ fontSize: '30px', color: '#00aff0' }}></i>
                                                                                 </a>
 
                                                                             </Col>
                                                                         </Row>
                                                                         <Row className={classes.mainRow}>
                                                                             <Col className={classes.mainCol} xs="1">
-                                                                                <h4 className={classes.fieldName}>Facebook</h4>
+                                                                                <h4 className={classes.fieldName}>Youtube</h4>
                                                                             </Col>
                                                                             <Col className={classes.mainCol}>
-                                                                                <a style={{ margin: 'auto' }} href={UserProfile.facebook} target='_blank' rel="noopener noreferrer" >
-                                                                                    <i className="fab fa-facebook-square fa-2x" style={{ color: '#4267B2' }}></i>
+                                                                                <a style={{ margin: 'auto' }} href={UserProfile.youtube} target='_blank' rel="noopener noreferrer" >
+                                                                                    <i className="fab fa-youtube fa-2x" style={{ color: '#E93F33' }}></i>
                                                                                 </a>
                                                                             </Col>
                                                                         </Row>
@@ -360,7 +360,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                             </Col>
                                                                             <Col className={classes.mainCol}>
                                                                                 <a style={{ margin: 'auto' }} href={UserProfile.linkedin} target='_blank' rel="noopener noreferrer" >
-                                                                                    <i className="fab fa-linkedin fa-2x" style={{ size: '40px', color: '#2867B2' }}> </i>
+                                                                                    <i className="fab fa-linkedin fa-2x" style={{ color: '#2867B2' }}> </i>
                                                                                 </a>
 
                                                                             </Col>
@@ -371,7 +371,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                             </Col>
                                                                             <Col className={classes.mainCol}>
                                                                                 <h4 style={{ fontWeight: 'normal', margin: 'auto' }}>
-                                                                                    <i className="fas fa-phone fa-2x" style={{ size: '20px', color: '#2867B2' }}></i>{UserProfile.Phone}</h4>
+                                                                                    <i className="fas fa-phone" style={{ fontSize: '25px', color: '#2867B2' }}></i>{UserProfile.Phone}</h4>
                                                                             </Col>
                                                                         </Row>
 

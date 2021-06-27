@@ -42,9 +42,9 @@ const CardComponent = (props) => {
             infinite: true,
             centerMode: true,
             autoPlay: false,
-            focusOnSelect: true,
+            focusOnSelect: false,
             speed: 500,
-            arrows: false,
+            arrows: true,
             slidesToShow: props.images.length < 3 ? props.images.length : 3,
             slidesToScroll: 1,
 
@@ -127,7 +127,7 @@ const CardComponent = (props) => {
                                 </Col>
                             </Row>
                         </CardHeader>
-                        <CardBody style={{ minHeight: '300px', minWidth: '40px', paddingTop: '30px' }}>
+                        <CardBody style={{ minHeight: '300px', minWidth: '40px', padding: '30px 20px 0px 20px' }}>
                             {EditPost ?
                                 <div>
                                     <TextareaAutosize

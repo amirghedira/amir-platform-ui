@@ -2567,6 +2567,14 @@ fieldset[disabled] .btn-link.active {
     color: #3b5998 !important;
 }
 
+.btn-youtube,
+.btn-youtube:hover,
+.btn-youtubefocus,
+.btn-youtube:active,
+.btn-youtube:active:focus {
+    color: #E93F33 !important;
+}
+
 .btn-twitter,
 .btn-twitter:hover,
 .btn-twitterfocus,
