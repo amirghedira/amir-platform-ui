@@ -10,8 +10,6 @@ export default class CustomDocument extends Document {
                     <meta name="google-site-verification" content="srWyQk73mi7vKyZuRzJVmq-4-E7qDQEljmKUSu_AAfk" />
                     <meta property="og:type" content="article" />
                     <meta property="og:site_name" content="Amir Platform" />
-                    <meta property="og:description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
-                    <meta property="description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
                     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Amir Platform" />
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
                     <link rel="preconnect" href="https://fonts.gstatic.com" />
