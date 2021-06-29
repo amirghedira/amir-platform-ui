@@ -127,7 +127,7 @@ const CardComponent = (props) => {
                                 </Col>
                             </Row>
                         </CardHeader>
-                        <CardBody style={{ minHeight: '300px', minWidth: '40px', padding: '30px 20px 0px 20px' }}>
+                        <CardBody style={{ minHeight: '200px', minWidth: '40px', padding: '30px 20px 0px 20px' }}>
                             {EditPost ?
                                 <div>
                                     <TextareaAutosize
