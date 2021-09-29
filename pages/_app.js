@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
                     stopDelayMs={200}
                     showSpinner={false}
                     options={{ showSpinner: false }}
-                    height="3"
+
                 />
                 <IndexNavbar />
                 <Component {...pageProps} />

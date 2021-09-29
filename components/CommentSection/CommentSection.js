@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './CommentSection.module.css';
-import TextareaAutosize from 'react-autosize-textarea';
+import { TextareaAutosize } from '@material-ui/core';
 import { Row, Col, Input, Label, Button } from 'reactstrap'
 
 
@@ -139,12 +139,12 @@ const CommentSection = (props) => {
                                             onClick={() => { submitCommmentFunction({ autor: props.token ? "admin" : document.getElementById('namecomment').value, content: document.getElementById('thecomment').value }) }}
                                         >
                                             Submit
-                                                </Button>
+                                        </Button>
                                         <Button
                                             color="danger" onClick={() => SetcommentFocus(false)}>
 
                                             Cancel
-                                                </Button>
+                                        </Button>
                                     </div>
 
                                 </div>

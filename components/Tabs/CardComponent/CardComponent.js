@@ -16,7 +16,7 @@ import {
     Button,
     CardFooter
 } from "reactstrap";
-import TextareaAutosize from 'react-autosize-textarea/lib';
+import { TextareaAutosize } from '@material-ui/core';
 import FormatDate from '../../../utils/FormatDate';
 import classes from './CardComponent.module.css';
 import Slider from 'react-slick';

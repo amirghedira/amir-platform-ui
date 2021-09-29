@@ -3,7 +3,7 @@ import LoginModal from '../loginModal/LoginModal'
 import GlobalContext from '../../context/GlobalContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { CommonLoading } from 'react-loadingg';
+
 import { useRouter } from 'next/router'
 import classes from './IndexNavbar.module.css'
 // reactstrap components
@@ -17,6 +17,7 @@ import {
     Container,
     DropdownItem,
     DropdownToggle,
+    Spinner,
     DropdownMenu,
     UncontrolledDropdown,
     UncontrolledTooltip,
@@ -24,7 +25,7 @@ import {
     Input
 } from "reactstrap";
 import Link from "next/link";
-import { RotateCircleLoading } from 'react-loadingg';
+
 import axios from '../../utils/axios';
 const IndexNavbar = () => {
     const context = React.useContext(GlobalContext)
@@ -363,7 +364,7 @@ const IndexNavbar = () => {
                                                             :
                                                             <DropdownItem style={{ margin: 'auto', backgroundColor: 'white' }}>No notifications available yet..</DropdownItem>
                                                         :
-                                                        <CommonLoading />
+                                                        <Spinner color='primary' />
 
 
                                                 }

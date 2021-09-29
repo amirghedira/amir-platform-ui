@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './InputField.module.css'
-import TextareaAutosize from 'react-autosize-textarea';
+import { TextareaAutosize } from '@material-ui/core';
 
 const InputField = (props) => {
     if (props.editable)

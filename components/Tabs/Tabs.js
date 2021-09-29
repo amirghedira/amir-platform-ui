@@ -52,7 +52,7 @@ const Tabs = (props) => {
                             summary={project.summary}
                             platform={project.platform}
                             features={project.features}
-                            images={project.imagesurl}
+                            images={project.imagesurl?.slice(0, 3)}
                             github={project.github}
                             filelink={project.filelink}
                             SaveChangesFunction={props.savechanges}

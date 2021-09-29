@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Addtopic.module.css';
-import TextareaAutosize from 'react-autosize-textarea';
+import { TextareaAutosize } from '@material-ui/core';
 import { Container, Row, Col, Input, Label, Button, Nav, NavItem, NavLink } from 'reactstrap'
 import Link from 'next/link'
 import GlobalContext from '../../context/GlobalContext'
@@ -215,12 +215,12 @@ const AddTopic = (props) => {
                                                 })}
                                         >
                                             Submit
-                                    </Button>
+                                        </Button>
                                         <Button
                                             color="danger"
                                             onClick={() => { setRedirectCancel(true) }}>
                                             Cancel
-                                     </Button>
+                                        </Button>
 
                                     </div>
 

@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import GlobalContext from '../../context/GlobalContext'
-import TextareaAutosize from 'react-autosize-textarea';
+import { TextareaAutosize } from '@material-ui/core';
 import FormatDate from '../../utils/FormatDate'
 
 const AccountSettings = () => {
