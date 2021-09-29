@@ -121,9 +121,8 @@ const IndexNavbar = () => {
                     >
                         {LoadingImage ?
 
-                            <RotateCircleLoading
-                                size="small"
-                                color='white'
+                            <Spinner
+                                color="primary"
                                 style={{ width: '25px', height: '25px' }}
                             />
                             :
