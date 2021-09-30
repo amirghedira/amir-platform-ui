@@ -71,7 +71,7 @@ const CardComponent = (props) => {
                                             />
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname}/${props.technologie.replaceAll(' ', '-')}/${props._id}`} >
+                                        <Link href={`/project/${props.projectname}/${props.technologie?.replaceAll(' ', '-')}/${props._id}`} >
                                             <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
                                             </span>
@@ -187,7 +187,7 @@ const CardComponent = (props) => {
 
                                 </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <Link href={`/project/${props.projectname}/${props.technologie.replaceAll(' ', '-')}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Link href={`/project/${props.projectname}/${props.technologie?.replaceAll(' ', '-')}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                         <Button
                                             style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
                                             onMouseEnter={() => { setfocusedReadmore(true) }}
