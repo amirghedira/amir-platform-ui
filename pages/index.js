@@ -50,7 +50,7 @@ function Index(props) {
                 <meta property="og:description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
                 <meta property="description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
                 <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
-                <meta name="robots" content="index,follow" />
+                <meta name="robots" content="all" />
 
             </Head>
             <div>
