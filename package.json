@@ -28,8 +28,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start -p $PORT",
-        "heroko-postbuild": "npm run build",
-        "postbuild": "next-sitemap"
+        "heroko-postbuild": "npm run build"
+        // "postbuild": "next-sitemap"
     },
     "browserslist": {
         "production": [

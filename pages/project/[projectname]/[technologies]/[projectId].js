@@ -507,8 +507,6 @@ const Details = (props) => {
 
 export const getServerSideProps = async (context) => {
 
-
-    console.log(context.params.projectId)
     const projectId = context.params.projectId
     const res = await Axios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
     return {

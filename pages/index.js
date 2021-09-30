@@ -55,7 +55,7 @@ function Index(props) {
             </Head>
             <div>
                 <div className="wrapper">
-                    <Row>
+                    <Row style={{ justifyContent: 'center' }}>
                         <Col className={classes.sideBarMenu} >
                             <SidebarLeft xs="2" md="3" lg="2" />
                         </Col>
