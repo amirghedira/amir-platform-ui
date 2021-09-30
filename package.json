@@ -29,7 +29,7 @@
         "build": "next build",
         "start": "next start -p $PORT",
         "heroko-postbuild": "npm run build"
-        // "postbuild": "next-sitemap"
+
     },
     "browserslist": {
         "production": [
