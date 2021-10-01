@@ -80,7 +80,7 @@ export const getServerSideProps = async () => {
     const resultCount = await Axios.get('https://mywebrestapi.herokuapp.com/topic/counttopic')
     return {
         props: {
-            projects: [],
+            projects: result.data.result,
             topicsCount: resultCount.data.result
         },
     }

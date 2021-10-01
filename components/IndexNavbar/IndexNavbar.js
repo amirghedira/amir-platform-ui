@@ -139,7 +139,7 @@ const IndexNavbar = () => {
 
                     </DropdownToggle>
                     <DropdownMenu right>
-                        <Link href="/amirghedira"
+                        <Link href="/profil"
                             style={{ color: 'black' }}
                             onClick={() => {
                                 setCollapseOpen(false)
@@ -302,7 +302,7 @@ const IndexNavbar = () => {
                                     }}
 
                                 >
-                                    <Link href="/amirghedira">
+                                    <Link href="/profil">
                                         <div className={classes.navItemContainer}>
                                             <i className={`fas fa-address-card ${classes.navIcon}`}></i>
                                             <h5 className={classes.navItemContent}>Profile</h5>
