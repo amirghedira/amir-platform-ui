@@ -6,23 +6,34 @@ function generateSiteMap(projects) {
      <!--We manually set the two URLs we know already-->
      <url>
        <loc>https://www.amir-ghedira.com</loc>
+       <priority>0.5</priority>
      </url>
+
      <url>
        <loc>https://www.amir-ghedira.com/aboutus</loc>
+       <priority>0.5</priority>
+
      </url>
      <url>
      <loc>https://www.amir-ghedira.com/amirghedira</loc>
+     <priority>0.9</priority>
    </url>
    <url>
    <loc>https://www.amir-ghedira.com/questions</loc>
+   <priority>0.5</priority>
+
  </url>
  <url>
  <loc>https://www.amir-ghedira.com/suggestions</loc>
+ <priority>0.5</priority>
+
 </url>
      ${projects.map(project => {
         return `
        <url>
            <loc>${`https://amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`}</loc>
+           <priority>0.9</priority>
+
        </url>
      `
     })
