@@ -13,7 +13,7 @@ const IndexHeader = () => {
         <div id="indexheader" style={{ maxHeight: '250px' }} >
             <div
                 style={{
-                    backgroundImage: "url(./background.jpg)",
+                    backgroundImage: "url(/background.jpg)",
                     height: '250px',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center'

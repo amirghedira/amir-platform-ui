@@ -198,7 +198,12 @@ const IndexNavbar = () => {
                     }}
                 />
             ) : null}
-            <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info">
+            <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info"
+                style={{
+                    backgroundImage: navbarColor === '' && "url(/background.jpg)",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center center'
+                }}>
                 <Container>
                     <div className="navbar-translate">
                         <NavbarBrand
