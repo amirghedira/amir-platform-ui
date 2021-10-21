@@ -11,6 +11,7 @@ import InputField from '../../components/InputField/InputField'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Loading from '../../components/LoadingPage/LoadingPage'
 import GlobalContext from '../../context/GlobalContext'
 import { TextareaAutosize } from '@material-ui/core';
 import FormatDate from '../../utils/FormatDate'
