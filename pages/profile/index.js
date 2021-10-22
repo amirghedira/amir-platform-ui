@@ -75,8 +75,8 @@ const ProfilePage = ({ UserProfile }) => {
                 </title>
                 <meta name="title" content={`${UserProfile.name} | Amir Platform`} />
                 <meta name="description" content={UserProfile.aboutme} />
-                <link rel="canonical" href='https://www.amir-ghedira.com/amirghedira' />
-                <meta property="og:url" content='https://www.amir-ghedira.com/amirghedira' />
+                <link rel="canonical" href='https://www.amir-ghedira.com/profile' />
+                <meta property="og:url" content='https://www.amir-ghedira.com/profile' />
                 <meta property="og:title" content={UserProfile.name} />
                 <meta property="og:description" content={UserProfile.aboutme} />
                 <meta property="og:image" content={UserProfile.profileimage} />

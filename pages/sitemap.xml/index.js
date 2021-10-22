@@ -15,7 +15,7 @@ function generateSiteMap(projects) {
 
      </url>
      <url>
-     <loc>https://www.amir-ghedira.com/amirghedira</loc>
+     <loc>https://www.amir-ghedira.com/profile</loc>
      <priority>0.9</priority>
    </url>
    <url>

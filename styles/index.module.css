@@ -6,6 +6,12 @@
     display: block;
 }
 
+.img-raised {
+    width: 50px !important;
+    object-fit: cover !important;
+    height: 50px !important;
+}
+
 @media screen and (max-width:850px) {
 
     .sideBarMenu {

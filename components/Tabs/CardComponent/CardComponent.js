@@ -61,7 +61,7 @@ const CardComponent = (props) => {
 
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
                                     {context.UserProfile &&
-                                        <Link href={'/amirghedira'}>
+                                        <Link href={'/profile'}>
 
                                             <img
                                                 alt="amir ghedira profile image"

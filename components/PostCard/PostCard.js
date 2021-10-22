@@ -39,7 +39,7 @@ const PostCard = (props) => {
                             }
                             <NavItem style={{ display: width > 525 ? 'flex' : 'flex', width: '170px' }}>
                                 {
-                                    <NavLink href='/amirghedira' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'}>
+                                    <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'}>
                                         <div style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <strong className={classes.postname} style={{ textAlign: 'center', color: 'white', width: '120px', maxWidth: '120px' }}>{
                                                 isadmin ? context.UserProfile?.name : props.autor} </strong>
@@ -97,18 +97,18 @@ const PostCard = (props) => {
                                                     <DropdownItem
                                                         onClick={props.closeOpenFunction}>
                                                         Open/Close
-                                        </DropdownItem>
+                                                    </DropdownItem>
                                                     : null
                                                 }
                                                 <DropdownItem
                                                     onClick={props.deleteFunction}>
                                                     Delete
-                                        </DropdownItem>
+                                                </DropdownItem>
                                                 <DropdownItem
                                                     onClick={props.banMemberFunction}
                                                 >
                                                     Ban
-                                        </DropdownItem>
+                                                </DropdownItem>
 
                                             </DropdownMenu>
                                         </UncontrolledDropdown>
