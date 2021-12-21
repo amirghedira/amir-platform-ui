@@ -1,12 +1,12 @@
 import React from 'react'
-import { SemipolarLoading } from 'react-loadingg';
+import { Spinner } from 'reactstrap';
 
 const LoadingPage = (props) => {
     return (
         <div style={{ height: '100%', width: '100%', zIndex: '100', backgroundColor: '#f2f2f2', minHeight: props.minHeight, display: 'flex' }
         }>
-            <SemipolarLoading
-                color={'#2C2C2C'}
+            <Spinner
+                color="primary"
                 size="large"
                 style={{ margin: 'auto' }}
             />

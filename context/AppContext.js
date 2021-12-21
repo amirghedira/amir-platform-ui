@@ -20,10 +20,13 @@ const AppContext = (props) => {
     const [subscription, setsubscription] = React.useState(null)
     const [Erroraccured, setErrorAccured] = React.useState(false)
 
-
+    const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
         if (localStorage.getItem('token')) {
+            setLoading(false)
             Settoken(localStorage.getItem('token'))
+        } else {
+            setLoading(false)
         }
     }, [])
     React.useEffect(() => {
@@ -447,7 +450,7 @@ const AppContext = (props) => {
                 }
             }>
 
-                {props.children}
+                {!loading ? props.children : null}
                 < ToastContainer />
 
             </GlobalContext.Provider>
