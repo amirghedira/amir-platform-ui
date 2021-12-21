@@ -29,12 +29,6 @@ const CardComponent = (props) => {
     const [focusedGithub, setfocusedGithub] = React.useState(false);
     const [EditPost, setEditPost] = React.useState(false);
 
-    const pStyle = {
-        witdh: '50px',
-        height: '50px',
-        marginLeft: '10px',
-        boxShadow: 'none'
-    };
 
     const settings = React.useMemo(() => {
         return {
@@ -62,19 +56,24 @@ const CardComponent = (props) => {
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
                                     {context.UserProfile &&
                                         <Link href={'/profile'}>
-
-                                            <img
-                                                alt="amir ghedira profile image"
-                                                className="rounded-circle img-raised"
-                                                style={pStyle}
-                                                src={context.UserProfile?.profileimage}
-                                            />
+                                            <a>
+                                                <img
+                                                    alt="amir ghedira profile image"
+                                                    className="rounded-circle img-raised"
+                                                    style={{
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        marginLeft: '10px',
+                                                        boxShadow: 'none'
+                                                    }}
+                                                    src={context.UserProfile?.profileimage}
+                                                /></a>
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
                                         <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} >
-                                            <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
+                                            <a style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
-                                            </span>
+                                            </a>
                                         </Link>
                                         <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
@@ -188,17 +187,19 @@ const CardComponent = (props) => {
                                 </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
                                     <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
-                                        <Button
-                                            style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
-                                            onMouseEnter={() => { setfocusedReadmore(true) }}
-                                            onMouseLeave={() => { setfocusedReadmore(false) }}
-                                        >
-                                            <div>
-                                                <i className="fas fa-book-reader fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700' }}>Read More</p>
+                                        <a>
+                                            <Button
+                                                style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
+                                                onMouseEnter={() => { setfocusedReadmore(true) }}
+                                                onMouseLeave={() => { setfocusedReadmore(false) }}
+                                            >
+                                                <div>
+                                                    <i className="fas fa-book-reader fa-2x" ></i>
+                                                    <p style={{ margin: '0', fontWeight: '700' }}>Read More</p>
 
-                                            </div>
-                                        </Button>
+                                                </div>
+                                            </Button>
+                                        </a>
                                     </Link>
                                 </Col>
 

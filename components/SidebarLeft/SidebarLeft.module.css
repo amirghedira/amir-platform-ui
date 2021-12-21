@@ -14,7 +14,7 @@
 
 
 
-.navItemContainer{
+.navItemContainer {
     display: flex;
     align-items: center;
     justify-content: flex-start
@@ -30,25 +30,28 @@
     justify-content: flex-start;
     background-color: transparent;
 }
-.navItemText{
+
+.navItemText {
     color: inherit;
     color: #2CA8FF;
     font-size: 0.8rem;
     font-weight: 600;
+    text-decoration: none;
     line-height: 1.5;
     cursor: pointer;
     margin: 0;
     margin-left: 10px;
 }
+
 .navItemText:hover {
     text-decoration: none;
     color: #e83e8c;
 }
 
-.icon{
+.icon {
     color: black;
     cursor: pointer;
-    font-size: 14px;   
+    font-size: 14px;
     width: 10px;
 }
 

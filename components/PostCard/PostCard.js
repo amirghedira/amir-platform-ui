@@ -7,10 +7,10 @@ import Link from 'next/link'
 const PostCard = (props) => {
     const context = React.useContext(GlobalContext)
     const isadmin = props.autor === 'admin' ? true : false;
-    const [width, setwitdh] = React.useState(0)
+    const [width, setwidth] = React.useState(0)
 
     React.useEffect(() => {
-        setwitdh(window.innerWidth)
+        setwidth(window.innerWidth)
         window.addEventListener('resize', handleFunction)
         return () => {
             window.removeEventListener('resize', handleFunction);
@@ -22,7 +22,7 @@ const PostCard = (props) => {
         return content.replace(reg, "<a href='$1$2'>$1$2</a>");
     }
     const handleFunction = function () {
-        setwitdh(window.innerWidth)
+        setwidth(window.innerWidth)
     }
 
     return (
@@ -33,14 +33,14 @@ const PostCard = (props) => {
                         <Nav className={classes.Navbar} style={{ minHeight: width < 800 ? '80px' : null, height: 'fit-content' }} expand="lg">
                             {width < 800 ?
                                 <NavItem style={{ display: 'flex' }}>
-                                    <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'} style={{ height: '40px', width: '40px', margin: '10px', borderRadius: '100px' }} alt="JavaScript programmer" />
+                                    <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'} style={{ height: '40px', width: '40px', margin: '10px', borderRadius: '50%' }} alt="JavaScript programmer" />
                                 </NavItem>
                                 : null
                             }
                             <NavItem style={{ display: width > 525 ? 'flex' : 'flex', width: '170px' }}>
                                 {
                                     <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'}>
-                                        <div style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <a style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <strong className={classes.postname} style={{ textAlign: 'center', color: 'white', width: '120px', maxWidth: '120px' }}>{
                                                 isadmin ? context.UserProfile?.name : props.autor} </strong>
                                             {width < 525 ?
@@ -58,7 +58,7 @@ const PostCard = (props) => {
                                                 </div>
                                                 :
                                                 null}
-                                        </div>
+                                        </a>
                                     </NavLink>
 
 
@@ -127,9 +127,10 @@ const PostCard = (props) => {
 
                         <Col md="3" xl="2" style={{ display: 'flex', marginRight: '12px' }}>
 
-                            <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
+                            <img className="img-raised" src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
                                 style={{
-                                    borderRadius: '400px', height: '150px', width: '150px', margin: 'auto', marginTop: '40px'
+                                    borderRadius: '50%', height: '150px', width: '150px', margin: 'auto', marginTop: '40px',
+                                    boxShadow: 'none'
                                 }} alt="Javascript programmer" />
                         </Col>
                         :
