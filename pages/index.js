@@ -1,7 +1,7 @@
 import React from "react";
 import Tabs from "../components/Tabs/Tabs";
 import Support from "../components/Support/Support.js";
-import { Row, Col } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 import SidebarLeft from '../components/SidebarLeft/SidebarLeft'
 import SidebarRight from '../components/SidebarRight/SidebarRight'
 import classes from '../styles/index.module.css'
@@ -53,7 +53,7 @@ function Index(props) {
                 <meta name="robots" content="all" />
 
             </Head>
-            <div>
+            <Container fluid>
                 <div className="wrapper">
                     <Row style={{ justifyContent: 'center' }}>
                         <Col className={classes.sideBarMenu} >
@@ -68,7 +68,7 @@ function Index(props) {
                     </Row>
                     <Support />
                 </div>
-            </div>
+            </Container>
         </main>
 
     );

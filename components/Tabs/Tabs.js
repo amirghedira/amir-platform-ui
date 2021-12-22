@@ -3,7 +3,6 @@ import CardComponent from './CardComponent/CardComponent'
 
 // reactstrap components
 import {
-    Container,
     Row,
     Col
 
@@ -22,7 +21,7 @@ const Tabs = (props) => {
     }
     return (
 
-        <React.Fragment>
+        <Row>
             {projectImagesUrl && showProjectImage &&
                 <Lightbox
                     mainSrc={projectImagesUrl[displayImageIndex]}
@@ -38,32 +37,34 @@ const Tabs = (props) => {
 
                     }
                     onCloseRequest={() => setShowProjectImage(false)} />}
-            <Container style={{ marginTop: '70px', minHeight: '30vh' }}>
-                <React.Fragment>
-                    {props.projects.slice(0).reverse().map(project => {
-                        return <CardComponent
-                            key={project._id}
-                            _id={project._id}
-                            projectname={project.name}
-                            date={project.date}
-                            onShowImages={(imageIndex) => { showImagesHandler(project.imagesurl, imageIndex) }}
-                            technologie={project.technologie}
-                            status={project.status}
-                            summary={project.summary}
-                            platform={project.platform}
-                            features={project.features}
-                            images={project.imagesurl?.slice(0, 3)}
-                            github={project.github}
-                            filelink={project.filelink}
-                            SaveChangesFunction={props.savechanges}
-                        />
-                    })
-                    }
-                </React.Fragment>
+            <Col>
+                <Row style={{ marginTop: '70px', minHeight: '30vh' }}>
+                    <Col>
+                        {props.projects.slice(0).reverse().map(project => {
+                            return <CardComponent
+                                key={project._id}
+                                _id={project._id}
+                                projectname={project.name}
+                                date={project.date}
+                                onShowImages={(imageIndex) => { showImagesHandler(project.imagesurl, imageIndex) }}
+                                technologie={project.technologie}
+                                status={project.status}
+                                summary={project.summary}
+                                platform={project.platform}
+                                features={project.features}
+                                images={project.imagesurl?.slice(0, 3)}
+                                github={project.github}
+                                filelink={project.filelink}
+                                SaveChangesFunction={props.savechanges}
+                            />
+                        })
+                        }
+                    </Col>
 
 
-            </Container>
-        </React.Fragment>
+                </Row>
+            </Col>
+        </Row>
 
 
     )
