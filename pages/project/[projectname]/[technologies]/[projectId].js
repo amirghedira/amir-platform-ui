@@ -261,7 +261,8 @@ const Details = (props) => {
                 <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
                 <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
                 <meta property="og:title" content={project.name} />
-                <meta name="robots" content="all" />
+                <meta name="robots" content="index,nofollow" />
+                <meta name="googlebot" content="index,nofollow" />
                 <meta property="og:description" content={project.overview} />
                 {project.imagesurl.length > 0 ?
                     <meta property="og:image" content={project.imagesurl[Math.floor(Math.random() * project.imagesurl.length)]} />
