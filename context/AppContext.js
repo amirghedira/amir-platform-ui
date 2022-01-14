@@ -450,7 +450,7 @@ const AppContext = (props) => {
                 }
             }>
 
-                {!loading ? props.children : null}
+                {props.children}
                 < ToastContainer />
 
             </GlobalContext.Provider>
