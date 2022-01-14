@@ -209,13 +209,13 @@ const IndexNavbar = () => {
                             }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 {navbarColor !== '' ?
-                                    <Link href="/" className={classes.navLink}>
+                                    <Link passHref href="/" className={classes.navLink}>
                                         <a className={classes.navLink} style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
                                             Home
                                         </a>
                                     </Link>
                                     :
-                                    <Link href="/">
+                                    <Link passHref href="/">
                                         <a>
                                             <img className={classes.navIconImage} src={'/nav-icon.png'} alt="nav-icon" style={{ cursor: 'pointer' }} />
 
@@ -286,7 +286,7 @@ const IndexNavbar = () => {
 
                                     }}
                                 >
-                                    <Link href="/topics/suggestions">
+                                    <Link passHref href="/topics/suggestions">
                                         <a className={classes.navItemContainer}>
                                             <i className={`fas fa-lightbulb ${classes.navIcon}`}></i>
                                             <h5 className={classes.navItemContent}>Suggestions</h5>
@@ -302,7 +302,7 @@ const IndexNavbar = () => {
                                     }}
 
                                 >
-                                    <Link href="/profile">
+                                    <Link passHref href="/profile">
                                         <a className={classes.navItemContainer}>
                                             <i className={`fas fa-address-card ${classes.navIcon}`}></i>
                                             <h5 className={classes.navItemContent}>Profile</h5>

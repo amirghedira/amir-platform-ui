@@ -55,7 +55,7 @@ const CardComponent = (props) => {
 
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
                                     {context.UserProfile &&
-                                        <Link href={'/profile'}>
+                                        <Link passHref href={'/profile'}>
                                             <a>
                                                 <img
                                                     alt="amir ghedira profile image"
@@ -70,7 +70,7 @@ const CardComponent = (props) => {
                                                 /></a>
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} >
+                                        <Link passHref href={`/project/${props.projectname}/${props.technologie}/${props._id}`} >
                                             <a style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
                                             </a>
@@ -186,7 +186,7 @@ const CardComponent = (props) => {
 
                                 </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Link passHref href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                         <a>
                                             <Button
                                                 style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
@@ -204,23 +204,24 @@ const CardComponent = (props) => {
                                 </Col>
 
                                 {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <a
-                                        href={props.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        style={{ color: 'black', textDecoration: 'none' }}
-                                        onClick={() => { context.UpdateGitViewer(props._id) }}>
-                                        <Button
-                                            onMouseEnter={() => { setfocusedGithub(true) }}
-                                            onMouseLeave={() => { setfocusedGithub(false) }}
-                                            style={{ margin: 'auto', backgroundColor: focusedGithub ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
-                                            <div>
-                                                <i className="fab fa-github fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700', fontSize: '14px' }}>Github</p>
-                                            </div>
+                                    <Link href={props.github} passHref>
+                                        <a
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{ color: 'black', textDecoration: 'none' }}
+                                            onClick={() => { context.UpdateGitViewer(props._id) }}>
+                                            <Button
+                                                onMouseEnter={() => { setfocusedGithub(true) }}
+                                                onMouseLeave={() => { setfocusedGithub(false) }}
+                                                style={{ margin: 'auto', backgroundColor: focusedGithub ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
+                                                <div>
+                                                    <i className="fab fa-github fa-2x" ></i>
+                                                    <p style={{ margin: '0', fontWeight: '700', fontSize: '14px' }}>Github</p>
+                                                </div>
 
-                                        </Button>
-                                    </a>
+                                            </Button>
+                                        </a>
+                                    </Link>
                                 </Col>}
                             </Row>
                             <hr style={{ maxWidth: '90%', marginTop: '0', marginBottom: '20px' }} />
