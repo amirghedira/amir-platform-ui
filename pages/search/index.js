@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios'
+import axios from '../../utils/axios'
 import Tabs from '../../components/Tabs/Tabs'
 const SearchPage = ({ projects, searchTerm }) => {
     return (
@@ -23,7 +23,7 @@ const SearchPage = ({ projects, searchTerm }) => {
 
 
 export const getServerSideProps = async (context) => {
-    const results = await Axios.get(`https://mywebrestapi.herokuapp.com/project/search?searchTerm=${context.query.searchTerm}`)
+    const results = await axios.get(`/project/search?searchTerm=${context.query.searchTerm}`)
     return {
         props: {
             projects: results.data.projects,

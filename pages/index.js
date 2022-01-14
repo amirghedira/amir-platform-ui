@@ -5,7 +5,6 @@ import { Row, Col, Container } from "reactstrap";
 import SidebarLeft from '../components/SidebarLeft/SidebarLeft'
 import SidebarRight from '../components/SidebarRight/SidebarRight'
 import classes from '../styles/index.module.css'
-import Axios from "axios";
 import axios from '../utils/axios'
 import Head from 'next/head'
 function Index(props) {
@@ -53,21 +52,19 @@ function Index(props) {
                 <meta name="robots" content="all" />
 
             </Head>
-            <Container fluid>
-                <div className="wrapper">
-                    <Row style={{ justifyContent: 'center' }}>
-                        <Col className={classes.sideBarMenu} >
-                            <SidebarLeft xs="2" md="3" lg="2" />
-                        </Col>
-                        <Col xs="12" sm="12" md="9" lg="8">
-                            <Tabs projects={projects} savechanges={savechangesHandler} />
-                        </Col>
-                        <Col className={classes.sideBarProjects} xs="3" lg="2">
-                            <SidebarRight projects={projects} topicsCount={props.topicsCount} />
-                        </Col>
-                    </Row>
-                    <Support />
-                </div>
+            <Container fluid style={{ padding: '0' }}>
+                <Row style={{ justifyContent: 'center' }}>
+                    <Col className={classes.sideBarMenu} >
+                        <SidebarLeft xs="2" md="3" lg="2" />
+                    </Col>
+                    <Col xs="12" sm="12" md="9" lg="8">
+                        <Tabs projects={projects} savechanges={savechangesHandler} />
+                    </Col>
+                    <Col className={classes.sideBarProjects} xs="3" lg="2">
+                        <SidebarRight projects={projects} topicsCount={props.topicsCount} />
+                    </Col>
+                </Row>
+                <Support />
             </Container>
         </main>
 
@@ -76,8 +73,8 @@ function Index(props) {
 
 export const getServerSideProps = async () => {
 
-    const result = await Axios.get(`https://mywebrestapi.herokuapp.com/project`)
-    const resultCount = await Axios.get('https://mywebrestapi.herokuapp.com/topic/counttopic')
+    const result = await axios.get(`/project`)
+    const resultCount = await axios.get('/topic/counttopic')
     return {
         props: {
             projects: result.data.result,

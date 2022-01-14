@@ -203,7 +203,7 @@ const IndexNavbar = () => {
                 }}>
                 <Container>
                     <div className="navbar-translate">
-                        <NavbarBrand
+                        <div
                             onClick={() => {
                                 setCollapseOpen(false)
                             }}>
@@ -235,7 +235,7 @@ const IndexNavbar = () => {
                                 </div>
 
                             </div>
-                        </NavbarBrand>
+                        </div>
                         <button
                             className="navbar-toggler navbar-toggler"
                             onClick={() => {

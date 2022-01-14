@@ -19,7 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import PostCard from '../../../../components/PostCard/PostCard';
 import CommentSection from '../../../../components/CommentSection/CommentSection'
 import axios from '../../../../utils/axios';
-import Axios from 'axios';
 import Head from 'next/head'
 
 
@@ -509,7 +508,7 @@ const Details = (props) => {
 export const getServerSideProps = async (context) => {
 
     const projectId = context.params.projectId
-    const res = await Axios.get('https://mywebrestapi.herokuapp.com/project/' + projectId)
+    const res = await axios.get('/project/' + projectId)
     return {
         props: {
             project: res.data.result

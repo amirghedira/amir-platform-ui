@@ -20,7 +20,7 @@ import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
 import Head from 'next/head'
-import Axios from "axios";
+import axios from "../../utils/axios";
 import ReactGitHubCalender from 'react-github-calendar'
 import ReactTooltip from 'react-tooltip'
 const ProfilePage = ({ UserProfile }) => {
@@ -466,7 +466,7 @@ const ProfilePage = ({ UserProfile }) => {
 }
 
 export const getServerSideProps = async () => {
-    const res = await Axios.get('https://mywebrestapi.herokuapp.com/user')
+    const res = await axios.get('/user')
     return {
         props: {
             UserProfile: res.data

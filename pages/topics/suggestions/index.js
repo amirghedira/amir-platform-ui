@@ -1,7 +1,7 @@
 import TopicsPage from "../../../components/TopicsPage/TopicsPage"
-import Axios from 'axios'
 import Head from 'next/head'
 import React from 'react'
+import axios from "../../../utils/axios"
 
 
 const SuggestionsPage = ({ topics }) => {
@@ -33,7 +33,7 @@ export default SuggestionsPage
 export const getServerSideProps = async () => {
 
 
-    const result = await Axios.get(`https://mywebrestapi.herokuapp.com/topic/suggestions`)
+    const result = await axiosInstance.get(`/topic/suggestions`)
     return {
         props: {
             topics: result.data.result

@@ -1,8 +1,7 @@
-
-import Axios from 'axios';
 import Topic from '../../components/Topic/Topic'
 import React from 'react'
 import Head from 'next/head'
+import axios from '../../utils/axios';
 
 const TopicPage = ({ topic }) => {
     <React.Fragment>
@@ -25,7 +24,7 @@ const TopicPage = ({ topic }) => {
 
 export const getServerSideProps = async (context) => {
 
-    const result = await Axios.get('https://mywebrestapi.herokuapp.com/topic/' + context.params.topicId)
+    const result = await axiosInstance.get('/topic/' + context.params.topicId)
     return {
         props: {
             topic: result.data.result

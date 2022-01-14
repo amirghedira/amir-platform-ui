@@ -1,6 +1,6 @@
 
 import React from 'react'
-import axios from '../utils/axios'
+import axios, { API_URL } from '../utils/axios'
 import io from 'socket.io-client'
 import { ToastContainer, toast } from 'react-toastify';
 import Page404 from '../components/Page404/Page404'
@@ -31,7 +31,7 @@ const AppContext = (props) => {
     }, [])
     React.useEffect(() => {
 
-        setsocket(io('https://mywebrestapi.herokuapp.com'))
+        setsocket(io(API_URL))
         axios.get('/user/connected-user')
             .then(result => {
                 SetBannedUsers(result.data.banned)
