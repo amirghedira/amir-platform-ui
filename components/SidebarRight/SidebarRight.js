@@ -64,7 +64,7 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col style={{ display: 'flex' }}>
-                                <Link passHref href="/topics/questions">
+                                <Link href="/topics/questions">
                                     <a style={{ margin: 'auto' }} className={classes.items}>{props.topicsCount.questions}</a>
                                 </Link>
                             </Col>
@@ -83,7 +83,7 @@ const Sidebar = (props) => {
                             </Col>
 
                             <Col style={{ display: 'flex' }}>
-                                <Link passHref href="/topics/suggestions">
+                                <Link href="/topics/suggestions">
                                     <a style={{ margin: 'auto' }} className={classes.items}>{props.topicsCount.suggestions}</a>
 
                                 </Link>
@@ -106,7 +106,7 @@ const Sidebar = (props) => {
 
 
                                 {mostSeen ?
-                                    <Link passHref href={`/project/${mostSeen.name}/${mostSeen.technologie}/${mostSeen._id}`}>
+                                    <Link href={`/project/${mostSeen.name.replaceAll(' ', '-')}/${mostSeen.technologie.replaceAll(' ', '-')}/${mostSeen._id}`}>
                                         <a className={classes.items}>{mostSeen.name}</a>
                                     </Link>
                                     :
@@ -132,7 +132,7 @@ const Sidebar = (props) => {
                             <Col xs="6" xl="6">
                                 {
                                     mostDownload ?
-                                        <Link passHref href={`/project/${mostDownload.name}/${mostDownload.technologie}/${mostDownload._id}`}>
+                                        <Link href={`/project/${mostDownload.name.replaceAll(' ', '-')}/${mostDownload.technologie.replaceAll(' ', '-')}/${mostDownload._id}`}>
                                             <a className={classes.items}>{mostDownload.name}</a>
                                         </Link>
 

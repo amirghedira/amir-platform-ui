@@ -258,8 +258,8 @@ const Details = (props) => {
                 <title>{`${project.name} | Amir Platform`}</title>
                 <meta name="title" content={`${project.name} | Amir Platform`} />
                 <meta name="description" content={project.overview} />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
-                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
+                <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name.replaceAll(' ', '-')}/${project.technologie.replaceAll(' ', '-')}/${project._id}`} />
+                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name.replaceAll(' ', '-')}/${project.technologie.replaceAll(' ', '-')}/${project._id}`} />
                 <meta property="og:title" content={project.name} />
                 <meta name="robots" content="index,nofollow" />
                 <meta name="googlebot" content="index,nofollow" />

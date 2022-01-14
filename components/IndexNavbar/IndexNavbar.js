@@ -209,13 +209,13 @@ const IndexNavbar = () => {
                             }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 {navbarColor !== '' ?
-                                    <Link passHref href="/" className={classes.navLink}>
+                                    <Link href="/" className={classes.navLink}>
                                         <a className={classes.navLink} style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
                                             Home
                                         </a>
                                     </Link>
                                     :
-                                    <Link passHref href="/">
+                                    <Link href="/">
                                         <a>
                                             <img className={classes.navIconImage} src={'/nav-icon.png'} alt="nav-icon" style={{ cursor: 'pointer' }} />
 
@@ -257,58 +257,49 @@ const IndexNavbar = () => {
                         <Nav navbar style={{ display: 'flex', alignItems: 'center' }}>
 
                             <NavItem className={classes.navItem}>
-                                <NavLink
+                                <Link
+
+                                    href="/topics/questions"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
 
                                 >
-                                    <Link
-                                        href="/topics/questions"
-                                        onClick={() => {
-                                            setCollapseOpen(false)
-
-                                        }}
-                                    >
-                                        <a className={classes.navItemContainer}>
-                                            <i className={`fas fa-question ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Questions</h5>
-                                        </a>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-question ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Questions</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             <NavItem className={classes.navItem}>
-                                <NavLink
-
+                                <Link
+                                    href="/topics/suggestions"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
                                 >
-                                    <Link passHref href="/topics/suggestions">
-                                        <a className={classes.navItemContainer}>
-                                            <i className={`fas fa-lightbulb ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Suggestions</h5>
-                                        </a>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-lightbulb ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Suggestions</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             <NavItem className={classes.navItem}>
-                                <NavLink
+                                <Link
+                                    href="/profile"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
 
                                 >
-                                    <Link passHref href="/profile">
-                                        <a className={classes.navItemContainer}>
-                                            <i className={`fas fa-address-card ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Profile</h5>
-                                        </a>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-address-card ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Profile</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             {context.token ?
                                 <NavItem>

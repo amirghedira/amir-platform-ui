@@ -43,7 +43,7 @@ function Index(props) {
             <Head>
                 <title>{`Amir Platform`}</title>
                 <meta name="title" content={`Amir Platform`} />
-                {props.projects.map(project => (<link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />))}
+                <meta property="canonical" href={`https://www.amir-ghedira.com`} />
                 <meta property="og:url" content={`https://www.amir-ghedira.com`} />
                 <meta property="og:title" content={'Amir Platform'} />
                 <meta property="og:description" content="I'am an ISSATSO student ,studing software engineering am a web developper and an advanced javascript programmer dedicated to build backend applications with different technologies , Also am a React and Angular fan and i have a good knowledge about them." />
