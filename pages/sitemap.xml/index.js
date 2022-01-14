@@ -2,7 +2,6 @@ import axios from "../../utils/axios";
 
 function generateSiteMap(projects) {
 
-    console.log(projects.map(p => p.name))
     return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
@@ -33,7 +32,7 @@ function generateSiteMap(projects) {
      ${projects.map(project => {
         return `
        <url>
-           <loc>${`https://amir-ghedira.com/project/${project.name?.replaceAll(' ', '-')}/${project.technologie.replaceAll(' ', '-')}/${project._id}`}</loc>
+           <loc>${`https://amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
            <priority>0.9</priority>
 
        </url>
