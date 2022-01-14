@@ -70,7 +70,7 @@ const CardComponent = (props) => {
                                                 /></a>
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname.replaceAll(' ', '-')}/${props.technologie.replaceAll(' ', '-')}/${props._id}`} >
+                                        <Link href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`} >
                                             <a style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
                                             </a>
@@ -186,7 +186,7 @@ const CardComponent = (props) => {
 
                                 </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <Link href={`/project/${props.projectname.replaceAll(' ', '-')}/${props.technologie.replaceAll(' ', '-')}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Link href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
                                         <a>
                                             <Button
                                                 style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
