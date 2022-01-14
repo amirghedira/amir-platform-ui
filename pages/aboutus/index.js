@@ -28,7 +28,8 @@ const Aboutus = () => {
                 <meta property="og:title" content={`About us`} />
                 <meta property="og:description" content="this section is reserved for to know about us" />
                 <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
-
+                <meta name="robots" content="index,follow" />
+                <meta name="googlebot" content="index,follow" />
 
             </Head>
             <main>
