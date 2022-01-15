@@ -81,7 +81,7 @@ const ProfilePage = ({ UserProfile }) => {
                 <meta property="og:image" content={UserProfile.profileimage} />
             </Head>
             <main>
-                <h1 style={{ opacity: 0 }}>About us</h1>
+                <h1 style={{ opacity: 0 }}>Amir ghedira</h1>
                 <div className="wrapper">
                     {showImage}
                     <Container style={{
