@@ -23,7 +23,6 @@ const Aboutus = () => {
                 <title>{`About us | Amir Platform`}</title>
                 <meta name="title" content={`About us | Amir Platform`} />
                 <meta name="description" content="this section is reserved for to know about us" />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/aboutus`} />
                 <meta property="og:url" content={`https://www.amir-ghedira.com/aboutus`} />
                 <meta property="og:title" content={`About us`} />
                 <meta property="og:description" content="this section is reserved for to know about us" />
