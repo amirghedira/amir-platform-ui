@@ -7,17 +7,17 @@ function generateSiteMap(projects) {
      <!--We manually set the two URLs we know already-->
      <url>
        <loc>https://www.amir-ghedira.com</loc>
-       <priority>0.5</priority>
+       <priority>0.3</priority>
      </url>
 
      <url>
        <loc>https://www.amir-ghedira.com/aboutus</loc>
-       <priority>0.5</priority>
+       <priority>0.3</priority>
 
      </url>
      <url>
      <loc>https://www.amir-ghedira.com/profile</loc>
-     <priority>0.9</priority>
+     <priority>0.8</priority>
    </url>
    <url>
    <loc>https://www.amir-ghedira.com/questions</loc>
@@ -33,7 +33,7 @@ function generateSiteMap(projects) {
         return `
        <url>
            <loc>${`https://amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
-           <priority>0.9</priority>
+           <priority>0.8</priority>
 
        </url>
      `
