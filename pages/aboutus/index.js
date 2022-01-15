@@ -30,7 +30,7 @@ const Aboutus = () => {
 
             </Head>
             <main>
-                <h1 style={{ opacity: 0 }}>About us</h1>
+                <h1 style={{ opacity: 0, margin: 0 }}>About us</h1>
                 <Container className="main" style={{ marginTop: '40px', marginBottom: '40px', boxShadow: '0px 5px 25px 0px rgba(0, 0, 0, 0.2)' }}>
                     <Row style={{ display: 'flex' }}>
                         <Col xs='4' style={{ marginTop: '300px' }}>
