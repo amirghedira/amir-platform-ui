@@ -28,9 +28,9 @@ const ProfilePageHeader = (props) => {
                     <img alt="..." src={props.profileinfo.profileimage} onClick={() => { props.showprofileimageFunction(props.profileinfo.profileimage) }} />
 
                 </div>
-                <h3 className={classes.title}>
+                <h1 className={classes.title}>
                     {props.profileinfo.name}
-                </h3>
+                </h1>
                 <p className={classes.category}>
                     {props.profileinfo.title}
                 </p>

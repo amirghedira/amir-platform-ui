@@ -11,7 +11,6 @@ const TopicPage = ({ topic }) => {
                 <title>{`${topic.title} | Amir Platform`}</title>
                 <meta name="title" content={`${topic.title} | Amir Platform`} />
                 <meta name="description" content={topic.content} />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/questions/${topic._id}`} />
                 <meta property="og:url" content={`https://www.amir-ghedira.com/questions/${topic._id}`} />
                 <meta property="og:title" content={`${topic.title}`} />
                 <meta property="og:description" content={topic.content} />
