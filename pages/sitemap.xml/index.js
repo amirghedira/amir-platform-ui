@@ -7,33 +7,38 @@ function generateSiteMap(projects) {
      <!--We manually set the two URLs we know already-->
      <url>
        <loc>https://www.amir-ghedira.com</loc>
-       <priority>0.3</priority>
+       <lastmod>${new Date().toISOString()}</lastmod>
+
      </url>
 
      <url>
        <loc>https://www.amir-ghedira.com/aboutus</loc>
-       <priority>0.3</priority>
+       <lastmod>${new Date().toISOString()}</lastmod>
 
      </url>
      <url>
      <loc>https://www.amir-ghedira.com/profile</loc>
-     <priority>0.8</priority>
+     <lastmod>${new Date().toISOString()}</lastmod>
+
    </url>
    <url>
    <loc>https://www.amir-ghedira.com/questions</loc>
-   <priority>0.5</priority>
+   <lastmod>${new Date().toISOString()}</lastmod>
+
 
  </url>
  <url>
  <loc>https://www.amir-ghedira.com/suggestions</loc>
- <priority>0.5</priority>
+ <lastmod>${new Date().toISOString()}</lastmod>
+
 
 </url>
      ${projects.map(project => {
         return `
        <url>
            <loc>${`https://www.amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
-           <priority>0.8</priority>
+           <lastmod>${new Date().toISOString()}</lastmod>
+
 
        </url>
      `
