@@ -32,7 +32,7 @@ function generateSiteMap(projects) {
      ${projects.map(project => {
         return `
        <url>
-           <loc>${`https://amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
+           <loc>${`https://www.amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
            <priority>0.8</priority>
 
        </url>
