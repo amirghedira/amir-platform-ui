@@ -2,8 +2,5 @@
 User-agent: *
 Allow: /
 
-# Host
-Host: https://www.amir-ghedira.com
-
 # Sitemaps
 Sitemap: https://www.amir-ghedira.com/sitemap.xml
