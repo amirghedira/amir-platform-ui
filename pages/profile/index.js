@@ -74,13 +74,14 @@ const ProfilePage = ({ UserProfile }) => {
                     {`${UserProfile.name} | Amir Platform`}
                 </title>
                 <meta name="title" content={`${UserProfile.name} | Amir Platform`} />
-                <meta name="description" content={UserProfile.aboutme} />
+                <meta name="description" content={UserProfile.aboutme.slice(0, 150)} />
                 <meta property="og:url" content='https://www.amir-ghedira.com/profile' />
                 <meta property="og:title" content={UserProfile.name} />
                 <meta property="og:description" content={UserProfile.aboutme} />
                 <meta property="og:image" content={UserProfile.profileimage} />
             </Head>
             <main>
+                <h1 style={{ opacity: 0 }}>About us</h1>
                 <div className="wrapper">
                     {showImage}
                     <Container style={{
