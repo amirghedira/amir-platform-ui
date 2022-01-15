@@ -79,9 +79,6 @@ const ProfilePage = ({ UserProfile }) => {
                 <meta property="og:title" content={UserProfile.name} />
                 <meta property="og:description" content={UserProfile.aboutme} />
                 <meta property="og:image" content={UserProfile.profileimage} />
-                <meta name="robots" content="index" />
-                <meta name="googlebot" content="index" />
-
             </Head>
             <main>
                 <div className="wrapper">
