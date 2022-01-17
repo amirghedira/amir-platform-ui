@@ -17,12 +17,6 @@ function MyApp({ Component, pageProps }) {
     return (
 
         <React.Fragment>
-
-            <Head>
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <meta name="theme-color" content="#2c2c2c" />
-                <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
-            </Head>
             <AppContext>
                 <IndexHeader />
                 <NextNprogress
