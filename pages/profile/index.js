@@ -445,7 +445,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                 <Col className="ml-auto mr-auto" md="10">
                                                     <Row className="collections">
                                                         <Col md="12">
-                                                            <iframe src={UserProfile.cvFile} width="100%" height="500px">
+                                                            <iframe src={"/amir-ghedira-cv-en.pdf"} width="100%" height="800px">
                                                             </iframe>
                                                         </Col>
                                                     </Row>
