@@ -65,7 +65,7 @@ const CardComponent = (props) => {
 
                                             <img
                                                 alt="amir ghedira profile image"
-                                                className="rounded-circle img-raised"
+                                                className="rounded-circle"
                                                 style={pStyle}
                                                 src={context.UserProfile?.profileimage}
                                             />
@@ -76,7 +76,7 @@ const CardComponent = (props) => {
                                                 {props.projectname}
                                             </span>
                                         </Link>
-                                        <h5 style={{ color: '#808080', fontSize: '12px', margin: '0' }}>Posted{' '}
+                                        <h5 style={{ color: '#808080', fontSize: '12px', margin: '0', fontWeight: '300' }}>Posted{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
 
                                     </div>
@@ -168,7 +168,7 @@ const CardComponent = (props) => {
 
                         </CardBody>
                         <CardFooter>
-                            <hr style={{ maxWidth: '90%', marginBottom: '0' }} />
+                            <hr style={{ width: '100%', marginBottom: '0' }} />
                             <Row style={{ margin: '5px' }}>
 
                                 {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }} >
@@ -180,7 +180,7 @@ const CardComponent = (props) => {
                                             style={{ margin: 'auto', backgroundColor: focusedDownload ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
                                             <div>
                                                 <i className="fas fa-download fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700' }}>Download</p>
+                                                <p style={{ margin: '0', fontWeight: '700', textAlign: 'center' }}>Download</p>
                                             </div>
                                         </Button>
                                     </a>
@@ -195,7 +195,7 @@ const CardComponent = (props) => {
                                         >
                                             <div>
                                                 <i className="fas fa-book-reader fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700' }}>Read More</p>
+                                                <p style={{ margin: '0', fontWeight: '700', textAlign: 'center' }}>Read More</p>
 
                                             </div>
                                         </Button>
@@ -215,14 +215,13 @@ const CardComponent = (props) => {
                                             style={{ margin: 'auto', backgroundColor: focusedGithub ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
                                             <div>
                                                 <i className="fab fa-github fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700', fontSize: '14px' }}>Github</p>
+                                                <p style={{ margin: '0', fontWeight: '700', fontSize: '14px', textAlign: 'center' }}>Github</p>
                                             </div>
 
                                         </Button>
                                     </a>
                                 </Col>}
                             </Row>
-                            <hr style={{ maxWidth: '90%', marginTop: '0', marginBottom: '20px' }} />
 
                         </CardFooter>
                     </Card >

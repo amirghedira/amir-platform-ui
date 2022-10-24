@@ -593,7 +593,7 @@ const AccountSettings = () => {
                                                         onClick={() => { inputFile2.current.click() }}
                                                     ></i>
                                                 </div>
-                                                <img className="rounded-circle img-raised"
+                                                <img className="rounded-circle"
                                                     style={{ height: '210px', width: '210px', margin: 'auto' }}
                                                     alt="..."
                                                     src={context.UserProfile.profileimage} />
@@ -958,7 +958,7 @@ const AccountSettings = () => {
                                             <Col style={{ margin: '20px' }}>
                                                 <img
                                                     alt="..."
-                                                    className="img-raised"
+                                                    className="rounded-circle"
                                                     src={selectedimage ? URL.createObjectURL(selectedimage) : context.UserProfile.backgroundimage}
                                                 ></img>
                                             </Col>
@@ -1016,7 +1016,7 @@ const AccountSettings = () => {
                                                                 </div>
                                                                 <img
                                                                     alt="..."
-                                                                    className="img-raised"
+                                                                    className="rounded-circle"
                                                                     src={image}
                                                                 ></img>
 
@@ -1055,7 +1055,7 @@ const AccountSettings = () => {
                                                                 <div style={{ display: 'flex' }}>
 
                                                                     <div style={{ display: 'inline-flex' }}>
-                                                                        <img className="rounded-circle img-raised" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={context.UserProfile.profileimage} />
+                                                                        <img className="rounded-circle" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={context.UserProfile.profileimage} />
                                                                         <h4 className={classes.newsProfileName}>{context.UserProfile.name}</h4>
                                                                     </div>
                                                                     <div style={{ flex: '1' }}></div>

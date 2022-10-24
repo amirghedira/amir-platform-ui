@@ -25,7 +25,7 @@ const TopicPage = ({ topic }) => {
 
 export const getServerSideProps = async (context) => {
 
-    const result = await Axios.get('https://mywebrestapi.herokuapp.com/topic/' + context.params.topicId)
+    const result = await Axios.get('http://localhost:5000/topic/' + context.params.topicId)
     return {
         props: {
             topic: result.data.result

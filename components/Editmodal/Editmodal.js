@@ -8,8 +8,8 @@ const Editmodal = (props) => {
     if (props.objectedit === 'project status')
         inputcomponent = (
             <Input type="select" name="select" id="editedzone">
-                <option>Finished</option>
-                <option>Unfinished</option>
+                <option>Public</option>
+                <option>Private</option>
             </Input>)
     else
         inputcomponent = (

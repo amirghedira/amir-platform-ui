@@ -33,7 +33,7 @@ export default SuggestionsPage
 export const getServerSideProps = async () => {
 
 
-    const result = await Axios.get(`https://mywebrestapi.herokuapp.com/topic/suggestions`)
+    const result = await Axios.get(`http://localhost:5000/topic/suggestions`)
     return {
         props: {
             topics: result.data.result

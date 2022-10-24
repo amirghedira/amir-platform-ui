@@ -49,7 +49,7 @@ function SiteMap() {
 
 export async function getServerSideProps({ res }) {
     // We make an API call to gather the URLs for our site
-    const result = await Axios.get(`https://mywebrestapi.herokuapp.com/project`)
+    const result = await Axios.get(`http://localhost:5000/project`)
 
     // We generate the XML sitemap with the posts data
     const sitemap = generateSiteMap(result.data.result)

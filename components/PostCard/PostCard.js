@@ -33,7 +33,10 @@ const PostCard = (props) => {
                         <Nav className={classes.Navbar} style={{ minHeight: width < 800 ? '80px' : null, height: 'fit-content' }} expand="lg">
                             {width < 800 ?
                                 <NavItem style={{ display: 'flex' }}>
-                                    <img src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'} style={{ height: '40px', width: '40px', margin: '10px', borderRadius: '100px' }} alt="JavaScript programmer" />
+                                    <img
+                                        className='rounded-circle'
+                                        src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
+                                        alt="JavaScript programmer" />
                                 </NavItem>
                                 : null
                             }

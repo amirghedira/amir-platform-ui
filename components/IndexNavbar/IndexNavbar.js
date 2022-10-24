@@ -128,7 +128,7 @@ const IndexNavbar = () => {
                             :
                             <img
                                 alt="..."
-                                className="rounded-circle img-raised"
+                                className="rounded-circle"
                                 style={{
                                     witdh: '30px',
                                     height: '30px'

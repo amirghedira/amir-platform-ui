@@ -36,8 +36,7 @@ const Tabs = (props) => {
                     onMoveNextRequest={() =>
                         setDisplayImageIndex((displayImageIndex + 1) % projectImagesUrl.length)
 
-                    }
-                    onCloseRequest={() => setShowProjectImage(false)} />}
+                    } />}
             <Container style={{ marginTop: '70px', minHeight: '30vh' }}>
                 <React.Fragment>
                     {props.projects.slice(0).reverse().map(project => {

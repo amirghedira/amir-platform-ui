@@ -199,7 +199,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                         <img
                                                                             key={i}
                                                                             alt="..."
-                                                                            className="img-raised"
+                                                                            className="rounded-circle"
                                                                             src={image}
                                                                             onClick={() => { showprojectimageHandler(image) }}
                                                                         ></img>)
@@ -215,7 +215,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                     <img
                                                                         key={i}
                                                                         alt="..."
-                                                                        className="img-raised"
+                                                                        className="rounded-circle"
                                                                         src={image}
                                                                         onClick={() => { showprojectimageHandler(image) }}
                                                                         style={{ margin: '10px' }}
@@ -399,7 +399,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                                                             <div style={{ display: 'flex' }}>
 
                                                                                                 <div style={{ display: 'inline-flex' }}>
-                                                                                                    <img className="rounded-circle img-raised" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={UserProfile.profileimage} />
+                                                                                                    <img className="rounded-circle" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={UserProfile.profileimage} />
                                                                                                     <h4 className={classes.newsProfileName}>{UserProfile.name}</h4>
                                                                                                 </div>
                                                                                                 <div style={{ flex: '1' }}></div>
@@ -466,7 +466,7 @@ const ProfilePage = ({ UserProfile }) => {
 }
 
 export const getServerSideProps = async () => {
-    const res = await Axios.get('https://mywebrestapi.herokuapp.com/user')
+    const res = await Axios.get('http://localhost:5000/user')
     return {
         props: {
             UserProfile: res.data

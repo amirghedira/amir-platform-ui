@@ -76,8 +76,8 @@ function Index(props) {
 
 export const getServerSideProps = async () => {
 
-    const result = await Axios.get(`https://mywebrestapi.herokuapp.com/project`)
-    const resultCount = await Axios.get('https://mywebrestapi.herokuapp.com/topic/counttopic')
+    const result = await Axios.get(`http://localhost:5000/project`)
+    const resultCount = await Axios.get('http://localhost:5000/topic/counttopic')
     return {
         props: {
             projects: result.data.result,

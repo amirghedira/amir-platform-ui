@@ -1,8 +1,9 @@
 .firstdiv {
     background-color: white;
-    margin-bottom: 20px;
     min-height: 50vh;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);    position: -webkit-sticky;
+    margin-left: 1px;
+    box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
+    position: -webkit-sticky;
     position: sticky;
     top: 80px;
 
@@ -33,11 +34,49 @@
 }
 
 .button {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     margin: 5px;
+
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .downloadsection {
 
     display: flex;
+    align-items: center;
+    width: 100% !important;
+    justify-content: center;
     margin-top: 16px;
+}
+
+.projectImage {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+
+}
+
+
+.deleteContainer {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+
+}
+
+.projectImageContainer {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.deleteIcon {
+    color: #555556;
+    cursor: pointer;
+    font-size: 20px;
 }

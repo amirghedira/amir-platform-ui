@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'https://mywebrestapi.herokuapp.com'
+    baseURL: 'http://localhost:5000'
 })
 
 axiosInstance.interceptors.request.use(

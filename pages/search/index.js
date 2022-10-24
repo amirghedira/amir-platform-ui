@@ -23,7 +23,7 @@ const SearchPage = ({ projects, searchTerm }) => {
 
 
 export const getServerSideProps = async (context) => {
-    const results = await Axios.get(`https://mywebrestapi.herokuapp.com/project/search?searchTerm=${context.query.searchTerm}`)
+    const results = await Axios.get(`http://localhost:5000/project/search?searchTerm=${context.query.searchTerm}`)
     return {
         props: {
             projects: results.data.projects,

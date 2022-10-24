@@ -79,7 +79,7 @@ const CommentSection = (props) => {
                             <Col xs="1" style={{ display: 'flex' }}>
                                 <div style={{ width: '50px', margin: 'auto', marginTop: commentFocused ? '35px' : 'auto' }}>
                                     {props.image ?
-                                        <img src={props.image} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="Amir ghedira" />
+                                        <img src={props.image} className='rounded-circle' alt="Amir ghedira" />
                                         :
                                         <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="..." />
 
@@ -105,7 +105,6 @@ const CommentSection = (props) => {
                                             onBlur={() => { setcommentTitlefocus(false) }}
                                             style={{
                                                 borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
-                                                boxShadow: commentTitlefocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.7)' : 'none',
                                                 borderStyle: 'solid', borderWidth: '2px',
                                                 backgroundColor: 'white',
                                                 borderRadius: '0',
@@ -125,7 +124,7 @@ const CommentSection = (props) => {
                                     onBlur={() => { setcommentContentfocus(false) }}
                                     style={{
                                         paddingLeft: '20px', width: '100%', paddingTop: '20px', borderColor: commentContentfocus ? '#1ab2ff' : 'transparent', borderStyle: 'solid', borderWidth: '2px'
-                                        , backgroundColor: 'white', boxShadow: commentContentfocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.7)' : 'none', borderRadius: '0'
+                                        , backgroundColor: 'white', borderRadius: '0'
                                     }}
 
                                 />

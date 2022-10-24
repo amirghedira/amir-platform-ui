@@ -19,6 +19,7 @@ export default class CustomDocument extends Document {
                     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@1,900&display=swap" rel="stylesheet" />
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" />
                     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap" rel="stylesheet" />
+
                 </Head>
                 <body>
                     <Main />

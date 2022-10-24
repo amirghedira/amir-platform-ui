@@ -68,8 +68,8 @@ const CenteredModal = (props) => {
                                 <br />
                                 <Label for="exampleSelect">Project Status</Label>
                                 <Input type="select" name="select" id="select" onFocus={() => { SetModalError('') }}>
-                                    <option>Finished</option>
-                                    <option>Unfinished</option>
+                                    <option>Public</option>
+                                    <option>Private</option>
                                 </Input>
                                 <br />
                                 <Input
@@ -145,7 +145,7 @@ const CenteredModal = (props) => {
                                         })
                                 }}>
                                     Add project
-                    </Button>{' '}
+                                </Button>{' '}
                                 <Button color="secondary" onClick={props.handleClose}>Cancel</Button>
                             </ModalFooter>
                         </div>

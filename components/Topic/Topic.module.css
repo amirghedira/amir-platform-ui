@@ -26,7 +26,8 @@
 
 .commentSection {
     background-color: white;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);    border-radius: 3px;
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
     padding: 20px
 }
 
@@ -45,7 +46,8 @@
 .commentSection {
     background-color: #f9f4f4;
     margin: auto;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);}
+    box-shadow: 0 0px 2px rgba(0, 0, 0, 0.2);
+}
 
 .Navbar {
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%);

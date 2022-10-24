@@ -160,7 +160,6 @@ const AddTopic = (props) => {
                                                 onBlur={() => { setcommentTitlefocus(false) }}
                                                 style={{
                                                     borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
-                                                    boxShadow: commentTitlefocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none',
                                                     borderStyle: 'solid', borderWidth: '2px',
                                                     backgroundColor: 'white',
                                                     borderRadius: '0',
@@ -181,7 +180,7 @@ const AddTopic = (props) => {
                                         onBlur={() => { setcommentContentfocus(false) }}
                                         style={{
                                             paddingLeft: '20px', width: '100%', paddingTop: '20px', borderColor: commentContentfocus ? '#1ab2ff' : 'transparent', borderStyle: 'solid', borderWidth: '2px'
-                                            , backgroundColor: 'white', boxShadow: commentContentfocus ? '0px 5px 25px 0px rgba(26, 163, 255,0.4)' : 'none', borderRadius: '0'
+                                            , backgroundColor: 'white', borderRadius: '0'
                                         }}
 
                                     />
