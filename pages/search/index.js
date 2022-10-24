@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'axios'
+import axios from '../../utils/axios'
 import Tabs from '../../components/Tabs/Tabs'
 const SearchPage = ({ projects, searchTerm }) => {
     return (

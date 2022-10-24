@@ -1,6 +1,6 @@
 
 import React from 'react'
-import axios from '../utils/axios'
+import axios, { API_URL } from '../utils/axios'
 import io from 'socket.io-client'
 import { ToastContainer, toast } from 'react-toastify';
 import Page404 from '../components/Page404/Page404'
@@ -20,10 +20,13 @@ const AppContext = (props) => {
     const [subscription, setsubscription] = React.useState(null)
     const [Erroraccured, setErrorAccured] = React.useState(false)
 
-
+    const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
         if (localStorage.getItem('token')) {
+            setLoading(false)
             Settoken(localStorage.getItem('token'))
+        } else {
+            setLoading(false)
         }
     }, [])
     React.useEffect(() => {

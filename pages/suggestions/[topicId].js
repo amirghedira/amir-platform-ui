@@ -1,8 +1,7 @@
-
-import Axios from 'axios';
 import Topic from '../../components/Topic/Topic'
 import React from 'react'
 import Head from 'next/head'
+import axios from '../../utils/axios';
 
 const TopicPage = ({ topic }) => {
     <React.Fragment>
@@ -10,7 +9,6 @@ const TopicPage = ({ topic }) => {
             <title>{`${topic.title} | Amir Platform`}</title>
             <meta name="title" content={`${topic.title} | Amir Platform`} />
             <meta name="description" content={topic.content} />
-            <link rel="canonical" href={`https://www.amir-ghedira.com/suggestions/${topic._id}`} />
             <meta property="og:url" content={`https://www.amir-ghedira.com/suggestions/${topic._id}`} />
             <meta property="og:title" content={`${topic.title}`} />
             <meta property="og:description" content={topic.content} />

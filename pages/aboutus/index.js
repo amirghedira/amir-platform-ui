@@ -22,16 +22,15 @@ const Aboutus = () => {
             <Head>
                 <title>{`About us | Amir Platform`}</title>
                 <meta name="title" content={`About us | Amir Platform`} />
-                <meta name="description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/aboutus`} />
+                <meta name="description" content="this section is reserved for to know about us" />
                 <meta property="og:url" content={`https://www.amir-ghedira.com/aboutus`} />
                 <meta property="og:title" content={`About us`} />
-                <meta property="og:description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
+                <meta property="og:description" content="this section is reserved for to know about us" />
                 <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
-
 
             </Head>
             <main>
+                <h1 style={{ opacity: 0, margin: 0 }}>About us</h1>
                 <Container className="main" style={{ marginTop: '40px', marginBottom: '40px', boxShadow: '0px 5px 25px 0px rgba(0, 0, 0, 0.2)' }}>
                     <Row style={{ display: 'flex' }}>
                         <Col xs='4' style={{ marginTop: '300px' }}>
@@ -55,9 +54,9 @@ const Aboutus = () => {
                                         This platform provide more information about each project made , with full details and provide a comment section
                                         in which you can comment each project and give your opinion and your feedback .
                                         also any question or suggestion will be taken under consideration.
-                         Please ,if you have a <Link href="/"><a>question</a></Link> or <Link href="/"><a>suggestion</a></Link> dont hesistate to post them .
+                                        Please ,if you have a <Link href="/"><a>question</a></Link> or <Link href="/"><a>suggestion</a></Link> dont hesistate to post them .
 
-                     </pre>
+                                    </pre>
                                 </div>
                                 <div id="rules" style={{ paddingTop: '50px' }} >
                                     <h2 className={classes.title}>Rules</h2>
@@ -83,10 +82,10 @@ const Aboutus = () => {
                                         in presenting my projects and describing them.
                                         The second goal is related to you ,guys. Actually am giving those details and descriptions of each project
                                         to provide support and help to beginners ,who have difficulties to begin a project with any technologie
-                         Not also details of projects are helpful but <Link href='topics/questions'><a>question</a></Link> section is available to answer
-                         to your questions in a breve delay and to satisfy your needs.
-                         I will try my best to cover most popular technologies such as react nodejs angular...
-                          </p>
+                                        Not also details of projects are helpful but <Link href='topics/questions'><a>question</a></Link> section is available to answer
+                                        to your questions in a breve delay and to satisfy your needs.
+                                        I will try my best to cover most popular technologies such as react nodejs angular...
+                                    </p>
                                 </div>
 
 

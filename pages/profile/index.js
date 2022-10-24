@@ -20,7 +20,7 @@ import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
 import Head from 'next/head'
-import Axios from "axios";
+import axios from "../../utils/axios";
 import ReactGitHubCalender from 'react-github-calendar'
 import ReactTooltip from 'react-tooltip'
 const ProfilePage = ({ UserProfile }) => {
@@ -74,15 +74,14 @@ const ProfilePage = ({ UserProfile }) => {
                     {`${UserProfile.name} | Amir Platform`}
                 </title>
                 <meta name="title" content={`${UserProfile.name} | Amir Platform`} />
-                <meta name="description" content={UserProfile.aboutme} />
-                <link rel="canonical" href='https://www.amir-ghedira.com/profile' />
+                <meta name="description" content={UserProfile.aboutme.slice(0, 150)} />
                 <meta property="og:url" content='https://www.amir-ghedira.com/profile' />
                 <meta property="og:title" content={UserProfile.name} />
                 <meta property="og:description" content={UserProfile.aboutme} />
                 <meta property="og:image" content={UserProfile.profileimage} />
-
             </Head>
             <main>
+                <h1 style={{ opacity: 0, margin: 0 }}>Amir ghedira</h1>
                 <div className="wrapper">
                     {showImage}
                     <Container style={{
@@ -446,7 +445,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                 <Col className="ml-auto mr-auto" md="10">
                                                     <Row className="collections">
                                                         <Col md="12">
-                                                            <iframe src={UserProfile.cvFile} width="100%" height="500px">
+                                                            <iframe src={"/amir-ghedira-cv-en.pdf"} width="100%" height="800px">
                                                             </iframe>
                                                         </Col>
                                                     </Row>

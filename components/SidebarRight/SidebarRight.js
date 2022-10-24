@@ -106,7 +106,7 @@ const Sidebar = (props) => {
 
 
                                 {mostSeen ?
-                                    <Link href={`/project/${mostSeen.name}/${mostSeen.technologie}/${mostSeen._id}`}>
+                                    <Link href={`/project/${mostSeen.name.replace(/ /g, '-')}/${mostSeen.technologie.replace(/ /g, '-')}/${mostSeen._id}`}>
                                         <a className={classes.items}>{mostSeen.name}</a>
                                     </Link>
                                     :
@@ -132,7 +132,7 @@ const Sidebar = (props) => {
                             <Col xs="6" xl="6">
                                 {
                                     mostDownload ?
-                                        <Link href={`/project/${mostDownload.name}/${mostDownload.technologie}/${mostDownload._id}`}>
+                                        <Link href={`/project/${mostDownload.name.replace(/ /g, '-')}/${mostDownload.technologie.replace(/ /g, '-')}/${mostDownload._id}`}>
                                             <a className={classes.items}>{mostDownload.name}</a>
                                         </Link>
 

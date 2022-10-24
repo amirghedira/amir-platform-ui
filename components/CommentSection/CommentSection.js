@@ -9,17 +9,17 @@ import { Row, Col, Input, Label, Button } from 'reactstrap'
 const CommentSection = (props) => {
     const [commentContentfocus, setcommentContentfocus] = React.useState(false)
     const [commentTitlefocus, setcommentTitlefocus] = React.useState(false)
-    const [width, setwitdh] = React.useState(1000)
+    const [width, setwidth] = React.useState(1000)
     const [errormessage, SeterrorMessage] = React.useState('')
     const [commentFocused, SetcommentFocus] = React.useState(null)
 
 
     const handleFunction = function () {
-        setwitdh(window.innerWidth)
+        setwidth(window.innerWidth)
     }
 
     React.useEffect(() => {
-        setwitdh(window.innerWidth)
+        setwidth(window.innerWidth)
         window.addEventListener('resize', handleFunction)
         return () => {
             window.removeEventListener('resize', handleFunction);
@@ -81,7 +81,7 @@ const CommentSection = (props) => {
                                     {props.image ?
                                         <img src={props.image} className='rounded-circle' alt="Amir ghedira" />
                                         :
-                                        <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="..." />
+                                        <img className='img-raised' src={'/default-avatar.png'} style={{ height: '50px', width: '50px', boxShadow: 'none' }} alt="..." />
 
                                     }
 

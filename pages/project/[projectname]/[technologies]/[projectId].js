@@ -15,7 +15,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import PostCard from '../../../../components/PostCard/PostCard';
 import CommentSection from '../../../../components/CommentSection/CommentSection'
 import axios from '../../../../utils/axios';
-import Axios from 'axios';
 import Head from 'next/head'
 
 const Details = (props) => {
@@ -190,10 +189,8 @@ const Details = (props) => {
                 <title>{`${project.name} | Amir Platform`}</title>
                 <meta name="title" content={`${project.name} | Amir Platform`} />
                 <meta name="description" content={project.overview} />
-                <link rel="canonical" href={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
-                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`} />
+                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`} />
                 <meta property="og:title" content={project.name} />
-                <meta name="robots" content="all" />
                 <meta property="og:description" content={project.overview} />
                 {project.imagesurl.length > 0 ?
                     <meta property="og:image" content={project.imagesurl[Math.floor(Math.random() * project.imagesurl.length)]} />

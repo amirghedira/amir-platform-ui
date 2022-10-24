@@ -3,7 +3,6 @@ import CardComponent from './CardComponent/CardComponent'
 
 // reactstrap components
 import {
-    Container,
     Row,
     Col
 
@@ -22,7 +21,7 @@ const Tabs = (props) => {
     }
     return (
 
-        <React.Fragment>
+        <Row>
             {projectImagesUrl && showProjectImage &&
                 <Lightbox
                     mainSrc={projectImagesUrl[displayImageIndex]}
@@ -62,8 +61,7 @@ const Tabs = (props) => {
 
 
             </Container>
-        </React.Fragment>
-
+        </Row>
 
     )
 

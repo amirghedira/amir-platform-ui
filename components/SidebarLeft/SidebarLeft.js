@@ -20,20 +20,20 @@ const Sidebar = (props) => {
                                     <Row style={{ marginBottom: '10px' }}>
                                         <Col>
                                             <Link href="/topics/questions" className={classes.items}>
-                                                <div className={classes.navItemContainer}>
+                                                <a className={classes.navItemContainer}>
                                                     <i className={`far fa-question-circle ${classes.icon}`}></i>
                                                     <h5 className={classes.navItemText}>Questions</h5>
-                                                </div>
+                                                </a>
                                             </Link>
                                         </Col>
                                     </Row>
                                     <Row style={{ marginBottom: '10px' }}>
                                         <Col>
                                             <Link href="/add-topic/questions" className={classes.items}>
-                                                <div className={classes.navItemContainer}>
+                                                <a className={classes.navItemContainer}>
                                                     <i className={`far fa-comments ${classes.icon}`}></i>
                                                     <h5 className={classes.navItemText}>Post a question</h5>
-                                                </div>
+                                                </a>
                                             </Link>
                                         </Col>
                                     </Row>
@@ -57,20 +57,20 @@ const Sidebar = (props) => {
                                     <Row style={{ marginBottom: '10px' }}>
                                         <Col>
                                             <Link href="/topics/suggestions" className={classes.items}>
-                                                <div className={classes.navItemContainer}>
+                                                <a className={classes.navItemContainer}>
                                                     <i className={`fas fa-lightbulb ${classes.icon}`}></i>
                                                     <h5 className={classes.navItemText}>Suggestions</h5>
-                                                </div>
+                                                </a>
                                             </Link>
                                         </Col>
                                     </Row>
                                     <Row style={{ marginBottom: '10px' }}>
                                         <Col>
                                             <Link href="/add-topic/suggestions" className={classes.items}>
-                                                <div className={classes.navItemContainer}>
+                                                <a className={classes.navItemContainer}>
                                                     <i className={`far fa-comments ${classes.icon}`}></i>
                                                     <h5 className={classes.navItemText}>Post a Suggestion</h5>
-                                                </div>
+                                                </a>
                                             </Link>
                                         </Col>
                                     </Row>

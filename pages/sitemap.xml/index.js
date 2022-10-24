@@ -1,38 +1,44 @@
-import Axios from "axios";
+import axios from "../../utils/axios";
 
 function generateSiteMap(projects) {
+
     return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
        <loc>https://www.amir-ghedira.com</loc>
-       <priority>0.5</priority>
+       <lastmod>${new Date().toISOString()}</lastmod>
+
      </url>
 
      <url>
        <loc>https://www.amir-ghedira.com/aboutus</loc>
-       <priority>0.5</priority>
+       <lastmod>${new Date().toISOString()}</lastmod>
 
      </url>
      <url>
      <loc>https://www.amir-ghedira.com/profile</loc>
-     <priority>0.9</priority>
+     <lastmod>${new Date().toISOString()}</lastmod>
+
    </url>
    <url>
    <loc>https://www.amir-ghedira.com/questions</loc>
-   <priority>0.5</priority>
+   <lastmod>${new Date().toISOString()}</lastmod>
+
 
  </url>
  <url>
  <loc>https://www.amir-ghedira.com/suggestions</loc>
- <priority>0.5</priority>
+ <lastmod>${new Date().toISOString()}</lastmod>
+
 
 </url>
      ${projects.map(project => {
         return `
        <url>
-           <loc>${`https://amir-ghedira.com/project/${project.name}/${project.technologie}/${project._id}`}</loc>
-           <priority>0.9</priority>
+           <loc>${`https://www.amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
+           <lastmod>${new Date().toISOString()}</lastmod>
+
 
        </url>
      `

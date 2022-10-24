@@ -74,7 +74,6 @@ const AddTopic = (props) => {
                     <title>{`Create new ${props.type} | Amir Platform`}</title>
                     <meta name="title" content={`Create new ${props.type} | Amir Platform`} />
                     <meta name="description" content="Feel free to post a new topic here if you have a question or a suggestion for us, Its a pleasure to answer you!" />
-                    <link rel="canonical" href='https://www.amir-ghedira.com/amirghedira' />
                     <meta property="og:url" content={`https://www.amir-ghedira.com/add-topic/${props.type}`} />
                     <meta property="og:title" content={`Create new ${props.type}`} />
                     <meta property="og:description" content="Feel free to post a new topic here if you have a question or a suggestion for us, Its a pleasure to answer you!" />

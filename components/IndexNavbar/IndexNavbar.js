@@ -206,20 +206,23 @@ const IndexNavbar = () => {
                 }}>
                 <Container>
                     <div className="navbar-translate">
-                        <NavbarBrand
+                        <div
                             onClick={() => {
                                 setCollapseOpen(false)
                             }}>
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 {navbarColor !== '' ?
-                                    <Link href="/">
-                                        <h5 className={classes.navLink} style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
+                                    <Link href="/" className={classes.navLink}>
+                                        <a className={classes.navLink} style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
                                             Home
-                                        </h5>
+                                        </a>
                                     </Link>
                                     :
                                     <Link href="/">
-                                        <img className={classes.navIconImage} src={'/nav-icon.png'} alt="nav-icon" style={{ cursor: 'pointer' }} />
+                                        <a>
+                                            <img className={classes.navIconImage} src={'/nav-icon.png'} alt="nav-icon" style={{ cursor: 'pointer' }} />
+
+                                        </a>
                                     </Link>}
                                 <div style={{ marginLeft: '20px', display: 'flex', alignItems: 'center' }}>
                                     <i className={`fas fa-search ${classes.searchIcon}`} style={{ color: focusSearch ? '#2CA8FF' : 'white' }}></i>
@@ -235,7 +238,7 @@ const IndexNavbar = () => {
                                 </div>
 
                             </div>
-                        </NavbarBrand>
+                        </div>
                         <button
                             className="navbar-toggler navbar-toggler"
                             onClick={() => {
@@ -257,58 +260,49 @@ const IndexNavbar = () => {
                         <Nav navbar style={{ display: 'flex', alignItems: 'center' }}>
 
                             <NavItem className={classes.navItem}>
-                                <NavLink
+                                <Link
+
+                                    href="/topics/questions"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
 
                                 >
-                                    <Link
-                                        href="/topics/questions"
-                                        onClick={() => {
-                                            setCollapseOpen(false)
-
-                                        }}
-                                    >
-                                        <div className={classes.navItemContainer}>
-                                            <i className={`fas fa-question ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Questions</h5>
-                                        </div>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-question ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Questions</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             <NavItem className={classes.navItem}>
-                                <NavLink
-
+                                <Link
+                                    href="/topics/suggestions"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
                                 >
-                                    <Link href="/topics/suggestions">
-                                        <div className={classes.navItemContainer}>
-                                            <i className={`fas fa-lightbulb ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Suggestions</h5>
-                                        </div>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-lightbulb ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Suggestions</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             <NavItem className={classes.navItem}>
-                                <NavLink
+                                <Link
+                                    href="/profile"
                                     onClick={() => {
                                         setCollapseOpen(false)
 
                                     }}
 
                                 >
-                                    <Link href="/profile">
-                                        <div className={classes.navItemContainer}>
-                                            <i className={`fas fa-address-card ${classes.navIcon}`}></i>
-                                            <h5 className={classes.navItemContent}>Profile</h5>
-                                        </div>
-                                    </Link>
-                                </NavLink>
+                                    <a className={classes.navItemContainer + " nav-link"}>
+                                        <i className={`fas fa-address-card ${classes.navIcon}`}></i>
+                                        <h5 className={classes.navItemContent}>Profile</h5>
+                                    </a>
+                                </Link>
                             </NavItem>
                             {context.token ?
                                 <NavItem>
@@ -319,7 +313,7 @@ const IndexNavbar = () => {
                                             >
                                                 <i className={`fas fa-bell ${classes.navIcon}`} style={{ margin: 'auto' }}>
                                                     {!LoadingNotification && context.Notifications.filter(notification => { return notification.read === false }).length > 0 ?
-                                                        < Badge style={{ witdh: '20px', height: '20px', borderRadius: '100px', fontSize: '14px' }} color="danger">
+                                                        < Badge style={{ width: '20px', height: '20px', borderRadius: '100px', fontSize: '14px' }} color="danger">
                                                             {
                                                                 context.Notifications.filter(notification => { return notification.read === false }).length
                                                             }

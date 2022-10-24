@@ -29,12 +29,6 @@ const CardComponent = (props) => {
     const [focusedGithub, setfocusedGithub] = React.useState(false);
     const [EditPost, setEditPost] = React.useState(false);
 
-    const pStyle = {
-        witdh: '50px',
-        height: '50px',
-        marginLeft: '10px',
-        boxShadow: 'none'
-    };
 
     const settings = React.useMemo(() => {
         return {
@@ -71,10 +65,10 @@ const CardComponent = (props) => {
                                             />
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} >
-                                            <span style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
+                                        <Link href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`} >
+                                            <a style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
                                                 {props.projectname}
-                                            </span>
+                                            </a>
                                         </Link>
                                         <h5 style={{ color: '#808080', fontSize: '12px', margin: '0', fontWeight: '300' }}>Posted{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
@@ -227,7 +221,7 @@ const CardComponent = (props) => {
                     </Card >
                 </Col >
             </Row>
-        </article>
+        </article >
 
 
     )
