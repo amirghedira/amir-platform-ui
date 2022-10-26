@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from '../../utils/axios'
 import Tabs from '../../components/Tabs/Tabs'
+import axios from '../../utils/axios'
 const SearchPage = ({ projects, searchTerm }) => {
     return (
         <div style={{ minHeight: '70vh' }}>
@@ -23,7 +23,7 @@ const SearchPage = ({ projects, searchTerm }) => {
 
 
 export const getServerSideProps = async (context) => {
-    const results = await Axios.get(`http://localhost:5000/project/search?searchTerm=${context.query.searchTerm}`)
+    const results = await axios.get(`/project/search?searchTerm=${context.query.searchTerm}`)
     return {
         props: {
             projects: results.data.projects,

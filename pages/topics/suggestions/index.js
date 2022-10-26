@@ -32,7 +32,7 @@ export default SuggestionsPage
 export const getServerSideProps = async () => {
 
 
-    const result = await Axios.get(`http://localhost:5000/topic/suggestions`)
+    const result = await axios.get('/topic/suggestions')
     return {
         props: {
             topics: result.data.result

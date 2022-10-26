@@ -1,4 +1,4 @@
-import axios from "../../utils/axios";
+import axios from '../../utils/axios'
 
 function generateSiteMap(projects) {
 
@@ -55,7 +55,7 @@ function SiteMap() {
 
 export async function getServerSideProps({ res }) {
     // We make an API call to gather the URLs for our site
-    const result = await Axios.get(`http://localhost:5000/project`)
+    const result = await axios.get(`/project`)
 
     // We generate the XML sitemap with the posts data
     const sitemap = generateSiteMap(result.data.result)

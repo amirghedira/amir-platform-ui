@@ -60,7 +60,6 @@ const CardComponent = (props) => {
                                             <img
                                                 alt="amir ghedira profile image"
                                                 className="rounded-circle"
-                                                style={pStyle}
                                                 src={context.UserProfile?.profileimage}
                                             />
                                         </Link>}

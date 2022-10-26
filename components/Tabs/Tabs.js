@@ -4,7 +4,8 @@ import CardComponent from './CardComponent/CardComponent'
 // reactstrap components
 import {
     Row,
-    Col
+    Col,
+    Container
 
 } from "reactstrap";
 import Lightbox from 'react-image-lightbox';

@@ -5,8 +5,8 @@ import { Row, Col, Container } from "reactstrap";
 import SidebarLeft from '../components/SidebarLeft/SidebarLeft'
 import SidebarRight from '../components/SidebarRight/SidebarRight'
 import classes from '../styles/index.module.css'
-import axios from '../utils/axios'
 import Head from 'next/head'
+import axios from "../utils/axios";
 function Index(props) {
 
     const [projects, setProjects] = React.useState(props.projects)
@@ -71,8 +71,8 @@ function Index(props) {
 
 export const getServerSideProps = async () => {
 
-    const result = await Axios.get(`http://localhost:5000/project`)
-    const resultCount = await Axios.get('http://localhost:5000/topic/counttopic')
+    const result = await axios.get(`/project`)
+    const resultCount = await axios.get('/topic/counttopic')
     return {
         props: {
             projects: result.data.result,

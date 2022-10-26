@@ -34,7 +34,7 @@ export default QuestionsPage
 export const getServerSideProps = async () => {
 
 
-    const result = await Axios.get(`http://localhost:5000/topic/questions`)
+    const result = await axios.get(`/topic/questions`)
     return {
         props: {
             topics: result.data.result

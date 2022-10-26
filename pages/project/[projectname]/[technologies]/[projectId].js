@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './ProjectDetails.module.css'
 import Lightbox from 'react-image-lightbox';
+
 import {
     Container, Row, Col
 
@@ -286,7 +287,8 @@ const Details = (props) => {
 export const getServerSideProps = async (context) => {
 
     const projectId = context.params.projectId
-    const res = await Axios.get('http://localhost:5000/project/' + projectId)
+    const res = await axios.get('/project/' + projectId)
+
     return {
         props: {
             project: res.data.result

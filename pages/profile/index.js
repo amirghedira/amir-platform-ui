@@ -20,9 +20,9 @@ import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
 import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
 import Head from 'next/head'
-import axios from "../../utils/axios";
 import ReactGitHubCalender from 'react-github-calendar'
 import ReactTooltip from 'react-tooltip'
+import axios from "../../utils/axios";
 const ProfilePage = ({ UserProfile }) => {
     const [pills, setPills] = React.useState("2");
     const [showImage, setShowimage] = React.useState(null)
@@ -465,7 +465,7 @@ const ProfilePage = ({ UserProfile }) => {
 }
 
 export const getServerSideProps = async () => {
-    const res = await Axios.get('http://localhost:5000/user')
+    const res = await axios.get('/user')
     return {
         props: {
             UserProfile: res.data
