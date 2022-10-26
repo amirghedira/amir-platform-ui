@@ -174,27 +174,28 @@ const ProjectColumn = (props) => {
                     </Col>
 
                 </Row>
-                <Row>
+                {props.project.status === 'Public' && <Row>
 
 
-                    {props.project.status === 'Public' &&
-                        <Col className={classes.downloadsection}>
-                            <a href={props.project.github} target="_blank" rel="noopener noreferrer">
-                                <Button className={classes.button} color="warning" onClick={props.githubButtonFunction}>
-                                    <i className="fab fa-github fa-2x" style={{ marginRight: '10px' }}></i>
-                                    Github
-                                </Button>
-                            </a>
-                            <a href={props.project.filelink} download onClick={props.downloadButtonFunction}>
-                                <Button color="success" className={classes.button}>
-                                    <i className="fas fa-download fa-2x" style={{ marginRight: '10px' }}></i>
-                                    Download
-                                </Button>
-                            </a>
-
-                        </Col>}
+                    <Col md="12" lg="6" className={classes.downloadsection}>
+                        <a href={props.project.github} target="_blank" rel="noopener noreferrer">
+                            <Button className={classes.button} color="warning" onClick={props.githubButtonFunction}>
+                                <i className="fab fa-github fa-2x" style={{ marginRight: '10px' }} ></i>
+                                Github
+                            </Button>
+                        </a>
+                    </Col>
+                    <Col md="12" lg="6">
+                        <a href={props.project.filelink} download onClick={props.downloadButtonFunction}>
+                            <Button color="success" className={classes.button}>
+                                <i className="fas fa-download fa-2x" style={{ marginRight: '10px' }} ></i>
+                                Download
+                            </Button>
+                        </a>
+                    </Col>
 
                 </Row>
+                }
 
                 <Row>
                     <Col>
@@ -224,7 +225,7 @@ const ProjectColumn = (props) => {
                                 props.project.imagesurl.map((image, i) => {
 
                                     return (
-                                        <Col xs="12" md="6" key={i} style={{ display: 'flex', justifyContent: 'center' }}>
+                                        <Col xs="3" md="6" key={i} style={{ display: 'flex', justifyContent: 'center' }}>
                                             <div className={classes.projectImageContainer}>
                                                 {context.token && <div className={classes.deleteContainer}>
                                                     <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImageHandler(image)}></i>

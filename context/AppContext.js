@@ -181,6 +181,7 @@ const AppContext = (props) => {
         fd.append('started', inputs.started);
         fd.append('technologie', inputs.technologie);
         fd.append('summary', inputs.summary);
+        fd.append('documentation', inputs.documentation);
         fd.append('whatlearned', inputs.whatlearned);
         fd.append('overview', inputs.overview);
         fd.append('status', inputs.status);
@@ -219,7 +220,8 @@ const AppContext = (props) => {
 
             })
             .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
+                console.log(err)
+                // ErrorAccureHandler(500, "Connection to server has timedout")
             })
 
 

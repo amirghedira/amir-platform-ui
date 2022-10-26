@@ -9,7 +9,7 @@ const Page404 = (props) => {
                     <h1>{props.statuscode}</h1>
                 </div>
                 <h2>We are sorry, Page not found!</h2>
-                <p>{props.message}</p>
+                <p style={{ textAlign: 'center' }}>{props.message}</p>
                 <a href="/">Back To Homepage</a>
             </div>
         </div>

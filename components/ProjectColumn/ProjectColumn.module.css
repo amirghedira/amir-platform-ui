@@ -2,10 +2,12 @@
     background-color: white;
     min-height: 50vh;
     margin-left: 1px;
+    margin-right: 1px;
     box-shadow: 0 0px 3px rgba(0, 0, 0, 0.2);
     position: -webkit-sticky;
     position: sticky;
-    top: 80px;
+    top: 100px;
+    margin-bottom: 20px;
 
 }
 
@@ -36,20 +38,14 @@
 .button {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    margin: 5px;
-
+    justify-content: center;
+    width: 100%;
     font-size: 12px;
     font-weight: 600;
 }
 
 .downloadsection {
-
-    display: flex;
-    align-items: center;
-    width: 100% !important;
     justify-content: center;
-    margin-top: 16px;
 }
 
 .projectImage {

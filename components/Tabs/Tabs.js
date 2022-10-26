@@ -41,6 +41,7 @@ const Tabs = (props) => {
                 <React.Fragment>
                     {props.projects.slice(0).reverse().map(project => {
                         return <CardComponent
+                            deleteProject={props.deleteProject}
                             key={project._id}
                             _id={project._id}
                             projectname={project.name}

@@ -107,7 +107,7 @@ const CardComponent = (props) => {
                                                             Edit Post
                                                         </DropdownItem>
                                                         <DropdownItem
-                                                            onClick={() => { context.deleteprojectHandler(props._id) }}
+                                                            onClick={() => { context.deleteprojectHandler(props._id); props.deleteProject(props._id) }}
                                                         >
                                                             Delete
                                                         </DropdownItem>

@@ -17,6 +17,7 @@ import PostCard from '../../../../components/PostCard/PostCard';
 import CommentSection from '../../../../components/CommentSection/CommentSection'
 import axios from '../../../../utils/axios';
 import Head from 'next/head'
+import EditDocumentationModal from '../../../../components/EditDocumentationModal/EditDocumentationModal';
 
 const Details = (props) => {
     const context = React.useContext(GlobalContext)
@@ -25,7 +26,7 @@ const Details = (props) => {
 
     //========
     const [errorMessages, SetErrorMessqge] = React.useState('');
-
+    const [showEditDocumentationModal, setShowEditDocumentationModal] = React.useState(false)
     const [modalprops, setmodalprops] = React.useState({
         value: null,
         show: false,
@@ -50,6 +51,11 @@ const Details = (props) => {
             document.body.classList.remove("sidebar-collapse");
         };
     }, [])
+
+    React.useEffect(() => {
+        console.log(project.documentation)
+        console.log("project updated")
+    }, [project])
 
 
     const updateDownloadHandler = () => {
@@ -115,10 +121,22 @@ const Details = (props) => {
             .then(result => {
                 const value = infos.value
                 const item = infos.propname;
-                console.log(item)
                 setProject({
                     ...project,
                     [item]: value
+                })
+            })
+            .catch(err => { context.ErrorAccureHandler(); })
+        closehandler()
+    }
+    const editDocumentationHandler = (value) => {
+        console.log(value)
+        axios.patch('/project/' + project._id, { propName: 'documentation', value: value })
+            .then(result => {
+                setShowEditDocumentationModal(false)
+                setProject({
+                    ...project,
+                    documentation: value
                 })
             })
             .catch(err => { context.ErrorAccureHandler(); })
@@ -206,18 +224,18 @@ const Details = (props) => {
                     <div className="section" style={{ backgroundColor: 'transparent', marginTop: '40px' }}>
                         <Container fluid>
                             <Row >
-                                <Col md="10" xl="3" >
+                                <Col sm="12" md="4" xl="3" >
                                     <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
                                         downloadButtonFunction={updateDownloadHandler}
                                         editFunction={editHandler} logstatus={context.token} />
                                 </Col>
-                                <Col md="10" xl="9">
+                                <Col sm="12" md="8" xl="9">
                                     <ProjectField
                                         key='1'
-                                        sectionname="Overview"
+                                        sectionname="Documentation"
                                         propname='documentation'
                                         logstatus={context.token}
-                                        editFunction={editHandler}
+                                        editFunction={() => setShowEditDocumentationModal(true)}
                                         content={project.documentation}
                                         icon={<i className="fas fa-globe fa-3x" style={{ marginBottom: '20px' }}></i>} />
                                 </Col >
@@ -268,6 +286,12 @@ const Details = (props) => {
                         defaultvalue={modalprops.defaultvalue}
                         propname={modalprops.propname}
                         objectedit={modalprops.sectionname}
+                    />
+                    <EditDocumentationModal
+                        show={showEditDocumentationModal}
+                        savechangesfunction={editDocumentationHandler}
+                        handleClose={() => setShowEditDocumentationModal(false)}
+                        defaultValue={project.documentation}
                     />
                     <DeleteModal
                         show={deletemodalprops.show}

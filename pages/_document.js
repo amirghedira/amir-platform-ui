@@ -10,7 +10,6 @@ export default class CustomDocument extends Document {
                     <meta name="google-site-verification" content="srWyQk73mi7vKyZuRzJVmq-4-E7qDQEljmKUSu_AAfk" />
                     <meta property="og:type" content="article" />
                     <meta property="og:site_name" content="Amir Platform" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
                     <meta name="theme-color" content="#2c2c2c" />
                     <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
                     <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Amir Platform" />

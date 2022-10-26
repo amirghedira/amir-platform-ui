@@ -38,6 +38,19 @@ function Index(props) {
 
     }
 
+    const deleteProjectHandler = (id) => {
+        axios.delete('/project/deleteproject/' + id)
+            .then(res => {
+                const newProjects = [...projects];
+                const projectIndex = projects.findIndex(project => project._id === id)
+                newProjects.splice(projectIndex, 1);
+                setProjects([...newProjects])
+            })
+            .catch(err => {
+                console.log(err)
+                // ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+    }
     return (
         <main>
             <Head>
@@ -56,7 +69,7 @@ function Index(props) {
                         <SidebarLeft xs="2" md="3" lg="2" />
                     </Col>
                     <Col xs="12" sm="12" md="9" lg="8">
-                        <Tabs projects={projects} savechanges={savechangesHandler} />
+                        <Tabs projects={projects} deleteProject={deleteProjectHandler} savechanges={savechangesHandler} />
                     </Col>
                     <Col className={classes.sideBarProjects} xs="3" lg="2">
                         <SidebarRight projects={projects} topicsCount={props.topicsCount} />

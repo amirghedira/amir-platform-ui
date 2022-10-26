@@ -15,6 +15,7 @@ import Loading from '../../components/LoadingPage/LoadingPage'
 import GlobalContext from '../../context/GlobalContext'
 import { TextareaAutosize } from '@material-ui/core';
 import FormatDate from '../../utils/FormatDate'
+import EditDocumentationModal from '../../components/EditDocumentationModal/EditDocumentationModal';
 
 const AccountSettings = () => {
     const context = React.useContext(GlobalContext)
@@ -44,6 +45,9 @@ const AccountSettings = () => {
         news: false,
         banlist: false,
     })
+
+    const [showEditDocumentationModal, setShowEditDocumentationModal] = React.useState(false)
+    const [newProject, setNewProject] = React.useState({})
 
 
     const inputFile = React.useRef(null);
@@ -380,26 +384,13 @@ const AccountSettings = () => {
             })
             .catch(err => { context.ErrorAccureHandler() })
     }
-    const postProjectHandler = (info) => {
-        if (info.name === '' || info.status === '' || info.platform === '' || info.summary === '' ||
-            info.started === '' || info.overview === '' || info.whatlearned === '' || info.technologie === '') {
+    const postProjectHandler = () => {
+        if (newProject.name === '' || newProject.status === '' || newProject.documentation === '' ||
+            newProject.started === '' || newProject.technologie === '') {
             SetProjectErrField({ color: 'red', message: 'Please fill all inputs' });
         }
         else {
-            context.addProjectHandler({
-                name: info.name,
-                status: info.status,
-                platform: info.platform,
-                github: info.github,
-                features: info.features,
-                summary: info.summary,
-                started: info.started,
-                overview: info.overview,
-                whatlearned: info.whatlearned,
-                technologie: info.technologie,
-                filelink: info.filelink,
-                projectimages: projectImages
-            })
+            context.addProjectHandler(newProject)
             SetLoadingPage(true)
             SetProjectErrField({ color: 'green', message: 'Project Added successfully' });
         }
@@ -1153,7 +1144,8 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="name"
+                                                            value={newProject.name || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
                                                             className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
@@ -1166,7 +1158,8 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="started"
+                                                            value={newProject.started || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, started: e.target.value })}
                                                             className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
@@ -1178,11 +1171,13 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Project status</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <Input type="select"
-                                                            name="select" id="select"
+                                                        <Input
+                                                            type="select"
+                                                            value={newProject.status || 'Public'}
+                                                            onChange={(e) => setNewProject({ ...newProject, status: e.target.value })}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}>
-                                                            <option>Public</option>
-                                                            <option>Private</option>
+                                                            <option value={"Pulic"}>Public</option>
+                                                            <option value={"Private"}>Private</option>
                                                         </Input>
                                                     </Col>
                                                 </Row>
@@ -1192,7 +1187,8 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="technologie"
+                                                            value={newProject.technologie || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, technologie: e.target.value })}
                                                             className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
@@ -1205,7 +1201,8 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="github"
+                                                            value={newProject.github || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, github: e.target.value })}
                                                             className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
@@ -1218,7 +1215,8 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="filelink"
+                                                            value={newProject.filelink || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, filelink: e.target.value })}
                                                             className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
@@ -1231,7 +1229,6 @@ const AccountSettings = () => {
                                                     </Col>
                                                     <Col xs="9">
                                                         <Input
-                                                            id="projectname"
                                                             type="file"
                                                             multiple
                                                             onChange={(event) => { setProjectImages(event.target.files) }}
@@ -1243,55 +1240,13 @@ const AccountSettings = () => {
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
                                                     <Col xs="3">
-                                                        <h5 className={classes.itemsTitle}>Overview</h5>
-                                                    </Col>
-                                                    <Col xs="9">
-                                                        <TextareaAutosize
-                                                            id="overview"
-                                                            type="textarea"
-                                                            className={classes.textareaField}
-                                                            onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
-
-                                                        />
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
-                                                    <Col xs="3">
-                                                        <h5 className={classes.itemsTitle}>Features</h5>
-                                                    </Col>
-                                                    <Col xs="9">
-                                                        <TextareaAutosize
-                                                            id="features"
-                                                            type="textarea"
-                                                            className={classes.textareaField}
-                                                            onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
-
-                                                        />
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
-                                                    <Col xs="3">
-                                                        <h5 className={classes.itemsTitle}>Platform/libreries</h5>
-                                                    </Col>
-                                                    <Col xs="9">
-                                                        <TextareaAutosize
-                                                            id="platform"
-                                                            type="textarea"
-                                                            className={classes.textareaField}
-                                                            onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
-
-                                                        />
-                                                    </Col>
-                                                </Row>
-                                                <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
-                                                    <Col xs="3">
                                                         <h5 className={classes.itemsTitle}>Summary</h5>
                                                     </Col>
                                                     <Col xs="9">
                                                         <TextareaAutosize
-                                                            id="summary"
-                                                            type="textarea"
-                                                            className={classes.textareaField}
+                                                            value={newProject.summary || ''}
+                                                            onChange={(e) => setNewProject({ ...newProject, summary: e.target.value })}
+                                                            className={classes.projectInputfield}
                                                             onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
 
                                                         />
@@ -1299,15 +1254,15 @@ const AccountSettings = () => {
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
                                                     <Col xs="3">
-                                                        <h5 className={classes.itemsTitle}>What I learned</h5>
+                                                        <h5 className={classes.itemsTitle}>Documentation</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <TextareaAutosize
-                                                            id="whatlearned"
-                                                            className={classes.textareaField}
-                                                            type="textarea"
-                                                            onFocus={() => { SetProjectErrField({ color: 'red', message: '' }) }}
-
+                                                        <Button onClick={() => { setShowEditDocumentationModal(true) }}>Edit</Button>
+                                                        <EditDocumentationModal
+                                                            show={showEditDocumentationModal}
+                                                            savechangesfunction={(doc) => { setNewProject({ ...newProject, documentation: doc }); setShowEditDocumentationModal(false) }}
+                                                            handleClose={() => setShowEditDocumentationModal(false)}
+                                                            defaultValue={newProject.documentation || ''}
                                                         />
                                                     </Col>
                                                 </Row>
@@ -1321,24 +1276,7 @@ const AccountSettings = () => {
                                                 </Row>
                                                 <Row >
                                                     <div style={{ margin: 'auto' }}>
-                                                        <Button color="info" onClick={() => {
-                                                            postProjectHandler(
-                                                                {
-                                                                    name: document.getElementById('name').value,
-                                                                    status: document.getElementById('select').value,
-                                                                    platform: document.getElementById('platform').value,
-                                                                    github: document.getElementById('github').value,
-                                                                    features: document.getElementById('features').value,
-                                                                    summary: document.getElementById('summary').value,
-                                                                    started: document.getElementById('started').value,
-                                                                    overview: document.getElementById('overview').value,
-                                                                    whatlearned: document.getElementById('whatlearned').value,
-                                                                    technologie: document.getElementById('technologie').value,
-                                                                    filelink: document.getElementById('filelink').value,
-                                                                    projectimages: projectImages
-                                                                }
-                                                            )
-                                                        }}>Save</Button>
+                                                        <Button color="info" onClick={() => { postProjectHandler(newProject) }}>Save</Button>
                                                     </div>
 
                                                 </Row>
