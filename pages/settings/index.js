@@ -10,10 +10,10 @@ import classes from './AccountSettings.module.css'
 import InputField from '../../components/InputField/InputField'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import LinearProgress from '@material-ui/core/LinearProgress';
+import LinearProgress from '@mui/material/LinearProgress';
 import Loading from '../../components/LoadingPage/LoadingPage'
 import GlobalContext from '../../context/GlobalContext'
-import { TextareaAutosize } from '@material-ui/core';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import FormatDate from '../../utils/FormatDate'
 import EditDocumentationModal from '../../components/EditDocumentationModal/EditDocumentationModal';
 

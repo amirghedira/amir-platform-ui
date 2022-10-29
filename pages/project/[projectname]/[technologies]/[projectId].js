@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './ProjectDetails.module.css'
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-18-image-lightbox'
 
 import {
     Container, Row, Col

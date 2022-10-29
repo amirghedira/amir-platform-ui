@@ -8,7 +8,7 @@ import {
     Container
 
 } from "reactstrap";
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-18-image-lightbox'
 
 
 const Tabs = (props) => {

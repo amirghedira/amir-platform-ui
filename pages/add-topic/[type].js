@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './Addtopic.module.css';
-import { TextareaAutosize } from '@material-ui/core';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Container, Row, Col, Input, Label, Button, Nav, NavItem, NavLink } from 'reactstrap'
 import Link from 'next/link'
 import GlobalContext from '../../context/GlobalContext'

@@ -3,7 +3,7 @@ import classes from './ProjectColumn.module.css';
 import { Nav, Button, Col, Row } from 'reactstrap';
 import FormatDate from '../../utils/FormatDate'
 import GlobalContext from '../../context/GlobalContext';
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-18-image-lightbox'
 import axios from '../../utils/axios'
 
 const ProjectColumn = (props) => {

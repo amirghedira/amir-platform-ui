@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Modal, Input, Container, Row, Card, Form, CardHeader, CardTitle, CardBody, InputGroup, CardFooter, InputGroupAddon, InputGroupText, Label } from 'reactstrap';
+
 const LoginModal = (props) => {
     const [firstFocus, setFirstFocus] = React.useState(false);
     const [lastFocus, setLastFocus] = React.useState(false);
@@ -73,7 +74,7 @@ const LoginModal = (props) => {
                                         size="lg"
                                     >
                                         Login
-                                   </Button>
+                                    </Button>
                                     <InputGroup>
                                         <Label style={{ margin: 'auto' }}>
                                             {props.error}

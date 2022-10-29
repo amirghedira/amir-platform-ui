@@ -1,7 +1,6 @@
 import React from "react";
-import Lightbox from 'react-image-lightbox';
+import Lightbox from 'react-18-image-lightbox'
 import FormatDate from '../../utils/FormatDate'
-import 'react-image-lightbox/style.css';
 // reactstrap components
 import {
     NavItem,

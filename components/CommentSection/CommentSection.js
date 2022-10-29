@@ -1,6 +1,6 @@
 import React from 'react'
 import classes from './CommentSection.module.css';
-import { TextareaAutosize } from '@material-ui/core';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Row, Col, Input, Label, Button } from 'reactstrap'
 
 
