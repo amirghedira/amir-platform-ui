@@ -34,10 +34,10 @@ const Topicitem = (props) => {
                                 null
 
                         }
-                        <Link href={'/' + props.type + '/' + props.id}>
-                            <a className={classes.linkCustom}>
-                                {props.title}
-                            </a>
+                        <Link href={'/' + props.type + '/' + props.id} className={classes.linkCustom}>
+
+                            {props.title}
+
                         </Link>
                     </Row>
                     <Row className={classes.contentBar}>
@@ -99,8 +99,7 @@ const Topicitem = (props) => {
 
             </Row>
         </div>
-
-    )
+    );
 }
 
 

@@ -304,8 +304,7 @@ const Details = (props) => {
                 </article >
             </main>
         </React.Fragment>
-
-    )
+    );
 }
 
 export const getServerSideProps = async (context) => {

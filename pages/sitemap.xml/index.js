@@ -41,12 +41,12 @@ function generateSiteMap(projects) {
 
 
        </url>
-     `
+     `;
     })
             .join('')
         }
    </urlset >
-    `
+    `;
 }
 
 function SiteMap() {

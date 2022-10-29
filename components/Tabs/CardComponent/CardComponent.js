@@ -55,7 +55,7 @@ const CardComponent = (props) => {
 
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
                                     {context.UserProfile &&
-                                        <Link href={'/profile'}>
+                                        <Link href={'/profile'} legacyBehavior>
 
                                             <img
                                                 alt="amir ghedira profile image"
@@ -64,10 +64,12 @@ const CardComponent = (props) => {
                                             />
                                         </Link>}
                                     <div style={{ marginLeft: '10px' }}>
-                                        <Link href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`} >
-                                            <a style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
-                                                {props.projectname}
-                                            </a>
+                                        <Link
+                                            href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`}
+                                            style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
+
+                                            {props.projectname}
+
                                         </Link>
                                         <h5 style={{ color: '#808080', fontSize: '12px', margin: '0', fontWeight: '300' }}>Posted{' '}
                                             <FormatDate>{props.date}</FormatDate></h5>
@@ -180,7 +182,10 @@ const CardComponent = (props) => {
 
                                 </Col>}
                                 <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <Link href={`/project/${props.projectname}/${props.technologie}/${props._id}`} style={{ color: 'black', textDecoration: 'none' }}>
+                                    <Link
+                                        href={`/project/${props.projectname}/${props.technologie}/${props._id}`}
+                                        style={{ color: 'black', textDecoration: 'none' }}
+                                        legacyBehavior>
                                         <Button
                                             style={{ margin: 'auto', backgroundColor: focusedReadmore ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}
                                             onMouseEnter={() => { setfocusedReadmore(true) }}
@@ -221,9 +226,7 @@ const CardComponent = (props) => {
                 </Col >
             </Row>
         </article >
-
-
-    )
+    );
 
 }
 

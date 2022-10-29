@@ -168,7 +168,7 @@ const TopicsPage = ({ Topics, Type }) => {
                         <h3 className={classes.sectionTitle}>{Type}</h3>
                     </Col>
                     <Col style={{ justifyContent: 'flex-end', display: 'flex' }}>
-                        <Link href={`/add-topic/${Type}`}>
+                        <Link href={`/add-topic/${Type}`} legacyBehavior>
                             <Button color="info" >
                                 <i className="fas fa-comments fa-2x" style={{ marginRight: '10px', fontSize: '16px' }}></i>
                                     Create new Topic
@@ -263,7 +263,7 @@ const TopicsPage = ({ Topics, Type }) => {
                                     <h4 style={{ margin: 'auto' }}> There are no topics in this section yet</h4>
                                 </div>
                                 <div style={{ display: 'flex' }}>
-                                    <Link href={`/add-topic/${Type}`} style={{ margin: 'auto' }} >
+                                    <Link href={`/add-topic/${Type}`} style={{ margin: 'auto' }} legacyBehavior>
 
                                         <Button color="info">
                                             Start the first topic
@@ -301,8 +301,7 @@ const TopicsPage = ({ Topics, Type }) => {
 
             </Container>
         </div>
-
-    )
+    );
 }
 
 export default TopicsPage

@@ -1,4 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  output: 'standalone',
+    reactStrictMode: true,
+    compiler: {
+        emotion: true,
+    },
+    output: 'standalone',
 }

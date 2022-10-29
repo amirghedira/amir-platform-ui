@@ -54,7 +54,7 @@ const Aboutus = () => {
                                         This platform provide more information about each project made , with full details and provide a comment section
                                         in which you can comment each project and give your opinion and your feedback .
                                         also any question or suggestion will be taken under consideration.
-                                        Please ,if you have a <Link href="/"><a>question</a></Link> or <Link href="/"><a>suggestion</a></Link> dont hesistate to post them .
+                                        Please ,if you have a <Link href="/">question</Link> or <Link href="/">suggestion</Link> dont hesistate to post them .
 
                                     </pre>
                                 </div>
@@ -82,7 +82,7 @@ const Aboutus = () => {
                                         in presenting my projects and describing them.
                                         The second goal is related to you ,guys. Actually am giving those details and descriptions of each project
                                         to provide support and help to beginners ,who have difficulties to begin a project with any technologie
-                                        Not also details of projects are helpful but <Link href='topics/questions'><a>question</a></Link> section is available to answer
+                                        Not also details of projects are helpful but <Link href='topics/questions'>question</Link> section is available to answer
                                         to your questions in a breve delay and to satisfy your needs.
                                         I will try my best to cover most popular technologies such as react nodejs angular...
                                     </p>
@@ -109,7 +109,7 @@ const Aboutus = () => {
                 </Container>
             </main>
         </React.Fragment>
-    )
+    );
 }
 
 export default Aboutus
