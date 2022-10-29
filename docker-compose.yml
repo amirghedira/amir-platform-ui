@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  amir_platform_ui_prod:
+    restart: always
+    container_name: amir_platform_ui_prod
+    image: ${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${VERSION}
+    networks:
+      - amir_platform_ui
+    env_file: 
+      - .env
+    ports:
+      - "3000:3000"
+
+networks:
+  amir_platform_ui:
+    driver: bridge
