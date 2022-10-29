@@ -35,4 +35,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["node", "/app/.next/standalone/server.js"]
+CMD ["node", "standalone/server.js"]
