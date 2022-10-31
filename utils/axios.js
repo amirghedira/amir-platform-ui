@@ -1,5 +1,5 @@
 import axios from 'axios'
-const production = false
+const production = true
 const API_HOST = production ? 'https://api.amirghedira.com' : 'http://localhost:5000'
 const axiosInstance = axios.create({
     baseURL: API_HOST
