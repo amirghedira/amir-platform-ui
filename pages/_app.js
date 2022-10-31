@@ -18,9 +18,7 @@ function MyApp({ Component, pageProps }) {
 
     const [isOpenSlackFeedback, setIsOpenSlackFeedback] = React.useState(false)
 
-
     const sendFeedbackToSlack = (payload, success, error) => {
-        console.log(payload)
         return axios.post('/slack-feedback', payload.attachments[0])
             .then(res => {
                 success()
