@@ -19,6 +19,23 @@ function Download() {
                         <Button
                             className="btn-neutral btn-icon btn-round"
                             style={{ margin: '0px 5px 0px 5px' }}
+                            color="github"
+                            href="https://join.slack.com/t/amir-platform/shared_invite/zt-1is1vbal1-mqqCpxiH36L3z2Ir7K0zJQ"
+                            id="tooltip331904ee895"
+                            size="lg"
+                            target="_blank"
+                        >
+                            <div style={{ display: 'flex', height: '100%', width: '100%' }}>
+
+                                <img style={{ height: '25px', width: '25px', margin: 'auto' }} src="/slack.png" />
+                            </div>
+                        </Button>
+                        <UncontrolledTooltip delay={0} target="tooltip331904ee895">
+                            My Slack workspace
+                        </UncontrolledTooltip>
+                        <Button
+                            className="btn-neutral btn-icon btn-round"
+                            style={{ margin: '0px 5px 0px 5px' }}
                             href="https://www.youtube.com/channel/UCptn1tAPBr3GrdPWMziB8Sg"
                             id="tooltip735272548"
                             color="youtube"
@@ -56,7 +73,7 @@ function Download() {
                             <i className="fab fa-github"></i>
                         </Button>
                         <UncontrolledTooltip delay={0} target="tooltip331904895">
-                            My Github Repository
+                            My Github Account
                         </UncontrolledTooltip>
                     </Col>
                 </Row>
