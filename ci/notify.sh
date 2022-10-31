@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION="${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}"
+export VERSION="${CI_COMMIT_BRANCH}-${CI_COMMIT_SHORT_SHA}"
 SLACK_USERNAME="amir_platform_ui"
 SLACK_EMOJI=":amir_platform_ui:"
 SLACK_CHANNEL="#amir-platform-ui"
