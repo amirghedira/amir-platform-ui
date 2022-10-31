@@ -1,5 +1,7 @@
 import axios from 'axios'
-const API_HOST = process.env.API_URL
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
+const API_HOST = config.API_URL
 const axiosInstance = axios.create({
     baseURL: API_HOST
 })

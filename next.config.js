@@ -4,5 +4,8 @@ module.exports = {
     compiler: {
         emotion: true,
     },
-    output: 'standalone'
+    output: 'standalone',
+    publicRuntimeConfig: {
+        API_URL: process.env.API_URL,
+    }
 }
