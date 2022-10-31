@@ -195,7 +195,7 @@ const AccountSettings = () => {
         if (selectedimage) {
             const fd = new FormData();
             fd.append("bgimage", selectedimage);
-            fd.append("oldimagelink", context.UserProfile.backgroundimage.split('/')[7].split('.')[0])
+            fd.append("oldimagelink", context.UserProfile.backgroundimage)
 
             axios.patch('/user/updatebgimage', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
@@ -253,13 +253,9 @@ const AccountSettings = () => {
             const fd = new FormData();
 
             fd.append("profileimage", file);
-            fd.append("oldimagelink", context.UserProfile.profileimage.split('/')[7].split('.')[0])
+            fd.append("oldimagelink", context.UserProfile.profileimage)
             setloadingImage(true);
-
-
-
-            axios.patch('/user/updateprofileimg', fd,
-                { onUploadProgress: onUploadProgress })
+            axios.patch('/user/updateprofileimg', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
                     context.UpdateProfile({
                         ...context.UserProfile,
@@ -269,7 +265,8 @@ const AccountSettings = () => {
                     setprogress(0)
                 })
                 .catch(err => {
-                    context.ErrorAccureHandler()
+                    console.log(err)
+                    // context.ErrorAccureHandler()
 
                 });
 
@@ -302,7 +299,7 @@ const AccountSettings = () => {
         const index = context.UserProfile.images.findIndex(img => { return image === img });
         let newImages = context.UserProfile.images;
         newImages.splice(index, 1);
-        axios.patch('/user/deleteimage', { imagelink: image.split('/')[7].split('.')[0], images: newImages }
+        axios.patch('/user/deleteimage', { imagelink: image, images: newImages }
             , { onUploadProgress: onUploadProgress })
             .then(result => {
                 context.UpdateProfile(

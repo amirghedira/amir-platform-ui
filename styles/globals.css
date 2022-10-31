@@ -76,6 +76,7 @@ pre {
 a {
     text-decoration: none !important;
 }
+
 .notfound a {
     font-family: 'Maven Pro', sans-serif;
     font-size: 14px;
@@ -528,8 +529,8 @@ pre tt {
 }
 
 .rounded-circle {
-    width: 50px !important;
+    width: 50px;
     object-fit: cover !important;
-    height: 50px !important;
+    height: 50px;
     border-radius: 50%;
 }

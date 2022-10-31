@@ -1,8 +1,6 @@
 import '../styles/globals.css'
 import "../styles/css/bootstrap.min.css";
 import "../styles/scss/now-ui-kit.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import '../styles/react-lightbox.css'
 
 import React from 'react'

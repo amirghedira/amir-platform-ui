@@ -24,12 +24,10 @@
         "react-dom": "^18.2.0",
         "react-github-calendar": "^3.3.4",
         "react-moment": "^1.1.2",
-        "react-slick": "^0.29.0",
         "react-syntax-highlighter": "^15.5.0",
         "react-toastify": "^9.0.8",
         "react-tooltip": "^4.4.3",
         "reactstrap": "^8.10.0",
-        "slick-carousel": "^1.8.1",
         "socket.io": "^4.5.3",
         "socket.io-client": "^4.5.3"
     }

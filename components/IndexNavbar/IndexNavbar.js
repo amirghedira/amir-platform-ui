@@ -9,7 +9,6 @@ import classes from './IndexNavbar.module.css'
 // reactstrap components
 import {
     Collapse,
-    NavbarBrand,
     Navbar,
     NavItem,
     NavLink,
@@ -130,8 +129,8 @@ const IndexNavbar = () => {
                                 alt="..."
                                 className="rounded-circle"
                                 style={{
-                                    witdh: '30px',
-                                    height: '30px'
+                                    width: '40px',
+                                    height: '40px'
                                 }}
                                 src={context.UserProfile.profileimage}
                             />
@@ -203,7 +202,7 @@ const IndexNavbar = () => {
         ) : null}
         <Navbar className={"fixed-top " + navbarColor} expand="lg" color="info"
             style={{
-                backgroundImage: navbarColor === '' && "url(/background.jpg)",
+                backgroundImage: navbarColor === '' && "url(/background.webp)",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center'
             }}>
@@ -218,11 +217,10 @@ const IndexNavbar = () => {
                                 <Link
                                     href="/"
                                     className={classes.navLink}
-                                    className={classes.navLink}
                                     style={{ fontWeight: '600', margin: '0px 20px 0px 0px' }}>
-                                    
-                                        Home
-                                    
+
+                                    Home
+
                                 </Link>
                                 :
                                 <Link href="/">

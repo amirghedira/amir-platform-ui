@@ -2,7 +2,7 @@
 import React from "react";
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row } from "reactstrap";
 
 const IndexHeader = () => {
     React.useEffect(() => {
@@ -13,7 +13,7 @@ const IndexHeader = () => {
         <div id="indexheader" style={{ maxHeight: '250px' }} >
             <div
                 style={{
-                    backgroundImage: "url(/background.jpg)",
+                    backgroundImage: "url(/background.webp)",
                     height: '250px',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center'

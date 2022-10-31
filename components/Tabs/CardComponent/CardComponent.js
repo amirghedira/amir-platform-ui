@@ -19,7 +19,6 @@ import {
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import FormatDate from '../../../utils/FormatDate';
 import classes from './CardComponent.module.css';
-import Slider from 'react-slick';
 
 const CardComponent = (props) => {
 
@@ -152,15 +151,6 @@ const CardComponent = (props) => {
                                     {props.summary}
                                 </pre>
                             }
-                            <Slider   {...settings} >
-                                {
-                                    props.images.map((image, index) => (
-                                        <img key={index} className={classes.projectImage} onClick={() => { props.onShowImages(index) }} src={image} />
-                                    ))
-                                }
-                            </Slider>
-
-
                         </CardBody>
                         <CardFooter>
                             <hr style={{ width: '100%', marginBottom: '0' }} />
