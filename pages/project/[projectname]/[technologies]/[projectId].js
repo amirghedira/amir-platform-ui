@@ -130,7 +130,7 @@ const Details = (props) => {
         closehandler()
     }
     const editDocumentationHandler = (value) => {
-        console.log(value)
+
         axios.patch('/project/' + project._id, { propName: 'documentation', value: value })
             .then(result => {
                 setShowEditDocumentationModal(false)
@@ -140,7 +140,6 @@ const Details = (props) => {
                 })
             })
             .catch(err => { context.ErrorAccureHandler(); })
-        closehandler()
     }
     const closehandler = () => {
         setmodalprops({
