@@ -2,6 +2,8 @@ stages:
   - build
   - deploy
   - notify
+  - cleanup
+
 
 build_image:
   stage: build
@@ -41,3 +43,16 @@ notify:
   script:
     - chmod +x ./ci/notify.sh
     - ./ci/notify.sh
+
+
+cleanup:
+  stage: cleanup
+  only:
+    refs:
+      - /^(main.*)$/
+
+  tags:
+    - imagesbuilder
+  script:
+    - chmod +x ./ci/cleanup.sh
+    - ./ci/cleanup.sh
