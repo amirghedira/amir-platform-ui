@@ -16,9 +16,13 @@ import GlobalContext from '../../context/GlobalContext'
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import FormatDate from '../../utils/FormatDate'
 import EditDocumentationModal from '../../components/EditDocumentationModal/EditDocumentationModal';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
 
 const AccountSettings = () => {
     const context = React.useContext(GlobalContext)
+    const [userProfile, setUserProfile] = React.useState(null)
+    const [numberOfProjects, setNumberOfProjects] = React.useState(0)
+
     const [pills, setPills] = React.useState("1");
     const [newsboxFocused, setnewsBoxFocused] = React.useState(false);
     const [hoveronprofileimg, sethoveronprofileimg] = React.useState(false)
@@ -53,6 +57,7 @@ const AccountSettings = () => {
     const inputFile = React.useRef(null);
     const inputFile2 = React.useRef(null);
 
+
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
         document.title = 'Settings'
@@ -67,16 +72,23 @@ const AccountSettings = () => {
     }, [])
 
     React.useEffect(() => {
-        if (context.token) {
-            if (context.UserProfile && context.projects && context.BannedUsers) {
-                SetLoadingPage(false)
+        if (!context.loadingContext) {
+            if (context.currentUser) {
+                axios.get('/user')
+                    .then(res => {
+                        setUserProfile(res.data)
+                        SetLoadingPage(false)
+                    })
+                axios.get('/project/number')
+                    .then(res => {
+                        setNumberOfProjects(res.data.projects)
+                    })
+            } else {
+                context.ErrorAccureHandler(401, 'You are not authorized to access this page');
             }
 
         }
-        else {
-            context.ErrorAccureHandler(401, 'You are not authorized to access this page');
-        }
-    }, [context])
+    }, [context.loadingContext, context.bannedUsers])
 
     const onUploadProgress = (ProgressEvent) => {
         var percentcompleted = Math.round((ProgressEvent.loaded * 100) / ProgressEvent.total)
@@ -85,7 +97,7 @@ const AccountSettings = () => {
     }
 
     const savePersonalHandler = (info) => {
-        let newProfile = { ...context.UserProfile }
+        let newProfile = { ...userProfile }
         for (let element of info) {
             newProfile[element.propName] = element.value;
         }
@@ -96,7 +108,7 @@ const AccountSettings = () => {
         }
         axios.patch('/user', info, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile(newProfile);
+                setUserProfile({ ...newProfile });
                 SetEditablePersonal(false)
                 setprogress(0)
             })
@@ -113,12 +125,12 @@ const AccountSettings = () => {
 
         }
         if (editableUsername && !editablePassword) {
-            let newProfile = { ...context.UserProfile }
+            let newProfile = { ...userProfile }
             newProfile['username'] = info.username;
             let obj = [{ propName: 'username', value: info.username }];
             axios.patch('/user', obj, { onUploadProgress: onUploadProgress })
                 .then(result => {
-                    context.UpdateProfile(newProfile);
+                    setUserProfile({ ...newProfile });
                     SetEditableUsername(false)
                     setprogress(0)
                 })
@@ -131,7 +143,7 @@ const AccountSettings = () => {
         else {
 
             axios.patch('/user/updatepassword', {
-                username: context.UserProfile.username,
+                username: userProfile.username,
                 oldpassword: info.oldpassword,
                 password: info.newpassword
             }, { onUploadProgress: onUploadProgress })
@@ -154,14 +166,14 @@ const AccountSettings = () => {
 
     }
     const saveContactHandler = (info) => {
-        let newProfile = { ...context.UserProfile }
+        let newProfile = { ...userProfile }
         for (let element of info) {
             newProfile[element.propName] = element.value;
         }
 
         axios.patch('/user', info, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile(newProfile);
+                setUserProfile({ ...newProfile });
                 SetEditableContact(false)
                 setprogress(0)
             })
@@ -176,14 +188,13 @@ const AccountSettings = () => {
 
             axios.patch('/user/upload-cv', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
-                    context.UpdateProfile({
-                        ...context.UserProfile,
+                    setUserProfile({
+                        ...userProfile,
                         cvFile: result.data.fileUrl
                     })
                     setprogress(0)
                 })
                 .catch(err => {
-                    console.log({ err })
                     context.ErrorAccureHandler()
                 });
 
@@ -195,12 +206,12 @@ const AccountSettings = () => {
         if (selectedimage) {
             const fd = new FormData();
             fd.append("bgimage", selectedimage);
-            fd.append("oldimagelink", context.UserProfile.backgroundimage)
+            fd.append("oldimagelink", userProfile.backgroundimage)
 
             axios.patch('/user/updatebgimage', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
-                    context.UpdateProfile({
-                        ...context.UserProfile,
+                    setUserProfile({
+                        ...userProfile,
                         backgroundimage: result.data.imageurl
                     })
                     setprogress(0)
@@ -220,8 +231,8 @@ const AccountSettings = () => {
         axios.delete('/user/deleteskill/' + id, { onUploadProgress: onUploadProgress })
             .then(result => {
 
-                context.UpdateProfile({
-                    ...context.UserProfile,
+                setUserProfile({
+                    ...userProfile,
                     skills: [...result.data.skills]
                 })
                 setprogress(0)
@@ -237,9 +248,9 @@ const AccountSettings = () => {
         fd.append("description", desc);
         axios.patch('/user/addskill', fd, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile({
-                    ...context.UserProfile,
-                    skills: [...context.UserProfile.skills, result.data.skill]
+                setUserProfile({
+                    ...userProfile,
+                    skills: [...userProfile.skills, result.data.skill]
                 })
                 setprogress(0)
             })
@@ -253,20 +264,19 @@ const AccountSettings = () => {
             const fd = new FormData();
 
             fd.append("profileimage", file);
-            fd.append("oldimagelink", context.UserProfile.profileimage)
+            fd.append("oldimagelink", userProfile.profileimage)
             setloadingImage(true);
             axios.patch('/user/updateprofileimg', fd, { onUploadProgress: onUploadProgress })
                 .then(result => {
-                    context.UpdateProfile({
-                        ...context.UserProfile,
+                    setUserProfile({
+                        ...userProfile,
                         profileimage: result.data.imageurl
                     })
                     setloadingImage(false);
                     setprogress(0)
                 })
                 .catch(err => {
-                    console.log(err)
-                    // context.ErrorAccureHandler()
+                    context.ErrorAccureHandler()
 
                 });
 
@@ -279,10 +289,10 @@ const AccountSettings = () => {
 
         axios.patch('/user/uploadimage', fd, { onUploadProgress: onUploadProgress })
             .then(result => {
-                let newImages = context.UserProfile.images;
+                let newImages = userProfile.images;
                 newImages.push(result.data.imageurl)
-                context.UpdateProfile({
-                    ...context.UserProfile,
+                setUserProfile({
+                    ...userProfile,
                     images: newImages
                 })
                 setprogress(0)
@@ -296,15 +306,15 @@ const AccountSettings = () => {
 
     }
     const deleteImageHandler = (image) => {
-        const index = context.UserProfile.images.findIndex(img => { return image === img });
-        let newImages = context.UserProfile.images;
+        const index = userProfile.images.findIndex(img => { return image === img });
+        let newImages = userProfile.images;
         newImages.splice(index, 1);
         axios.patch('/user/deleteimage', { imagelink: image, images: newImages }
             , { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile(
+                setUserProfile(
                     {
-                        ...context.UserProfile,
+                        ...userProfile,
                         images: newImages
                     }
 
@@ -319,10 +329,10 @@ const AccountSettings = () => {
         setnewsBoxFocused(false)
         axios.patch('/user/postnews', { title: info.title, content: info.content }, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile(
+                setUserProfile(
                     {
-                        ...context.UserProfile,
-                        news: [...context.UserProfile.news, { _id: result.data._id, title: info.title, content: info.content, date: result.data.date }]
+                        ...userProfile,
+                        news: [...userProfile.news, { _id: result.data._id, title: info.title, content: info.content, date: result.data.date }]
                     }
                 )
                 setprogress(0);
@@ -330,14 +340,14 @@ const AccountSettings = () => {
             .catch(err => { context.ErrorAccureHandler() })
     }
     const deleteNewsHandler = (id) => {
-        let newNews = context.UserProfile.news;
+        let newNews = userProfile.news;
         const index = newNews.findIndex(element => { return element.id === id })
         newNews.splice(index, 1);
 
         axios.patch('/user/changenews', { news: newNews }, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile({
-                    ...context.UserProfile,
+                setUserProfile({
+                    ...userProfile,
                     news: newNews
                 })
                 setprogress(0)
@@ -348,15 +358,15 @@ const AccountSettings = () => {
     const keypressedHandler = (keycode, info) => {
         if (keycode === 13) {
             SetEdittile(false);
-            const i = context.UserProfile.news.findIndex(element => { return element.id === info.id })
-            let newNews = context.UserProfile.news;
+            const i = userProfile.news.findIndex(element => { return element.id === info.id })
+            let newNews = userProfile.news;
             newNews[i].title = info.title
 
 
             axios.patch('/user/changenews', { news: newNews }, { onUploadProgress: onUploadProgress })
                 .then(result => {
-                    context.UpdateProfile({
-                        ...context.UserProfile,
+                    setUserProfile({
+                        ...userProfile,
                         news: newNews
                     })
                     setprogress(0)
@@ -367,14 +377,14 @@ const AccountSettings = () => {
     }
     const saveNewsContent = (info) => {
         Seteditcontent(false)
-        const i = context.UserProfile.news.findIndex(element => { return element.id === info.id })
-        let newNews = context.UserProfile.news;
+        const i = userProfile.news.findIndex(element => { return element.id === info.id })
+        let newNews = userProfile.news;
         newNews[i].content = info.content
 
         axios.patch('/user/changenews', { news: newNews }, { onUploadProgress: onUploadProgress })
             .then(result => {
-                context.UpdateProfile({
-                    ...context.UserProfile,
+                setUserProfile({
+                    ...userProfile,
                     news: newNews
                 })
                 setprogress(0)
@@ -387,10 +397,65 @@ const AccountSettings = () => {
             SetProjectErrField({ color: 'red', message: 'Please fill all inputs' });
         }
         else {
-            context.addProjectHandler(newProject)
-            SetLoadingPage(true)
+            addProjectHandler(newProject)
             SetProjectErrField({ color: 'green', message: 'Project Added successfully' });
         }
+
+    }
+
+    const addProjectHandler = (inputs) => {
+        const fd = new FormData();
+        if (projectImages)
+            for (const key of Object.keys(projectImages)) {
+                fd.append('projectimages', projectImages[key])
+            }
+
+        fd.append('name', inputs.name);
+        fd.append('started', inputs.started);
+        fd.append('technologie', inputs.technologie);
+        fd.append('summary', inputs.summary);
+        fd.append('documentation', inputs.documentation);
+        fd.append('whatlearned', inputs.whatlearned);
+        fd.append('overview', inputs.overview);
+        fd.append('status', inputs.status);
+        fd.append('platform', inputs.platform);
+        fd.append('features', inputs.features);
+        fd.append('github', inputs.github);
+        fd.append('filelink', inputs.filelink);
+
+        axios.post('/project', fd)
+            .then(result => {
+                let newProject = {
+                    _id: result.data._id,
+                    name: inputs.name,
+                    date: result.data.date,
+                    summary: inputs.summary,
+                    overview: inputs.overview,
+                    whatlearned: inputs.whatlearned,
+                    technologie: inputs.technologie,
+                    commentsCount: 0,
+                    gitViewers: 0,
+                    downloadcount: 0,
+                    status: inputs.status,
+                    platform: inputs.platform,
+                    features: inputs.features,
+                    github: inputs.github,
+                    Comments: [],
+                    imagesurl: result.data.imagesurl
+
+                }
+                socket.emit('sendprojects', [...projects, newProject])
+                setProjects([
+                    ...projects,
+                    newProject
+                ])
+
+
+            })
+            .catch(err => {
+                ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+
 
     }
     let NewsBox = null;
@@ -451,8 +516,8 @@ const AccountSettings = () => {
         </Col>)
     }
 
-    if (!context.UserProfile) {
-        return null
+    if (loadingPage) {
+        return (<LoadingSpinner />)
     }
     else
         return (
@@ -584,7 +649,7 @@ const AccountSettings = () => {
                                                 <img className="rounded-circle"
                                                     style={{ height: '210px', width: '210px', margin: 'auto' }}
                                                     alt="..."
-                                                    src={context.UserProfile.profileimage} />
+                                                    src={userProfile.profileimage} />
                                             </div>
 
 
@@ -592,11 +657,11 @@ const AccountSettings = () => {
                                         </div>
 
                                         <div >
-                                            <h4 style={{ textAlign: 'center' }}>{context.UserProfile.name}</h4>
+                                            <h4 style={{ textAlign: 'center' }}>{userProfile.name}</h4>
                                         </div>
 
                                         <div >
-                                            <h5 style={{ textAlign: 'center' }}>{context.UserProfile.title}</h5>
+                                            <h5 style={{ textAlign: 'center' }}>{userProfile.title}</h5>
                                         </div>
                                     </Col>
                                 </Row>
@@ -606,7 +671,9 @@ const AccountSettings = () => {
                                             <i style={{ margin: 'auto', color: '#007bff' }} className="fas fa-project-diagram fa-4x"></i>
                                         </div>
                                         <div style={{ marginTop: '20px' }} >
-                                            <h1 style={{ textAlign: 'center', marginBottom: '-10px' }}>{context.projects.length}</h1>
+                                            {/* <h1 style={{ textAlign: 'center', marginBottom: '-10px' }}>{context.projects.length}</h1> */}
+                                            <h1 style={{ textAlign: 'center', marginBottom: '-10px' }}>{numberOfProjects}</h1>
+
                                             <h5 style={{ textAlign: 'center' }}>Projects</h5>
                                         </div>
 
@@ -637,7 +704,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Name</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="name" value={context.UserProfile.name} editable={editablePersonal} type="text" />
+                                                        <InputField id="name" value={userProfile.name} editable={editablePersonal} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -645,7 +712,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Title</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="title" value={context.UserProfile.title} editable={editablePersonal} type="text" />
+                                                        <InputField id="title" value={userProfile.title} editable={editablePersonal} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -653,7 +720,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Gender</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="gender" value={context.UserProfile.gender} editable={editablePersonal} type="text" />
+                                                        <InputField id="gender" value={userProfile.gender} editable={editablePersonal} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -661,7 +728,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Birthday</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="birthday" value={context.UserProfile.birthday} editable={editablePersonal} type="text" />
+                                                        <InputField id="birthday" value={userProfile.birthday} editable={editablePersonal} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -669,7 +736,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>About me</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="aboutme" value={context.UserProfile.aboutme} type="textarea" editable={editablePersonal} />
+                                                        <InputField id="aboutme" value={userProfile.aboutme} type="textarea" editable={editablePersonal} />
                                                     </Col>
                                                 </Row>
                                                 <Row >
@@ -706,7 +773,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Username</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="username" value={context.UserProfile.username} editable={editableUsername} type="text" />
+                                                        <InputField id="username" value={userProfile.username} editable={editableUsername} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -784,8 +851,8 @@ const AccountSettings = () => {
 
                                                 </Row>
 
-                                                {context.UserProfile.skills.length > 0 ?
-                                                    context.UserProfile.skills.map(skill => {
+                                                {userProfile.skills.length > 0 ?
+                                                    userProfile.skills.map(skill => {
                                                         return (
                                                             <Row key={skill._id} style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
                                                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
@@ -871,7 +938,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Email</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="email" value={context.UserProfile.email} editable={editableContact} type="text" />
+                                                        <InputField id="email" value={userProfile.email} editable={editableContact} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -879,7 +946,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Skype</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="skype" value={context.UserProfile.skype} editable={editableContact} type="text" />
+                                                        <InputField id="skype" value={userProfile.skype} editable={editableContact} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -887,7 +954,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Youtube</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="youtube" value={context.UserProfile.youtube} editable={editableContact} type="text" />
+                                                        <InputField id="youtube" value={userProfile.youtube} editable={editableContact} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -895,7 +962,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>LinkedIn</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="linkedin" value={context.UserProfile.linkedin} editable={editableContact} type="text" />
+                                                        <InputField id="linkedin" value={userProfile.linkedin} editable={editableContact} type="text" />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px' }}>
@@ -903,7 +970,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Phone</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="Phone" value={context.UserProfile.Phone} editable={editableContact} type="text" />
+                                                        <InputField id="Phone" value={userProfile.Phone} editable={editableContact} type="text" />
 
                                                     </Col>
                                                 </Row>
@@ -912,7 +979,7 @@ const AccountSettings = () => {
                                                         <h5 className={classes.itemsTitle}>Github</h5>
                                                     </Col>
                                                     <Col xs="9">
-                                                        <InputField id="github" value={context.UserProfile.github} editable={editableContact} type="text" />
+                                                        <InputField id="github" value={userProfile.github} editable={editableContact} type="text" />
 
                                                     </Col>
                                                 </Row>
@@ -947,7 +1014,7 @@ const AccountSettings = () => {
                                                 <img
                                                     alt="..."
                                                     className="rounded-circle"
-                                                    src={selectedimage ? URL.createObjectURL(selectedimage) : context.UserProfile.backgroundimage}
+                                                    src={selectedimage ? URL.createObjectURL(selectedimage) : userProfile.backgroundimage}
                                                 ></img>
                                             </Col>
                                             <Col xs="5" >
@@ -969,7 +1036,7 @@ const AccountSettings = () => {
                                         </Row>
                                         <Row className={classes.settingsCards}>
                                             <Col style={{ margin: '20px' }}>
-                                                <iframe src={selectedCvFile ? URL.createObjectURL(selectedCvFile) : context.UserProfile.cvFile} width="100%" height="500px">
+                                                <iframe src={selectedCvFile ? URL.createObjectURL(selectedCvFile) : userProfile.cvFile} width="100%" height="500px">
                                                 </iframe>
                                             </Col>
                                             <Col xs="5" >
@@ -993,7 +1060,7 @@ const AccountSettings = () => {
                                             <Col >
                                                 <h4 className={classes.sectionTitel}>Content Images</h4>
                                                 <Row className="collections">
-                                                    {context.UserProfile.images.map((image, i) => {
+                                                    {userProfile.images.map((image, i) => {
                                                         return (
                                                             <Col key={i} md="3" style={{ marginBottom: '10px' }}>
                                                                 <div style={{ display: 'flex' }}>
@@ -1034,7 +1101,7 @@ const AccountSettings = () => {
                                         <Row className={classes.settingsCards}>
                                             {NewsBox}
                                         </Row>
-                                        {context.UserProfile.news.slice(0).reverse().map((onenews) => {
+                                        {userProfile.news.slice(0).reverse().map((onenews) => {
                                             return (
                                                 <Row key={onenews._id} className={classes.settingsCards}>
                                                     <Col >
@@ -1043,8 +1110,8 @@ const AccountSettings = () => {
                                                                 <div style={{ display: 'flex' }}>
 
                                                                     <div style={{ display: 'inline-flex' }}>
-                                                                        <img className="rounded-circle" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={context.UserProfile.profileimage} />
-                                                                        <h4 className={classes.newsProfileName}>{context.UserProfile.name}</h4>
+                                                                        <img className="rounded-circle" style={{ height: '50px', width: '50px', marginTop: '10px' }} alt="..." src={userProfile.profileimage} />
+                                                                        <h4 className={classes.newsProfileName}>{userProfile.name}</h4>
                                                                     </div>
                                                                     <div style={{ flex: '1' }}></div>
                                                                     <Nav>
@@ -1285,7 +1352,7 @@ const AccountSettings = () => {
                                     <TabPane tabId="pills5">
                                         <Row style={{ display: 'flex' }} className={classes.settingsCards}>
                                             {
-                                                context.BannedUsers.length > 0 ?
+                                                context.bannedUsers.length > 0 ?
                                                     <Table>
                                                         <thead>
                                                             <tr>
@@ -1296,7 +1363,7 @@ const AccountSettings = () => {
                                                         </thead>
                                                         <tbody>
                                                             {
-                                                                context.BannedUsers.map(banneduser => {
+                                                                context.bannedUsers.map(banneduser => {
                                                                     return (
                                                                         <tr key={banneduser._id}>
                                                                             <td>{banneduser.ip}</td>

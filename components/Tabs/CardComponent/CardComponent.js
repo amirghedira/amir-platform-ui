@@ -53,15 +53,14 @@ const CardComponent = (props) => {
 
 
                                 <Col style={{ display: 'flex', alignItems: 'center' }}>
-                                    {context.UserProfile &&
-                                        <Link href={'/profile'} legacyBehavior>
+                                    <Link href={'/profile'} legacyBehavior>
 
-                                            <img
-                                                alt="amir ghedira profile image"
-                                                className="rounded-circle"
-                                                src={context.UserProfile?.profileimage}
-                                            />
-                                        </Link>}
+                                        <img
+                                            alt="amir ghedira profile image"
+                                            className="rounded-circle"
+                                            src={props.userImage}
+                                        />
+                                    </Link>
                                     <div style={{ marginLeft: '10px' }}>
                                         <Link
                                             href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`}
@@ -87,7 +86,7 @@ const CardComponent = (props) => {
                                                 <Badge color="danger" className="mr-1">Private</Badge>}
                                         </div>
                                         <div >
-                                            {context.token ? (<Nav
+                                            {context.currentUser ? (<Nav
                                                 className="nav-pills-info nav-pills-just-icons"
                                             >
                                                 <UncontrolledDropdown nav>
@@ -108,7 +107,7 @@ const CardComponent = (props) => {
                                                             Edit Post
                                                         </DropdownItem>
                                                         <DropdownItem
-                                                            onClick={() => { context.deleteprojectHandler(props._id); props.deleteProject(props._id) }}
+                                                            onClick={() => { props.deleteProject(props._id) }}
                                                         >
                                                             Delete
                                                         </DropdownItem>

@@ -52,11 +52,6 @@ const Details = (props) => {
         };
     }, [])
 
-    React.useEffect(() => {
-        console.log(project.documentation)
-        console.log("project updated")
-    }, [project])
-
 
     const updateDownloadHandler = () => {
         axios.patch('/project/updatedownloads/' + project._id, { downloadcount: project.downloadcount + 1 })
@@ -226,14 +221,14 @@ const Details = (props) => {
                                 <Col sm="12" md="4" xl="3" >
                                     <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
                                         downloadButtonFunction={updateDownloadHandler}
-                                        editFunction={editHandler} logstatus={context.token} />
+                                        editFunction={editHandler} logstatus={context.currentUser} />
                                 </Col>
                                 <Col sm="12" md="8" xl="9">
                                     <ProjectField
                                         key='1'
                                         sectionname="Documentation"
                                         propname='documentation'
-                                        logstatus={context.token}
+                                        logstatus={context.currentUser}
                                         editFunction={() => setShowEditDocumentationModal(true)}
                                         content={project.documentation}
                                         icon={<i className="fas fa-globe fa-3x" style={{ marginBottom: '20px' }}></i>} />
@@ -246,7 +241,7 @@ const Details = (props) => {
                                             ip={comment.ip} autor={comment.autor}
                                             content={comment.content}
                                             date={comment.date}
-                                            token={context.token}
+                                            connected={context.currentUser || false}
                                             banMemberFunction={() => { context.banMember({ name: comment.autor, ip: comment.ip, content: comment.content }) }}
                                             deleteFunction={() => showdeletemodalHandler({ autor: comment.autor, _id: comment._id })} />
                                     })
@@ -264,8 +259,8 @@ const Details = (props) => {
                             <Row style={{ margin: '20px' }}>
                                 <Col className={classes.commentSection}>
                                     <CommentSection
-                                        token={context.token}
-                                        image={context.UserProfile?.profileimage}
+                                        connected={context.currentUser || false}
+                                        image={context.currentUser?.profileimage}
                                         submitCommment={submitCommentHandler}
                                         errormessage={errorMessages}
                                         active={true}

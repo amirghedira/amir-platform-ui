@@ -26,6 +26,7 @@ import {
 import Link from "next/link";
 
 import axios from '../../utils/axios';
+import LocalStorageService from "../../utils/localStorageService";
 const IndexNavbar = () => {
     const context = React.useContext(GlobalContext)
     const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -39,14 +40,14 @@ const IndexNavbar = () => {
     const router = useRouter()
 
     React.useEffect(() => {
-        if (context.UserProfile)
+        if (context.currentUser)
             SetLoadingImage(false)
 
         if (context.Notifications)
             SetLoadingNotification(false)
 
 
-    }, [context.token, context.UserProfile, context.Notifications])
+    }, [context.currentUser, context.Notifications])
 
 
     React.useEffect(() => {
@@ -71,7 +72,8 @@ const IndexNavbar = () => {
     });
     const DisconnectHandler = () => {
         toast.success("Successfully disconnected", { position: toast.POSITION.BOTTOM_RIGHT })
-        context.disconnectHandler();
+        LocalStorageService.clearToken()
+        window.location.href = "/"
     }
     const keyPressedHandler = (e) => {
 
@@ -88,7 +90,8 @@ const IndexNavbar = () => {
                     setshowloginmodal(false)
                     setloginerror('')
                     toast.success(result.data.message, { position: toast.POSITION.BOTTOM_RIGHT })
-                    context.loginHandler(result.data.token)
+                    LocalStorageService.setAccessToken(result.data.token)
+                    window.location.href = "/"
                 } else
                     setloginerror(result.data.message)
 
@@ -108,7 +111,7 @@ const IndexNavbar = () => {
     }
 
     let profileImageComponent = null;
-    if (context.token) {
+    if (context.currentUser) {
         profileImageComponent = (
             <Nav
                 className="nav-pills-info nav-pills-just-icons"
@@ -132,7 +135,7 @@ const IndexNavbar = () => {
                                     width: '40px',
                                     height: '40px'
                                 }}
-                                src={context.UserProfile.profileimage}
+                                src={context.currentUser.profileimage}
                             />
                         }
 
@@ -305,7 +308,7 @@ const IndexNavbar = () => {
 
                             </Link>
                         </NavItem>
-                        {context.token ?
+                        {context.currentUser ?
                             <NavItem>
                                 <Nav
                                     className="nav-pills-info nav-pills-just-icons">

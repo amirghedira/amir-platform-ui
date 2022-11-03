@@ -80,8 +80,8 @@ const TopicsPage = ({ Topics, Type }) => {
 
     }
     const getBanStatus = () => {
-        if (context.BannedUsers && context.memberInfo) {
-            const ips = context.BannedUsers.map(banneduser => banneduser.ip)
+        if (context.bannedUsers && context.memberInfo) {
+            const ips = context.bannedUsers.map(banneduser => banneduser.ip)
             return ips.includes(context.memberInfo.ip)
         }
         return false;
@@ -171,7 +171,7 @@ const TopicsPage = ({ Topics, Type }) => {
                         <Link href={`/add-topic/${Type}`} legacyBehavior>
                             <Button color="info" >
                                 <i className="fas fa-comments fa-2x" style={{ marginRight: '10px', fontSize: '16px' }}></i>
-                                    Create new Topic
+                                Create new Topic
 
                             </Button>
                         </Link>
@@ -216,7 +216,7 @@ const TopicsPage = ({ Topics, Type }) => {
                                                 date={topic.date}
                                                 replies={topic.replies.length}
                                                 type={Type}
-                                                token={context.token}
+                                                token={context.currentUser}
                                                 pinnedstate={topic.pin}
                                                 lockedstate={topic.state}
                                                 closeOpenFunction={() => { editTopicStateHandler(topic._id, !topic.state) }}
@@ -240,7 +240,7 @@ const TopicsPage = ({ Topics, Type }) => {
                                             date={topic.date}
                                             replies={topic.replies.length}
                                             type={Type}
-                                            token={context.token}
+                                            token={context.currentUser}
                                             pinnedstate={topic.pinned}
                                             lockedstate={topic.state}
                                             closeOpenFunction={() => { editTopicStateHandler(topic._id, !topic.state) }}
@@ -267,7 +267,7 @@ const TopicsPage = ({ Topics, Type }) => {
 
                                         <Button color="info">
                                             Start the first topic
-                                </Button>
+                                        </Button>
                                     </Link>
                                 </div>
 

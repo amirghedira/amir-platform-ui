@@ -42,7 +42,7 @@ const PostCard = (props) => {
                             }
                             <NavItem style={{ display: width > 525 ? 'flex' : 'flex', width: '170px' }}>
                                 {
-                                    <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'}>
+                                    <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'} legacyBehavior>
                                         <a style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <strong className={classes.postname} style={{ textAlign: 'center', color: 'white', width: '120px', maxWidth: '120px' }}>{
                                                 isadmin ? context.UserProfile?.name : props.autor} </strong>
@@ -53,7 +53,7 @@ const PostCard = (props) => {
                                                     </h5>
 
                                                     {
-                                                        props.token ?
+                                                        props.connected ?
                                                             <p style={{ color: 'white', fontStyle: 'italic', fontSize: '14px', fontWeight: '500' }}>{props.ip}</p>
                                                             :
                                                             null
@@ -80,7 +80,7 @@ const PostCard = (props) => {
 
 
                             <NavItem style={{ flex: '1' }}> </NavItem>
-                            {width > 525 && props.token ?
+                            {width > 525 && props.connected ?
                                 <NavItem style={{ marginLeft: '10px', display: 'flex' }} >
                                     <p style={{ color: 'white', fontStyle: 'italic', fontSize: '14px', margin: 'auto', fontWeight: '500' }}>{props.ip}</p>
                                 </NavItem>
@@ -88,7 +88,7 @@ const PostCard = (props) => {
 
                             <NavItem style={{ display: 'flex' }} >
                                 {
-                                    props.token ?
+                                    props.connected ?
                                         <UncontrolledDropdown style={{ margin: 'auto' }}>
                                             <DropdownToggle
                                                 nav

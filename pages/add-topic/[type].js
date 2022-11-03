@@ -22,7 +22,7 @@ const AddTopic = (props) => {
 
         if (obj.autor === "")
             SeterrorMessage('Taper votre nom')
-        else if (obj.autor === 'admin' && !context.token)
+        else if (obj.autor === 'admin' && !context.currentUser)
             SeterrorMessage("Ce nom n'est pas valide")
         else if (obj.title === "")
             SeterrorMessage('Taper votre titre')
@@ -53,8 +53,8 @@ const AddTopic = (props) => {
         }
     }
     const getBanStatus = () => {
-        if (context.BannedUsers && context.memberInfo) {
-            const ips = context.BannedUsers.map(banneduser => banneduser.ip)
+        if (context.bannedUsers && context.memberInfo) {
+            const ips = context.bannedUsers.map(banneduser => banneduser.ip)
             return ips.includes(context.memberInfo.ip)
         }
         return false;
@@ -120,7 +120,7 @@ const AddTopic = (props) => {
                         <Row className={classes.commentSection}>
                             <Col xs="3" md='1' style={{ display: 'flex' }}>
                                 <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
-                                    {context.token ?
+                                    {context.currentUser ?
                                         <img src={context.UserProfile?.profileimage} style={{ height: '50px', width: '50px' }} alt="Amir ghedira" />
                                         :
                                         <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="Javascript programmer" />
@@ -150,7 +150,7 @@ const AddTopic = (props) => {
 
                                 <Row style={{ padding: '30px 20px 20px 20px', borderColor: '#e6e6e6', borderWidth: '1px', borderStyle: 'solid' }}>
                                     {
-                                        !context.token ?
+                                        !context.currentUser ?
                                             <Input
                                                 id="username"
                                                 className={classes.FirstInputComment}
@@ -207,7 +207,7 @@ const AddTopic = (props) => {
                                             onClick={() => submitTopicHandler(
                                                 {
                                                     title: document.getElementById('title').value,
-                                                    autor: context.token ? "admin" : document.getElementById('username').value,
+                                                    autor: context.currentUser ? "admin" : document.getElementById('username').value,
                                                     content: document.getElementById('content').value
 
                                                 })}

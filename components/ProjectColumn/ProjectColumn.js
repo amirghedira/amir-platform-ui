@@ -30,7 +30,6 @@ const ProjectColumn = (props) => {
                 })
             })
             .catch(err => {
-                console.log(err)
                 context.ErrorAccureHandler(500, "Connection to server has timedout")
             })
 
@@ -200,7 +199,7 @@ const ProjectColumn = (props) => {
                 <Row>
                     <Col>
                         {
-                            context.token ?
+                            context.currentUser ?
                                 <Row>
                                     <Col className={classes.Navbar}>
                                         <Button color="warning"
@@ -227,7 +226,7 @@ const ProjectColumn = (props) => {
                                     return (
                                         <Col xs="3" md="6" key={i} style={{ display: 'flex', justifyContent: 'center' }}>
                                             <div className={classes.projectImageContainer}>
-                                                {context.token && <div className={classes.deleteContainer}>
+                                                {context.currentUser && <div className={classes.deleteContainer}>
                                                     <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImageHandler(image)}></i>
                                                 </div>}
                                                 <img

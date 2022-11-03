@@ -5,7 +5,7 @@ export default React.createContext({
     UserProfile: null,
     questions: null,
     suggestions: null,
-    BannedUsers: null,
+    bannedUsers: null,
     news: null
 
 })

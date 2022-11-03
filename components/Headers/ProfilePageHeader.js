@@ -16,7 +16,7 @@ const ProfilePageHeader = (props) => {
             <div
                 className="page-header-image"
                 style={{
-                    backgroundImage: "url(" + props.profileinfo.backgroundimage + ")"
+                    backgroundImage: "url(" + props.backgroundimage + ")"
 
                 }}
                 ref={pageHeader}
@@ -25,14 +25,14 @@ const ProfilePageHeader = (props) => {
 
             <Container>
                 <div className="photo-container" style={{ width: '200px', height: '200px', marginTop: '-50px' }}>
-                    <img alt="..." src={props.profileinfo.profileimage} onClick={() => { props.showprofileimageFunction(props.profileinfo.profileimage) }} />
+                    <img alt="..." src={props.profileimage} onClick={() => { props.showprofileimageFunction(props.profileimage) }} />
 
                 </div>
                 <h1 className={classes.title}>
-                    {props.profileinfo.name}
+                    {props.name}
                 </h1>
                 <p className={classes.category}>
-                    {props.profileinfo.title}
+                    {props.title}
                 </p>
             </Container>
 

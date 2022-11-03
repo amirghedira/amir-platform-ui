@@ -47,8 +47,7 @@ function Index(props) {
                 setProjects([...newProjects])
             })
             .catch(err => {
-                console.log(err)
-                // ErrorAccureHandler(500, "Connection to server has timedout")
+                ErrorAccureHandler(500, "Connection to server has timedout")
             })
     }
     return (

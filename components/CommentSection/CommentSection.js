@@ -39,7 +39,7 @@ const CommentSection = (props) => {
     const submitCommmentFunction = (obj) => {
         if (obj.autor === "")
             SeterrorMessage('Write your name')
-        else if (obj.autor === 'admin' && !props.token)
+        else if (obj.autor === 'admin' && !props.connected)
             SeterrorMessage("Invalide name")
         else if (obj.content === "")
             SeterrorMessage('Write your comment')
@@ -78,7 +78,7 @@ const CommentSection = (props) => {
                         width > 992 ?
                             <Col xs="1" style={{ display: 'flex' }}>
                                 <div style={{ width: '50px', margin: 'auto', marginTop: commentFocused ? '35px' : 'auto' }}>
-                                    {props.image ?
+                                    {props.connected ?
                                         <img src={props.image} className='rounded-circle' alt="Amir ghedira" />
                                         :
                                         <img className='img-raised' src={'/default-avatar.png'} style={{ height: '50px', width: '50px', boxShadow: 'none' }} alt="..." />
@@ -96,23 +96,23 @@ const CommentSection = (props) => {
 
                             <div style={{ margin: '50px 10px 10px 10px' }}>
                                 {
-                                    !props.token ?
-                                        <Input
-                                            id="namecomment"
-                                            className={classes.FirstInputComment}
-                                            placeholder="Your Name"
-                                            onFocus={() => { setcommentTitlefocus(true); SeterrorMessage('') }}
-                                            onBlur={() => { setcommentTitlefocus(false) }}
-                                            style={{
-                                                borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
-                                                borderStyle: 'solid', borderWidth: '2px',
-                                                backgroundColor: 'white',
-                                                borderRadius: '0',
-                                                marginBottom: '20px'
-                                            }}
+                                    !props.connected &&
+                                    <Input
+                                        id="namecomment"
+                                        className={classes.FirstInputComment}
+                                        placeholder="Your Name"
+                                        onFocus={() => { setcommentTitlefocus(true); SeterrorMessage('') }}
+                                        onBlur={() => { setcommentTitlefocus(false) }}
+                                        style={{
+                                            borderColor: commentTitlefocus ? '#1ab2ff' : 'transparent',
+                                            borderStyle: 'solid', borderWidth: '2px',
+                                            backgroundColor: 'white',
+                                            borderRadius: '0',
+                                            marginBottom: '20px'
+                                        }}
 
-                                        />
-                                        : null
+                                    />
+
                                 }
 
                                 <TextareaAutosize
@@ -135,7 +135,7 @@ const CommentSection = (props) => {
                                     <div >
                                         <Button
                                             color="info"
-                                            onClick={() => { submitCommmentFunction({ autor: props.token ? "admin" : document.getElementById('namecomment').value, content: document.getElementById('thecomment').value }) }}
+                                            onClick={() => { submitCommmentFunction({ autor: props.connected ? "admin" : document.getElementById('namecomment').value, content: document.getElementById('thecomment').value }) }}
                                         >
                                             Submit
                                         </Button>

@@ -216,7 +216,7 @@ const Topic = ({ Topic, type }) => {
                     ip={Topic.ip}
                     autor={Topic.autor}
                     date={Topic.date}
-                    token={context.token}
+                    connected={context.currentUser || false}
                     content={Topic.content}
                     closeOpenFunction={() => { OpenCloseTopicHandler(!Topic.state) }}
                     banMemberFunction={() => { context.banMember({ name: Topic.autor, ip: Topic.ip, content: Topic.content }) }}
@@ -228,7 +228,7 @@ const Topic = ({ Topic, type }) => {
                             key={reply._id}
                             ip={reply.ip}
                             autor={reply.autor}
-                            token={context.token}
+                            connected={context.currentUser || false}
                             date={reply.date}
                             content={reply.content}
                             banMemberFunction={() => { context.banMember({ name: reply.autor, ip: reply.ip, content: reply.content }) }}
@@ -238,8 +238,8 @@ const Topic = ({ Topic, type }) => {
                 })
                 }
                 <CommentSection
-                    token={context.token}
-                    image={context.token ? context.UserProfile?.profileimage : null}
+                    token={context.currentUser}
+                    image={context.currentUser ? context.UserProfile?.profileimage : null}
                     submitCommment={submitCommentHandler}
                     defaultmessage='Reply to this topic'
                     active={Topic.state}

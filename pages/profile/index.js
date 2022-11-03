@@ -92,9 +92,10 @@ const ProfilePage = ({ UserProfile }) => {
                             <Col>
                                 <Row >
                                     <ProfilePageHeader
-                                        projectsnum={context.projects?.length
-                                        }
-                                        profileinfo={UserProfile}
+                                        backgroundimage={UserProfile.backgroundimage}
+                                        profileimage={UserProfile.profileimage}
+                                        name={UserProfile.name}
+                                        title={UserProfile.title}
                                         showprofileimageFunction={showprojectimageHandler}
                                     />
 
@@ -465,9 +466,10 @@ const ProfilePage = ({ UserProfile }) => {
 
 export const getServerSideProps = async () => {
     const res = await axios.get('/user')
+
     return {
         props: {
-            UserProfile: res.data
+            UserProfile: res.data,
         },
     }
 }

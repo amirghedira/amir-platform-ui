@@ -44,6 +44,7 @@ const Tabs = (props) => {
                             deleteProject={props.deleteProject}
                             key={project._id}
                             _id={project._id}
+                            userImage={project.addedBy.profileimage}
                             projectname={project.name}
                             date={project.date}
                             onShowImages={(imageIndex) => { showImagesHandler(project.imagesurl, imageIndex) }}

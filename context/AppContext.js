@@ -6,38 +6,54 @@ import { ToastContainer, toast } from 'react-toastify';
 import Page404 from '../components/Page404/Page404'
 import GlobalContext from './GlobalContext'
 import 'react-toastify/dist/ReactToastify.css';
+import LocalStorageService from '../utils/localStorageService';
 
 const AppContext = (props) => {
-
-    const [token, Settoken] = React.useState(null);
-    const [projects, setProjects] = React.useState(null);
     const [UserProfile, SetUserProfile] = React.useState(null);
+    const [currentUser, setCurrentUser] = React.useState(null)
     const [PageError, SetPageError] = React.useState({ state: false, statuscode: null, message: null });
     const [memberInfo, setMemberInfo] = React.useState(null)
-    const [BannedUsers, SetBannedUsers] = React.useState(null)
+    const [bannedUsers, SetBannedUsers] = React.useState(null)
     const [Notifications, setNotifications] = React.useState(null)
     const [socket, setsocket] = React.useState(null)
     const [subscription, setsubscription] = React.useState(null)
     const [Erroraccured, setErrorAccured] = React.useState(false)
-
     const [loading, setLoading] = React.useState(true)
     React.useEffect(() => {
-        if (localStorage.getItem('token')) {
-            setLoading(false)
-            Settoken(localStorage.getItem('token'))
+        if (LocalStorageService.getAccessToken()) {
+            axios.get('/user/connected-user')
+                .then(result => {
+                    result.data.notifications.forEach(notification => {
+
+                        if (!notification.read) {
+                            axios.post('/subscribe', { subscription: subscription, content: notification.content })
+                                .then()
+                                .catch(err => {
+                                    ErrorAccureHandler(500, "Connection to server has timedout")
+                                })
+
+                        }
+                    })
+                    setNotifications(result.data.notifications)
+                    setCurrentUser(result.data.user)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    ErrorAccureHandler(500, "Connection to server has timedout")
+                })
         } else {
             setLoading(false)
         }
     }, [])
     React.useEffect(() => {
-
         setsocket(io(API_URL))
-        axios.get('/user/connected-user')
-            .then(result => {
-                SetBannedUsers(result.data.banned)
-                setProjects(result.data.projects)
-                setNotifications(result.data.notifications)
-                SetUserProfile(result.data.user)
+        axios.get('/user')
+            .then(res => {
+                SetUserProfile(res.data)
+            })
+        axios.get('/user/banned')
+            .then(res => {
+                SetBannedUsers(res.data.banned)
                 fetch("https://api.ipgeolocation.io/getip")
                     .then(response => {
                         return response.json();
@@ -49,13 +65,9 @@ const AppContext = (props) => {
                         ErrorAccureHandler(500, "Connection to server has timedout")
                     })
             })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-
     }, [])
     React.useEffect(() => {
-        if (token) {
+        if (currentUser) {
             const publicVadidKey = 'BMUYV7TShfXpU5edFVCfBEO0JwC-kCujoxV6q4pp3WHipuDPF2OE4bMd4LYYsNjKdn9GMtIlxW6vMQinu9qBkUg'
             if ('serviceWorker' in navigator)
                 navigator.serviceWorker.register("/serviceworker.js")
@@ -68,18 +80,16 @@ const AppContext = (props) => {
                                 setsubscription(subscription)
                             })
                             .catch(err => {
-                                console.log(err)
                             })
                     })
                     .catch(err => {
-                        console.log(err)
                     })
         }
 
-    }, [token])
+    }, [currentUser])
 
 
-    function urlBase64ToUint8Array(base64String) {
+    const urlBase64ToUint8Array = (base64String) => {
         const padding = '='.repeat((4 - base64String.length % 4) % 4);
         const base64 = (base64String + padding)
             .replace(/-/g, '+')
@@ -95,11 +105,11 @@ const AppContext = (props) => {
     }
 
     React.useEffect(() => {
-        if (socket && Notifications && BannedUsers) {
-            if (token) {
+        if (socket && Notifications && bannedUsers) {
+            if (currentUser) {
                 socket.off('sendnotification');
                 socket.on('sendnotification', (notification) => {
-                    if (token) {
+                    if (currentUser) {
                         axios.post('/subscribe', { subscription: subscription, content: notification.content })
                             .then()
                             .catch(err => {
@@ -110,10 +120,6 @@ const AppContext = (props) => {
 
                 })
             } else {
-                socket.off('sendprojects');
-                socket.on('sendprojects', (projects) => {
-                    setProjects(projects)
-                })
                 socket.off('sendbannedmembers')
                 socket.on('sendbannedmembers', (NewBannedUsers) => {
                     SetBannedUsers(NewBannedUsers)
@@ -122,122 +128,15 @@ const AppContext = (props) => {
 
         }
 
-    }, [socket, token, Notifications, subscription, BannedUsers])
+    }, [socket, currentUser, Notifications, subscription, bannedUsers])
 
-
-
-    const loginHandler = async (token) => {
-
-        Notifications.forEach(notification => {
-
-            if (!notification.read) {
-                axios.post('/subscribe', { subscription: subscription, content: notification.content })
-                    .then()
-                    .catch(err => {
-                        ErrorAccureHandler(500, "Connection to server has timedout")
-                    })
-
-            }
-        })
-        localStorage.setItem('token', token)
-        Settoken(token);
-    }
-
-    const disconnectHandler = () => {
-
-        localStorage.clear()
-        Settoken(null);
-
-    }
-
-    const deleteprojectHandler = (id) => {
-        const project = projects.find(project => {
-            return project._id === id
-        })
-        axios.patch('/project/deleteproject/' + id, { files: project.imagesurl })
-            .then(res => {
-                const newProjects = projects;
-                newProjects.splice(projects.findIndex(project => {
-                    return project._id === id
-                }), 1);
-                socket.emit('sendprojects', [...newProjects])
-                setProjects([...newProjects])
-
-            })
-            .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-    }
-    const addProjectHandler = (inputs) => {
-
-
-        const fd = new FormData();
-        if (inputs.projectimages)
-            for (const key of Object.keys(inputs.projectimages)) {
-                fd.append('projectimages', inputs.projectimages[key])
-            }
-
-        fd.append('name', inputs.name);
-        fd.append('started', inputs.started);
-        fd.append('technologie', inputs.technologie);
-        fd.append('summary', inputs.summary);
-        fd.append('documentation', inputs.documentation);
-        fd.append('whatlearned', inputs.whatlearned);
-        fd.append('overview', inputs.overview);
-        fd.append('status', inputs.status);
-        fd.append('platform', inputs.platform);
-        fd.append('features', inputs.features);
-        fd.append('github', inputs.github);
-        fd.append('filelink', inputs.filelink);
-
-        axios.post('/project', fd)
-            .then(result => {
-                let newProject = {
-                    _id: result.data._id,
-                    name: inputs.name,
-                    date: result.data.date,
-                    summary: inputs.summary,
-                    overview: inputs.overview,
-                    whatlearned: inputs.whatlearned,
-                    technologie: inputs.technologie,
-                    commentsCount: 0,
-                    gitViewers: 0,
-                    downloadcount: 0,
-                    status: inputs.status,
-                    platform: inputs.platform,
-                    features: inputs.features,
-                    github: inputs.github,
-                    Comments: [],
-                    imagesurl: result.data.imagesurl
-
-                }
-                socket.emit('sendprojects', [...projects, newProject])
-                setProjects([
-                    ...projects,
-                    newProject
-                ])
-
-
-            })
-            .catch(err => {
-                console.log(err)
-                // ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-
-
-    }
-
-
-    const UpdateProfile = (newprofile) => {
-        SetUserProfile(newprofile)
-    }
 
     const unBanMemberHandler = (id) => {
 
         axios.delete(`/banned/${id}`)
             .then(result => {
-                const index = BannedUsers.findIndex(banneduser => { return banneduser._id === id })
-                let newBannedUsers = BannedUsers;
+                const index = bannedUsers.findIndex(banneduser => { return banneduser._id === id })
+                let newBannedUsers = bannedUsers;
                 newBannedUsers.splice(index, 1);
                 socket.emit('sendbannedmembers', newBannedUsers)
                 SetBannedUsers(newBannedUsers);
@@ -251,14 +150,14 @@ const AppContext = (props) => {
     const BanMemberHandler = (member) => {
 
 
-        let ips = BannedUsers.map(banneduser => { return banneduser.ip })
+        let ips = bannedUsers.map(banneduser => { return banneduser.ip })
         if (ips.includes(member.ip)) {
             toast.error('User already banned!', { position: toast.POSITION.BOTTOM_RIGHT })
         }
         else {
             axios.post('/banned', member)
                 .then(result => {
-                    let newBannedUsers = BannedUsers
+                    let newBannedUsers = bannedUsers
                     newBannedUsers.push({
                         ...member,
                         date: result.data.date,
@@ -276,8 +175,8 @@ const AppContext = (props) => {
     }
 
     const getBanStatusHandler = () => {
-        if (BannedUsers && memberInfo) {
-            const ips = BannedUsers.map(banneduser => banneduser.ip)
+        if (bannedUsers && memberInfo) {
+            const ips = bannedUsers.map(banneduser => banneduser.ip)
             return ips.includes(memberInfo.ip)
         }
         return false;
@@ -352,29 +251,7 @@ const AppContext = (props) => {
                 ErrorAccureHandler(500, "Connection to server has timedout");
             })
     }
-    const UpdateGitViewerHandler = (projectId) => {
-        const _projects = [...projects]
-        const projectIndex = _projects.findIndex(project => project._id === projectId)
-        axios.patch('/project/updategitviewers/' + projectId, { gitviewers: _projects[projectIndex].gitViewers + 1 })
-            .then(result => {
-                _projects[projectIndex].gitViewers += 1
-                setProjects([..._projects])
-            })
-            .catch(err => {
-                console.log({ err })
-            })
-    }
-    const updateDownloadHandler = (projectId) => {
-        const _projects = [...projects]
-        const projectIndex = _projects.findIndex(project => project._id === projectId)
-        axios.patch('/project/updatedownloads/' + projectId, { downloadcount: projects[projectIndex].downloadcount + 1 })
-            .then(result => {
 
-                _projects[projectIndex].downloadcount += 1
-                setProjects([..._projects])
-            })
-            .catch(err => { context.ErrorAccureHandler(500, "Connection to server has timedout") })
-    }
     const addNotificationTopicHandler = (id, autor, Type) => {
         axios.post('/notification', { id: id, content: `user ${autor} has created a new Topic`, link: `/${Type}/${id}` })
             .then(result => {
@@ -408,14 +285,6 @@ const AppContext = (props) => {
         setErrorAccured(true)
 
     }
-    const UpdateProjects = (index, newProject) => {
-
-        let NewProjects = projects
-        NewProjects[index] = newProject
-        socket.emit('sendprojects', NewProjects)
-        setProjects(NewProjects)
-
-    }
     if (Erroraccured)
         return <Page404 statuscode={PageError.statuscode} message={PageError.message} />
     else
@@ -423,19 +292,13 @@ const AppContext = (props) => {
             <GlobalContext.Provider value={
                 {
                     PageError: PageError,
+                    currentUser: currentUser,
+                    loadingContext: loading,
                     UserProfile: UserProfile,
                     socket: socket,
                     setsocket: setsocket,
                     memberInfo: memberInfo,
-                    UpdateProfile: UpdateProfile,
-                    token: token,
-                    loginHandler: loginHandler,
-                    disconnectHandler: disconnectHandler,
-                    projects: projects,
-                    addProjectHandler: addProjectHandler,
-                    deleteprojectHandler: deleteprojectHandler,
-                    UpdateProjects: UpdateProjects,
-                    BannedUsers: BannedUsers,
+                    bannedUsers: bannedUsers,
                     banMember: BanMemberHandler,
                     unbanMember: unBanMemberHandler,
                     getBanStatus: getBanStatusHandler,
@@ -446,8 +309,6 @@ const AppContext = (props) => {
                     addNotificationReply: addNotificationReplyHandler,
                     addNotificationTopic: addNotificationTopicHandler,
                     ErrorAccureHandler: ErrorAccureHandler,
-                    UpdateGitViewer: UpdateGitViewerHandler,
-                    UpdateDownloadCount: updateDownloadHandler
 
                 }
             }>
