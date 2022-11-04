@@ -11,7 +11,8 @@ mirror:
   only:
     - /^(main.*)$/
   script:
-    - setsid ./mirror.sh
+    - chmod +x ./ci/deliver.sh
+    - ./ci/mirror.sh
   tags:
     - imagesbuilder
 
