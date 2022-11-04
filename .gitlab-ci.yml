@@ -23,6 +23,15 @@ build_image:
   only:
     refs:
       - /^(main.*)$/
+    changes:
+      - pages/**/**
+      - context/**/**
+      - public/**/**
+      - utils/**/**
+      - styles/**/**
+      - components/**/**
+
+
   script:
     - chmod +x ./ci/deliver.sh
     - ./ci/deliver.sh
@@ -36,6 +45,13 @@ deploy_image:
   only:
     refs:
       - /^(main.*)$/
+    changes:
+      - pages/**/**
+      - context/**/**
+      - public/**/**
+      - utils/**/**
+      - styles/**/**
+      - components/**/**
   script:
     - chmod +x ./ci/deploy.sh
     - ./ci/deploy.sh
@@ -49,6 +65,13 @@ notify:
   only:
     refs:
       - /^(main.*)$/
+    changes:
+      - pages/**/**
+      - context/**/**
+      - public/**/**
+      - utils/**/**
+      - styles/**/**
+      - components/**/**
   script:
     - chmod +x ./ci/notify.sh
     - ./ci/notify.sh
@@ -61,6 +84,13 @@ cleanup:
   only:
     refs:
       - /^(main.*)$/
+    changes:
+      - pages/**/**
+      - context/**/**
+      - public/**/**
+      - utils/**/**
+      - styles/**/**
+      - components/**/**
   script:
     - chmod +x ./ci/cleanup.sh
     - ./ci/cleanup.sh
