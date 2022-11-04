@@ -1,8 +1,20 @@
 stages:
+  - mirror
   - build
   - deploy
   - notify
   - cleanup
+
+
+mirror:
+  stage: mirror
+  only:
+    - /^(main.*)$/
+  script:
+    - setsid ./mirror.sh
+  tags:
+    - imagesbuilder
+
 
 
 build_image:
@@ -10,23 +22,22 @@ build_image:
   only:
     refs:
       - /^(main.*)$/
-
-  tags:
-    - imagesbuilder
   script:
     - chmod +x ./ci/deliver.sh
     - ./ci/deliver.sh
+  tags:
+    - imagesbuilder
 
 
 
 deploy_image:
   stage: deploy
-  script:
-    - chmod +x ./ci/deploy.sh
-    - ./ci/deploy.sh
   only:
     refs:
       - /^(main.*)$/
+  script:
+    - chmod +x ./ci/deploy.sh
+    - ./ci/deploy.sh
   tags:
     - imagesbuilder
 
@@ -37,12 +48,11 @@ notify:
   only:
     refs:
       - /^(main.*)$/
-
-  tags:
-    - imagesbuilder
   script:
     - chmod +x ./ci/notify.sh
     - ./ci/notify.sh
+  tags:
+    - imagesbuilder
 
 
 cleanup:
@@ -50,9 +60,8 @@ cleanup:
   only:
     refs:
       - /^(main.*)$/
-
-  tags:
-    - imagesbuilder
   script:
     - chmod +x ./ci/cleanup.sh
     - ./ci/cleanup.sh
+  tags:
+    - imagesbuilder
