@@ -1,7 +1,12 @@
 import React from 'react'
 import Tabs from '../../components/Tabs/Tabs'
+import GlobalContext from '../../context/GlobalContext'
 import axios from '../../utils/axios'
 const SearchPage = ({ projects, searchTerm }) => {
+
+    const { currentUser } = React.useContext(GlobalContext)
+    const filteredProjects = projects.filter(p => p.visibility)
+    const listedProjects = currentUser ? projects : filteredProjects
     return (
         <div style={{ minHeight: '70vh' }}>
             <div>
@@ -9,8 +14,8 @@ const SearchPage = ({ projects, searchTerm }) => {
                     Search results for <span style={{ fontWeight: '600' }}>{searchTerm}</span>:
                 </h2>
             </div>
-            {projects.length > 0 ?
-                <Tabs noEdit projects={projects} />
+            {listedProjects.length > 0 ?
+                <Tabs noEdit projects={listedProjects} />
                 :
                 <div style={{ height: '70vh', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <h5>No projects found!</h5>

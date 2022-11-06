@@ -17,6 +17,7 @@ import TextareaAutosize from '@mui/material/TextareaAutosize';
 import FormatDate from '../../utils/FormatDate'
 import EditDocumentationModal from '../../components/EditDocumentationModal/EditDocumentationModal';
 import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import { Checkbox } from '@mui/material';
 
 const AccountSettings = () => {
     const context = React.useContext(GlobalContext)
@@ -398,7 +399,6 @@ const AccountSettings = () => {
         }
         else {
             addProjectHandler(newProject)
-            SetProjectErrField({ color: 'green', message: 'Project Added successfully' });
         }
 
     }
@@ -420,40 +420,15 @@ const AccountSettings = () => {
         fd.append('status', inputs.status);
         fd.append('platform', inputs.platform);
         fd.append('features', inputs.features);
+        fd.append('visibility', inputs.visibility || false);
         fd.append('github', inputs.github);
         fd.append('filelink', inputs.filelink);
-
         axios.post('/project', fd)
             .then(result => {
-                let newProject = {
-                    _id: result.data._id,
-                    name: inputs.name,
-                    date: result.data.date,
-                    summary: inputs.summary,
-                    overview: inputs.overview,
-                    whatlearned: inputs.whatlearned,
-                    technologie: inputs.technologie,
-                    commentsCount: 0,
-                    gitViewers: 0,
-                    downloadcount: 0,
-                    status: inputs.status,
-                    platform: inputs.platform,
-                    features: inputs.features,
-                    github: inputs.github,
-                    Comments: [],
-                    imagesurl: result.data.imagesurl
-
-                }
-                socket.emit('sendprojects', [...projects, newProject])
-                setProjects([
-                    ...projects,
-                    newProject
-                ])
-
-
+                SetProjectErrField({ color: 'green', message: 'Project Added successfully' });
             })
             .catch(err => {
-                ErrorAccureHandler(500, "Connection to server has timedout")
+                context.ErrorAccureHandler(500, "Connection to server has timedout")
             })
 
 
@@ -1243,6 +1218,14 @@ const AccountSettings = () => {
                                                             <option value={"Pulic"}>Public</option>
                                                             <option value={"Private"}>Private</option>
                                                         </Input>
+                                                    </Col>
+                                                </Row>
+                                                <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>
+                                                    <Col xs="3">
+                                                        <h5 className={classes.itemsTitle}>Visibility</h5>
+                                                    </Col>
+                                                    <Col xs="9">
+                                                        <Checkbox onChange={(e) => setNewProject({ ...newProject, visibility: e.target.checked })} checked={newProject.visibility || false} />
                                                     </Col>
                                                 </Row>
                                                 <Row style={{ padding: '0px 0px 0px 120px', marginBottom: '20px' }}>

@@ -42,6 +42,7 @@ const Tabs = (props) => {
                     {props.projects.slice(0).reverse().map(project => {
                         return <CardComponent
                             deleteProject={props.deleteProject}
+                            updateProjectVisibility={props.updateProjectVisibility}
                             key={project._id}
                             _id={project._id}
                             userImage={project.addedBy.profileimage}
@@ -50,6 +51,7 @@ const Tabs = (props) => {
                             onShowImages={(imageIndex) => { showImagesHandler(project.imagesurl, imageIndex) }}
                             technologie={project.technologie}
                             status={project.status}
+                            visibility={project.visibility}
                             summary={project.summary}
                             platform={project.platform}
                             features={project.features}

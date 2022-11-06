@@ -7,9 +7,11 @@ import SidebarRight from '../components/SidebarRight/SidebarRight'
 import classes from '../styles/index.module.css'
 import Head from 'next/head'
 import axios from "../utils/axios";
+import GlobalContext from "../context/GlobalContext";
 function Index(props) {
 
     const [projects, setProjects] = React.useState(props.projects)
+    const { currentUser } = React.useContext(GlobalContext)
 
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
@@ -36,6 +38,20 @@ function Index(props) {
             })
             .catch(err => { context.ErrorAccureHandler(); })
 
+    }
+    const updateProjectVisibilityHandler = (id) => {
+        const index = projects.findIndex(project => { return project._id === id })
+        const Newproject = {
+            ...projects[index],
+            visibility: !projects[index].visibility
+        }
+        axios.patch('/project/' + id, { propName: 'visibility', value: !projects[index].visibility })
+            .then(result => {
+                const NewProjects = [...projects]
+                NewProjects[index] = Newproject
+                setProjects([...NewProjects])
+            })
+            .catch(err => { context.ErrorAccureHandler(); })
     }
 
     const deleteProjectHandler = (id) => {
@@ -68,10 +84,10 @@ function Index(props) {
                         <SidebarLeft xs="2" md="3" lg="2" />
                     </Col>
                     <Col xs="12" sm="12" md="9" lg="8">
-                        <Tabs projects={projects} deleteProject={deleteProjectHandler} savechanges={savechangesHandler} />
+                        <Tabs projects={currentUser ? projects : projects.filter(p => p.visibility)} deleteProject={deleteProjectHandler} updateProjectVisibility={updateProjectVisibilityHandler} savechanges={savechangesHandler} />
                     </Col>
                     <Col className={classes.sideBarProjects} xs="3" lg="2">
-                        <SidebarRight projects={projects} topicsCount={props.topicsCount} />
+                        <SidebarRight projects={currentUser ? projects : projects.filter(p => p.visibility)} topicsCount={props.topicsCount} />
                     </Col>
                 </Row>
                 <Support />

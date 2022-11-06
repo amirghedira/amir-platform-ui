@@ -47,7 +47,7 @@ const CardComponent = (props) => {
         <article>
             <Row>
                 <Col key={props._id} className="ml-auto mr-auto" md="12" xl="8" >
-                    <Card className={classes.cardContainer}>
+                    <Card className={classes.cardContainer} style={{ backgroundColor: props.visibility ? 'white' : '#cacaca' }}>
                         <CardHeader>
                             <Row style={{ padding: '10px' }}>
 
@@ -105,6 +105,11 @@ const CardComponent = (props) => {
                                                             onClick={() => { setEditPost(true) }}
                                                         >
                                                             Edit Post
+                                                        </DropdownItem>
+                                                        <DropdownItem
+                                                            onClick={() => { props.updateProjectVisibility(props._id) }}
+                                                        >
+                                                            {`Mark as ${props.visibility ? 'hidden' : 'visible'}`}
                                                         </DropdownItem>
                                                         <DropdownItem
                                                             onClick={() => { props.deleteProject(props._id) }}
