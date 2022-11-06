@@ -46,7 +46,7 @@ const MarkdownViewer = (props) => {
 
         <div >
             <div className="doc" dangerouslySetInnerHTML={{
-                __html: enderText(contentMarkdown)
+                __html: contentMarkdown
             }} />
 
 
