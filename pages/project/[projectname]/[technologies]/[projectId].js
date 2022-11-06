@@ -202,13 +202,13 @@ const Details = (props) => {
                 <title>{`${project.name} | Amir Platform`}</title>
                 <meta name="title" content={`${project.name} | Amir Platform`} />
                 <meta name="description" content={project.overview} />
-                <meta property="og:url" content={`https://www.amir-ghedira.com/project/${project.name.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`} />
+                <meta property="og:url" content={`https://www.amirghedira.com/project/${project.name.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`} />
                 <meta property="og:title" content={project.name} />
                 <meta property="og:description" content={project.overview} />
                 {project.imagesurl.length > 0 ?
                     <meta property="og:image" content={project.imagesurl[Math.floor(Math.random() * project.imagesurl.length)]} />
                     :
-                    <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
+                    <meta property="og:image" content="https://www.amirghedira.com/logo.png" />
 
                 }
 

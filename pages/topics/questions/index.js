@@ -14,10 +14,10 @@ const QuestionsPage = ({ topics }) => {
                 <title>{`Questions | Amir Platform`}</title>
                 <meta name="title" content={`Questions | Amir Platform`} />
                 <meta name="description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
-                <meta property="og:url" content={`https://www.amir-ghedira.com/topics/questions`} />
+                <meta property="og:url" content={`https://www.amirghedira.com/topics/questions`} />
                 <meta property="og:title" content={`Questions`} />
                 <meta property="og:description" content="this section is reserved for all user to ask questions about front end or back end development or even about soft skills" />
-                <meta property="og:image" content="https://www.amir-ghedira.com/logo.png" />
+                <meta property="og:image" content="https://www.amirghedira.com/logo.png" />
             </Head>
             <main>
                 <TopicsPage Topics={topics} Type={'questions'} />

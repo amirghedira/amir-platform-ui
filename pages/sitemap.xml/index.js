@@ -6,29 +6,29 @@ function generateSiteMap(projects) {
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      <!--We manually set the two URLs we know already-->
      <url>
-       <loc>https://www.amir-ghedira.com</loc>
+       <loc>https://www.amirghedira.com</loc>
        <lastmod>${new Date().toISOString()}</lastmod>
 
      </url>
 
      <url>
-       <loc>https://www.amir-ghedira.com/aboutus</loc>
+       <loc>https://www.amirghedira.com/aboutus</loc>
        <lastmod>${new Date().toISOString()}</lastmod>
 
      </url>
      <url>
-     <loc>https://www.amir-ghedira.com/profile</loc>
+     <loc>https://www.amirghedira.com/profile</loc>
      <lastmod>${new Date().toISOString()}</lastmod>
 
    </url>
    <url>
-   <loc>https://www.amir-ghedira.com/questions</loc>
+   <loc>https://www.amirghedira.com/questions</loc>
    <lastmod>${new Date().toISOString()}</lastmod>
 
 
  </url>
  <url>
- <loc>https://www.amir-ghedira.com/suggestions</loc>
+ <loc>https://www.amirghedira.com/suggestions</loc>
  <lastmod>${new Date().toISOString()}</lastmod>
 
 
@@ -36,7 +36,7 @@ function generateSiteMap(projects) {
      ${projects.map(project => {
         return `
        <url>
-           <loc>${`https://www.amir-ghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
+           <loc>${`https://www.amirghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
            <lastmod>${new Date().toISOString()}</lastmod>
 
 

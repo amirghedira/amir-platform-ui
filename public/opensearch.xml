@@ -2,7 +2,7 @@
 <ShortName>Amir Platform</ShortName>
 <Description>Search Amir Platform</Description>
 <InputEncoding>UTF-8</InputEncoding>
-<Image width="16" height="16" type="image/x-icon">https://amir-ghedira.com/favicon-16x16.png</Image>
-<Url type="text/html" method="get" template="https://amir-ghedira.com/search?searchTerm={searchTerms}&amp;ref=opensearch"/>
-<moz:SearchForm>https://amir-ghedira.com/search</moz:SearchForm>
+<Image width="16" height="16" type="image/x-icon">https://amirghedira.com/favicon-16x16.png</Image>
+<Url type="text/html" method="get" template="https://amirghedira.com/search?searchTerm={searchTerms}&amp;ref=opensearch"/>
+<moz:SearchForm>https://amirghedira.com/search</moz:SearchForm>
 </OpenSearchDescription>
