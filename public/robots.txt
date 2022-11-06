@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://www.amirghedira.com
-
-# Sitemaps
-Sitemap: https://www.amirghedira.com/sitemap.xml
