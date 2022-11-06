@@ -12,56 +12,29 @@ const ProjectColumn = (props) => {
     const context = React.useContext(GlobalContext)
     const inputFile = React.useRef(null)
     const [showProjectImage, setShowProjectImage] = React.useState(false)
-    const [displayImageIndex, setDisplayImageIndex] = React.useState(0)
+    const [displayImageIndex, setDisplayImageIndex] = React.useState(null)
+
+    React.useState(() => {
+        console.log(displayImageIndex)
+        console.log(props.project.imagesurl[displayImageIndex])
+    }, [displayImageIndex])
 
 
-
-    const addprojectImageHandler = (images) => {
-        const fd = new FormData();
-        if (images)
-            for (const key of Object.keys(images)) {
-                fd.append('projectimages', images[key])
-            }
-        axios.patch('/project/addprojectimages/' + props.project._id, fd)
-            .then(result => {
-                context.setProject({
-                    ...props.project,
-                    imagesurl: [...project.imagesurl, ...result.data.imageurls]
-                })
-            })
-            .catch(err => {
-                context.ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-
+    const clickedImageHandler = (image) => {
+        const imageIndex = props.project.imagesurl.findIndex(i => i === image)
+        setDisplayImageIndex(imageIndex)
     }
-
-    const deleteProjectImageHandler = (image) => {
-        const imageindex = props.project.imagesurl.findIndex(projectimage => { return projectimage === image });
-        const newimages = props.project.imagesurl;
-        newimages.splice(imageindex, 1);
-        axios.patch('/project/deleteprojectimage/' + props.project._id, { imagetodelete: image, newimages: newimages })
-            .then(result => {
-                setProject({
-                    ...props.project,
-                    imagesurl: newimages
-                })
-            })
-            .catch(err => {
-                context.ErrorAccureHandler(500, "Connection to server has timedout")
-            })
-    }
-
     return (
 
         <Row className={classes.firstdiv} >
             <Col>
-                {showProjectImage &&
+                {displayImageIndex !== null &&
                     <Lightbox
                         mainSrc={props.project.imagesurl[displayImageIndex]}
                         enableZoom={false}
                         nextSrc={props.project.imagesurl[(displayImageIndex + 1) % props.project.imagesurl.length]}
                         prevSrc={props.project.imagesurl[(displayImageIndex + props.project.imagesurl.length - 1) % props.project.imagesurl.length]}
-                        onCloseRequest={() => setShowProjectImage(false)}
+                        onCloseRequest={() => setDisplayImageIndex(null)}
                         onMovePrevRequest={() =>
                             setDisplayImageIndex((displayImageIndex + props.project.imagesurl.length - 1) % props.project.imagesurl.length)
                         }
@@ -70,11 +43,12 @@ const ProjectColumn = (props) => {
 
                         } />
                 }
+
                 <Row>
                     <Col>
                         <Nav className={classes.itemsNavbar}>
                             <h1 className={classes.projecttitle} style={{ margin: 'auto', padding: '20px', fontSize: '16px' }}>
-                                {props.project.name}
+                                {props.project.name}{displayImageIndex}
                             </h1>
                         </Nav>
                     </Col>
@@ -210,7 +184,7 @@ const ProjectColumn = (props) => {
 
                                         <input
                                             style={{ display: 'none' }}
-                                            onChange={(event) => { addprojectImageHandler(event.target.files) }}
+                                            onChange={(event) => { props.addprojectImage(event.target.files) }}
                                             ref={inputFile}
                                             multiple
                                             type="file" />
@@ -221,30 +195,25 @@ const ProjectColumn = (props) => {
                         }
                         <Row >
                             {
-                                props.project.imagesurl.map((image, i) => {
+                                props.project.imagesurl.map(image => (
+                                    <Col xs="3" md="6" key={image} style={{ display: 'flex', justifyContent: 'center' }} >
+                                        <div className={classes.projectImageContainer} >
+                                            {context.currentUser && <div className={classes.deleteContainer}>
+                                                <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImage(image)}></i>
+                                            </div>}
+                                            <img
+                                                alt="..."
+                                                onClick={() => clickedImageHandler(image)}
+                                                className={classes.projectImage}
+                                                src={image} />
+                                        </div>
 
-                                    return (
-                                        <Col xs="3" md="6" key={i} style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <div className={classes.projectImageContainer}>
-                                                {context.currentUser && <div className={classes.deleteContainer}>
-                                                    <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImageHandler(image)}></i>
-                                                </div>}
-                                                <img
-                                                    alt="..."
-                                                    className={classes.projectImage}
-                                                    src={image}
-                                                    onClick={() => { setDisplayImageIndex(i + 1); setShowProjectImage(true) }} />
-                                            </div>
-
-                                        </Col>
-                                    )
-
-
-                                })}
+                                    </Col>
+                                ))}
                         </Row>
                     </Col>
                 </Row>
-            </Col>
+            </Col >
         </Row >
     )
 }

@@ -195,6 +195,40 @@ const Details = (props) => {
         Deletemodalclosehandler();
 
     }
+    const addprojectImageHandler = (images) => {
+        const fd = new FormData();
+        if (images)
+            for (const key of Object.keys(images)) {
+                fd.append('projectimages', images[key])
+            }
+        axios.patch('/project/addprojectimages/' + project._id, fd)
+            .then(result => {
+                context.setProject({
+                    ...project,
+                    imagesurl: [...project.imagesurl, ...result.data.imageurls]
+                })
+            })
+            .catch(err => {
+                context.ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+
+    }
+    const deleteProjectImageHandler = (image) => {
+        const imageindex = project.imagesurl.findIndex(projectimage => { return projectimage === image });
+        const newimages = [...project.imagesurl];
+        newimages.splice(imageindex, 1);
+        axios.patch('/project/deleteprojectimage/' + project._id, { imagetodelete: image, newimages: newimages })
+            .then(result => {
+                setProject({
+                    ...project,
+                    imagesurl: newimages
+                })
+            })
+            .catch(err => {
+                context.ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+    }
+
 
     return (
         <React.Fragment>
@@ -219,7 +253,11 @@ const Details = (props) => {
                         <Container fluid>
                             <Row >
                                 <Col sm="12" md="4" xl="3" >
-                                    <ProjectColumn project={project} githubButtonFunction={UpdateGitViewerHandler}
+                                    <ProjectColumn
+                                        project={project}
+                                        addprojectImage={addprojectImageHandler}
+                                        deleteProjectImage={deleteProjectImageHandler}
+                                        githubButtonFunction={UpdateGitViewerHandler}
                                         downloadButtonFunction={updateDownloadHandler}
                                         editFunction={editHandler} logstatus={context.currentUser} />
                                 </Col>
