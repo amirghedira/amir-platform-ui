@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
     const uploadImageHandler = (image, success, error) => {
         const form = new FormData()
         form.append('images', image)
-        return axios.post('/upload', form)
+        return axios.post('/slack-upload', form)
             .then(res => {
                 success(res.data.fileLinks[0])
             })
