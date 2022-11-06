@@ -11,13 +11,7 @@ const ProjectColumn = (props) => {
 
     const context = React.useContext(GlobalContext)
     const inputFile = React.useRef(null)
-    const [showProjectImage, setShowProjectImage] = React.useState(false)
     const [displayImageIndex, setDisplayImageIndex] = React.useState(null)
-
-    React.useState(() => {
-        console.log(displayImageIndex)
-        console.log(props.project.imagesurl[displayImageIndex])
-    }, [displayImageIndex])
 
 
     const clickedImageHandler = (image) => {
