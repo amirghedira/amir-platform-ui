@@ -203,7 +203,7 @@ const Details = (props) => {
             }
         axios.patch('/project/addprojectimages/' + project._id, fd)
             .then(result => {
-                context.setProject({
+                setProject({
                     ...project,
                     imagesurl: [...project.imagesurl, ...result.data.imageurls]
                 })
