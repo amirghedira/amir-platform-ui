@@ -8,8 +8,7 @@ import {
 import axios from '../../utils/axios'
 import classes from './AccountSettings.module.css'
 import InputField from '../../components/InputField/InputField'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import LinearProgress from '@mui/material/LinearProgress';
 import Loading from '../../components/LoadingPage/LoadingPage'
 import GlobalContext from '../../context/GlobalContext'
@@ -497,7 +496,6 @@ const AccountSettings = () => {
     else
         return (
             <div>
-                <ToastContainer />
                 <div>
                     {progress > 0 ?
                         <LinearProgress

@@ -6,12 +6,12 @@ import GlobalContext from '../../context/GlobalContext';
 import axios from '../../utils/axios'
 import Link from 'next/link'
 import Banned from '../../components/Banned/Banned'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 
 const TopicsPage = ({ Topics, Type }) => {
 
     const context = React.useContext(GlobalContext)
+    const [topics, setTopics] = React.useState(Topics)
     const [currentPosts, SetcurrentPosts] = React.useState({})
     const [currentPage, setcurrentPage] = React.useState(1);
     const [postsPerPage] = React.useState(10);
@@ -21,7 +21,7 @@ const TopicsPage = ({ Topics, Type }) => {
 
 
     React.useEffect(() => {
-        SetcurrentPosts(Topics.slice(indexofFirstPost, indexofLastPost))
+        SetcurrentPosts(topics.slice(indexofFirstPost, indexofLastPost))
     }, [])
 
     React.useEffect(() => {
@@ -45,7 +45,7 @@ const TopicsPage = ({ Topics, Type }) => {
         }
     }, [context.socket])
     React.useEffect(() => {
-        if (context.socket && Topics) {
+        if (context.socket && topics) {
             context.socket.off('sendtopics')
             context.socket.on('sendtopics', (topics) => {
                 setTopics(topics)
@@ -53,13 +53,13 @@ const TopicsPage = ({ Topics, Type }) => {
 
             })
         }
-    }, [context.socket, indexofFirstPost, indexofLastPost, Topics])
+    }, [context.socket, indexofFirstPost, indexofLastPost, topics])
 
     const editTopicStateHandler = (topicId, topicstate) => {
         axios.patch(`/topic/topicstate/${topicId}`, { state: topicstate })
             .then(result => {
-                let newTopics = Topics;
-                const topicIndex = Topics.findIndex(topic => { return topic._id === topicId });
+                let newTopics = topics;
+                const topicIndex = topics.findIndex(topic => { return topic._id === topicId });
                 newTopics[topicIndex] = {
                     ...newTopics[topicIndex],
                     state: topicstate
@@ -89,8 +89,8 @@ const TopicsPage = ({ Topics, Type }) => {
     const pinUnpinTopicHandler = (topicId, topicpinstate) => {
         axios.patch(`/topic/topicpin/${topicId}`, { state: topicpinstate })
             .then(result => {
-                let newTopics = Topics;
-                const topicIndex = Topics.findIndex(topic => { return topic._id === topicId });
+                let newTopics = topics;
+                const topicIndex = topics.findIndex(topic => { return topic._id === topicId });
                 newTopics[topicIndex] = {
                     ...newTopics[topicIndex],
                     pin: topicpinstate
@@ -114,17 +114,17 @@ const TopicsPage = ({ Topics, Type }) => {
     const deleteTopicHandler = (id) => {
         axios.delete(`topic/${id}`)
             .then(result => {
-                let newTopics = Topics;
+                let newTopics = topics;
                 const index = newTopics.findIndex(topic => { return topic._id === id })
-                context.deleteTopicNotifications(Topics[index]._id, Type)
+                context.deleteTopicNotifications(topics[index]._id, Type)
                 newTopics.splice(index, 1);
                 setTopics(newTopics)
-                context.socket.emit('sendtopics', newTopics)
                 toast.success('Topic deleted.', { position: toast.POSITION.BOTTOM_RIGHT })
                 SetcurrentPosts(newTopics.slice(indexofFirstPost, indexofLastPost))
 
             })
             .catch(err => {
+                console.log(err)
                 context.ErrorAccureHandler(500, "Connection to server timedout");
             })
 
@@ -132,7 +132,7 @@ const TopicsPage = ({ Topics, Type }) => {
 
     const getPageNumber = () => {
         let Pagenumber = [];
-        for (let i = 1; i <= Math.ceil(Topics.length / postsPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(topics.length / postsPerPage); i++) {
             Pagenumber.push(i)
         }
         return Pagenumber
@@ -161,7 +161,6 @@ const TopicsPage = ({ Topics, Type }) => {
             </Row>
 
             <Container className={classes.container}>
-                <ToastContainer />
 
                 <Row className={classes.createTopic}>
                     <Col>
@@ -180,7 +179,7 @@ const TopicsPage = ({ Topics, Type }) => {
                 </Row>
                 <Row>
                     <Col>
-                        {Topics.length > postsPerPage ?
+                        {topics.length > postsPerPage ?
                             <Nav className={classes.PaginationBar} expand="lg">
 
                                 <Pagination
@@ -236,7 +235,7 @@ const TopicsPage = ({ Topics, Type }) => {
                                             key={topic._id}
                                             id={topic._id}
                                             title={topic.title}
-                                            autor={topic.autor === 'admin' ? context.UserProfile.name : topic.autor}
+                                            autor={topic.addedBy ? topic.addedBy.name : topic.autor}
                                             date={topic.date}
                                             replies={topic.replies.length}
                                             type={Type}
@@ -277,7 +276,7 @@ const TopicsPage = ({ Topics, Type }) => {
                 </Row>
                 <Row>
                     <Col>
-                        {Topics.length > postsPerPage ?
+                        {topics.length > postsPerPage ?
                             <Nav className={classes.PaginationBar} expand="lg">
 
                                 <Pagination

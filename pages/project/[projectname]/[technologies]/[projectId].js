@@ -1,6 +1,5 @@
 import React from 'react'
 import classes from './ProjectDetails.module.css'
-import Lightbox from 'react-18-image-lightbox'
 
 import {
     Container, Row, Col
@@ -10,9 +9,8 @@ import Editmodal from '../../../../components/Editmodal/Editmodal'
 import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
 import ProjectField from '../../../../components/ProjectField/ProjectField';
 import ProjectColumn from '../../../../components/ProjectColumn/ProjectColumn';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import GlobalContext from '../../../../context/GlobalContext'
-import 'react-toastify/dist/ReactToastify.css';
 import PostCard from '../../../../components/PostCard/PostCard';
 import CommentSection from '../../../../components/CommentSection/CommentSection'
 import axios from '../../../../utils/axios';
@@ -332,7 +330,6 @@ const Details = (props) => {
                         commentorname={deletemodalprops.commentorname}
                         commentorid={deletemodalprops.id}
                     />
-                    <ToastContainer />
                 </article >
             </main>
         </React.Fragment>

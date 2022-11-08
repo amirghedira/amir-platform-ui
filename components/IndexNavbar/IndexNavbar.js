@@ -1,9 +1,7 @@
 import React from "react";
 import LoginModal from '../loginModal/LoginModal'
 import GlobalContext from '../../context/GlobalContext'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import classes from './IndexNavbar.module.css'
 // reactstrap components
@@ -392,7 +390,6 @@ const IndexNavbar = () => {
             focusgained={focusgainedHandler}
             error={loginerror}
         />
-        <ToastContainer />
     </>;
 }
 export default IndexNavbar;

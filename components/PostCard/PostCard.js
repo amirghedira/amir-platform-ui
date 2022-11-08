@@ -6,7 +6,6 @@ import FormatDate from '../../utils/FormatDate'
 import Link from 'next/link'
 const PostCard = (props) => {
     const context = React.useContext(GlobalContext)
-    const isadmin = props.autor === 'admin' ? true : false;
     const [width, setwidth] = React.useState(0)
 
     React.useEffect(() => {
@@ -35,17 +34,17 @@ const PostCard = (props) => {
                                 <NavItem style={{ display: 'flex' }}>
                                     <img
                                         className='rounded-circle'
-                                        src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
+                                        src={props.addedBy ? props.addedBy.profileimage : '/default-avatar.png'}
                                         alt="JavaScript programmer" />
                                 </NavItem>
                                 : null
                             }
                             <NavItem style={{ display: width > 525 ? 'flex' : 'flex', width: '170px' }}>
                                 {
-                                    <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={isadmin ? Link : 'div'} legacyBehavior>
+                                    <NavLink href='/profile' style={{ padding: '0', display: width > 525 ? 'flex' : 'block', margin: 'auto' }} tag={props.addedBy ? Link : 'div'} legacyBehavior>
                                         <a style={{ width: '100%', display: width < 525 ? 'block' : 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                             <strong className={classes.postname} style={{ textAlign: 'center', color: 'white', width: '120px', maxWidth: '120px' }}>{
-                                                isadmin ? context.UserProfile?.name : props.autor} </strong>
+                                                props.addedBy ? props.addedBy.name : props.autor} </strong>
                                             {width < 525 ?
                                                 <div style={{ display: 'block', margin: 'auto' }}>
                                                     <h5 className={classes.postinfo} style={{ color: 'white', margin: '0' }}>Posted:{' '}
@@ -129,8 +128,7 @@ const PostCard = (props) => {
                     {width > 800 ?
 
                         <Col md="3" xl="2" style={{ display: 'flex', marginRight: '12px' }}>
-
-                            <img className="img-raised" src={isadmin ? context.UserProfile?.profileimage : '/default-avatar.png'}
+                            <img className="img-raised" src={props.addedBy ? props.addedBy.profileimage : '/default-avatar.png'}
                                 style={{
                                     borderRadius: '50%', height: '150px', width: '150px', margin: 'auto', marginTop: '40px',
                                     boxShadow: 'none'

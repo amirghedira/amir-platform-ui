@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import "../styles/css/bootstrap.min.css";
 import "../styles/scss/now-ui-kit.css";
 import '../styles/react-lightbox.css'
+import 'react-toastify/dist/ReactToastify.css';
 
 import React from 'react'
 import AppContext from '../context/AppContext'

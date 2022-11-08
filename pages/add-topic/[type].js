@@ -19,7 +19,7 @@ const AddTopic = (props) => {
     const router = useRouter()
 
     const submitTopicHandler = (obj) => {
-
+        console.log('submit topic')
         if (obj.autor === "")
             SeterrorMessage('Taper votre nom')
         else if (obj.autor === 'admin' && !context.currentUser)
@@ -39,15 +39,16 @@ const AddTopic = (props) => {
                     date: new Date(),
                     type: props.type,
                     replies: []
-                }).then(result => {
+                })
+                .then(result => {
                     setRedirectPost({ state: true, path: `/${props.type}/${result.data.id}` })
-                    if (obj.autor !== 'admin')
+                    if (obj.autor && !context.currentUser)
                         context.addNotificationTopic(result.data.id, obj.autor, props.type)
 
 
                 })
                 .catch(err => {
-                    context.ErrorAccureHandler();
+                    console.log(err)
                 })
 
         }
@@ -121,9 +122,9 @@ const AddTopic = (props) => {
                             <Col xs="3" md='1' style={{ display: 'flex' }}>
                                 <div style={{ borderStyle: 'solid', borderColor: '#e6e6e6', width: '50px', borderWidth: '1px', margin: 'auto', marginTop: '10px' }}>
                                     {context.currentUser ?
-                                        <img src={context.UserProfile?.profileimage} style={{ height: '50px', width: '50px' }} alt="Amir ghedira" />
+                                        <img src={context.currentUser?.profileimage} style={{ height: '50px', width: '50px', objectFit: 'cover' }} alt="Amir ghedira" />
                                         :
-                                        <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px' }} alt="Javascript programmer" />
+                                        <img src={'/default-avatar.png'} style={{ height: '50px', width: '50px', objectFit: 'cover' }} alt="Javascript programmer" />
 
                                     }
                                 </div>

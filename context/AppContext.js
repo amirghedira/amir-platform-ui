@@ -5,16 +5,14 @@ import io from 'socket.io-client'
 import { ToastContainer, toast } from 'react-toastify';
 import Page404 from '../components/Page404/Page404'
 import GlobalContext from './GlobalContext'
-import 'react-toastify/dist/ReactToastify.css';
 import LocalStorageService from '../utils/localStorageService';
 
 const AppContext = (props) => {
-    const [UserProfile, SetUserProfile] = React.useState(null);
     const [currentUser, setCurrentUser] = React.useState(null)
     const [PageError, SetPageError] = React.useState({ state: false, statuscode: null, message: null });
     const [memberInfo, setMemberInfo] = React.useState(null)
     const [bannedUsers, SetBannedUsers] = React.useState(null)
-    const [Notifications, setNotifications] = React.useState(null)
+    const [Notifications, setNotifications] = React.useState([])
     const [socket, setsocket] = React.useState(null)
     const [subscription, setsubscription] = React.useState(null)
     const [Erroraccured, setErrorAccured] = React.useState(false)
@@ -47,10 +45,6 @@ const AppContext = (props) => {
     }, [])
     React.useEffect(() => {
         setsocket(io(API_URL))
-        axios.get('/user')
-            .then(res => {
-                SetUserProfile(res.data)
-            })
         axios.get('/user/banned')
             .then(res => {
                 SetBannedUsers(res.data.banned)
@@ -274,6 +268,7 @@ const AppContext = (props) => {
                 setNotifications([...newNotifications])
             })
             .catch(err => {
+                console.log(err)
                 ErrorAccureHandler(500, "Connection to server has timedout");
             })
     }
@@ -294,7 +289,6 @@ const AppContext = (props) => {
                     PageError: PageError,
                     currentUser: currentUser,
                     loadingContext: loading,
-                    UserProfile: UserProfile,
                     socket: socket,
                     setsocket: setsocket,
                     memberInfo: memberInfo,
@@ -314,7 +308,7 @@ const AppContext = (props) => {
             }>
 
                 {props.children}
-                < ToastContainer />
+                < ToastContainer position='bottom-left' theme="dark" style={{ marginBottom: '40px' }} />
 
             </GlobalContext.Provider>
         )

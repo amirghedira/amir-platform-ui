@@ -6,14 +6,14 @@ import CommentSection from '../CommentSection/CommentSection'
 import axios from '../../utils/axios'
 import Link from 'next/link'
 import GlobalContext from '../../context/GlobalContext'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
 import FormatDate from '../../utils/FormatDate'
 import { useRouter } from 'next/router'
 
 
 const Topic = ({ Topic, type }) => {
     const context = React.useContext(GlobalContext)
+    const [topic, setTopic] = React.useState(Topic)
     const router = useRouter()
 
     React.useEffect(() => {
@@ -47,26 +47,28 @@ const Topic = ({ Topic, type }) => {
 
             })
         }
-    }, [context.socket, Topic])
+    }, [context.socket, topic])
 
     const submitCommentHandler = (obj) => {
 
-        if (Topic.replies.length === 0 || context.memberInfo.ip !== Topic.replies[Topic.replies.length - 1].ip) {
+        if (topic.replies.length === 0 || context.memberInfo.ip !== topic.replies[topic.replies.length - 1].ip) {
 
-            axios.patch('/topic/postcomment/' + Topic._id, { ip: context.memberInfo.ip, autor: obj.autor, content: obj.content })
+            axios.patch('/topic/postcomment/' + topic._id, { ip: context.memberInfo.ip, autor: obj.autor, content: obj.content })
                 .then(response => {
                     const newTopic = {
-                        ...Topic,
-                        replies: [...Topic.replies, { _id: response.data.id, ip: context.memberInfo.ip, autor: obj.autor, content: obj.content, date: response.data.date }]
+                        ...topic,
+                        replies: [...topic.replies, { _id: response.data.id, ip: context.memberInfo.ip, autor: obj.autor, content: obj.content, date: response.data.date }]
                     }
                     setTopic(newTopic)
                     context.socket.emit('sendtopic', newTopic)
 
-                    if (obj.autor !== 'admin')
-                        context.addNotificationReply(response.data.id, obj.autor, Topic._id, Topic.title, type)
+                    if (!obj.autor && context.currentUser)
+                        context.addNotificationReply(response.data.id, obj.autor, topic._id, topic.title, type)
                 })
                 .catch(err => {
-                    context.ErrorAccureHandler(err.response.status, err.response.message);
+                    console.log(err)
+                    if (err.response)
+                        context.ErrorAccureHandler(err.response.status, err.response.message);
                 })
 
         } else {
@@ -78,10 +80,10 @@ const Topic = ({ Topic, type }) => {
     }
     const OpenCloseTopicHandler = (topicstate) => {
 
-        axios.patch('/topic/topicstate/' + Topic._id, { state: topicstate })
+        axios.patch('/topic/topicstate/' + topic._id, { state: topicstate })
             .then(result => {
                 const newTopic = {
-                    ...Topic,
+                    ...topic,
                     state: topicstate
                 }
                 setTopic(newTopic)
@@ -98,15 +100,9 @@ const Topic = ({ Topic, type }) => {
 
     const deleteTopicHandler = () => {
 
-        axios.delete('/topic/' + Topic._id)
+        axios.delete('/topic/' + topic._id)
             .then(result => {
-
-                context.deleteTopicNotifications(Topic._id, type)
                 router.push(`/topics/${type}`)
-
-
-
-
             })
             .catch(err => {
                 context.ErrorAccureHandler();
@@ -116,13 +112,13 @@ const Topic = ({ Topic, type }) => {
 
     const deleteReplyHandler = (replyId) => {
 
-        const replyIndex = Topic.replies.findIndex(reply => { return reply._id === replyId })
-        let newReplies = Topic.replies;
+        const replyIndex = topic.replies.findIndex(reply => { return reply._id === replyId })
+        let newReplies = topic.replies;
         newReplies.splice(replyIndex, 1)
-        axios.patch('/topic/deletecomment/' + Topic._id, { newreplies: newReplies })
+        axios.patch('/topic/deletecomment/' + topic._id, { newreplies: newReplies })
             .then(result => {
                 const newTopic = {
-                    ...Topic,
+                    ...topic,
                     replies: newReplies
                 }
                 setTopic(newTopic)
@@ -164,7 +160,7 @@ const Topic = ({ Topic, type }) => {
                             <NavLink >
                                 <div style={{ display: 'flex', alignItems: 'center' }}>
                                     <img style={{ height: '36px', width: '36px' }} alt='...' src={'/chevron.png'} />
-                                    <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {Topic.title} </strong>
+                                    <strong style={{ color: '#2CA8FF', fontSize: '12px' }} > {topic.title} </strong>
                                 </div>
                             </NavLink>
 
@@ -173,15 +169,14 @@ const Topic = ({ Topic, type }) => {
                 </Col>
             </Row>
             <Container className={classes.Container}>
-                <ToastContainer />
                 <Row style={{ marginBottom: '50px', margin: 'auto' }}>
 
                     <Col className="ml-auto mr-auto" xs="3" sm="2" md="1" style={{ justifyContent: 'flex-start', display: 'flex' }}>
 
                         <div style={{ margin: '0' }}>
                             {
-                                Topic.autor === 'admin' ?
-                                    <img src={context.UserProfile?.profileimage} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="Amir ghedira" />
+                                topic.addedBy ?
+                                    <img src={topic.addedBy.profileimage} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="Amir ghedira" />
                                     :
                                     <img src={"/default-avatar.png"} style={{ height: '50px', width: '50px', borderRadius: '100px' }} alt="javascript programmer" />
                             }
@@ -191,7 +186,7 @@ const Topic = ({ Topic, type }) => {
                     <Col >
                         <Row style={{ justifyContent: 'flex-start', display: 'flex' }}>
                             <Col>
-                                <h3 className={classes.topicTitle}>{Topic.title}</h3>
+                                <h3 className={classes.topicTitle}>{topic.title}</h3>
                             </Col>
 
                         </Row>
@@ -199,8 +194,8 @@ const Topic = ({ Topic, type }) => {
                             <Col>
                                 <div style={{ display: 'flex' }}>
                                     <p className={classes.infotext}> {'By'}</p>
-                                    <h5 className={classes.Topicautor}>{Topic.autor === 'admin' ? context.UserProfile.name : Topic.autor}</h5>
-                                    <p className={classes.infotext}><FormatDate>{Topic.date}</FormatDate></p>
+                                    <h5 className={classes.Topicautor}>{topic.addedBy ? topic.addedBy.name : topic.autor}</h5>
+                                    <p className={classes.infotext}><FormatDate>{topic.date}</FormatDate></p>
                                 </div>
                             </Col>
 
@@ -212,21 +207,23 @@ const Topic = ({ Topic, type }) => {
 
                 </Row>
                 <PostCard
-                    key={Topic._id}
-                    ip={Topic.ip}
-                    autor={Topic.autor}
-                    date={Topic.date}
+                    key={topic._id}
+                    ip={topic.ip}
+                    autor={topic.autor}
+                    addedBy={topic.addedBy}
+                    date={topic.date}
                     connected={context.currentUser || false}
-                    content={Topic.content}
-                    closeOpenFunction={() => { OpenCloseTopicHandler(!Topic.state) }}
-                    banMemberFunction={() => { context.banMember({ name: Topic.autor, ip: Topic.ip, content: Topic.content }) }}
+                    content={topic.content}
+                    closeOpenFunction={() => { OpenCloseTopicHandler(!topic.state) }}
+                    banMemberFunction={() => { context.banMember({ name: topic.autor, ip: topic.ip, content: topic.content }) }}
                     deleteFunction={deleteTopicHandler}
                 />
-                {Topic.replies.map(reply => {
+                {topic.replies.map(reply => {
                     return (
                         <PostCard
                             key={reply._id}
                             ip={reply.ip}
+                            addedBy={reply.addedBy}
                             autor={reply.autor}
                             connected={context.currentUser || false}
                             date={reply.date}
@@ -239,10 +236,10 @@ const Topic = ({ Topic, type }) => {
                 }
                 <CommentSection
                     token={context.currentUser}
-                    image={context.currentUser ? context.UserProfile?.profileimage : null}
+                    image={context.currentUser ? context.currentUser.profileimage : null}
                     submitCommment={submitCommentHandler}
                     defaultmessage='Reply to this topic'
-                    active={Topic.state}
+                    active={topic.state}
                     banned={context.getBanStatus()}
                 />
 

@@ -135,7 +135,7 @@ const CommentSection = (props) => {
                                     <div >
                                         <Button
                                             color="info"
-                                            onClick={() => { submitCommmentFunction({ autor: props.connected ? "admin" : document.getElementById('namecomment').value, content: document.getElementById('thecomment').value }) }}
+                                            onClick={() => { submitCommmentFunction({ autor: document.getElementById('namecomment').value, content: document.getElementById('thecomment').value }) }}
                                         >
                                             Submit
                                         </Button>
