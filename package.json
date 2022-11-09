@@ -30,7 +30,7 @@
         "react-moment": "^1.1.2",
         "react-slack-feedback": "^2.1.1",
         "react-syntax-highlighter": "^15.5.0",
-        "react-toastify": "^9.0.8",
+        "react-toastify": "^9.1.1",
         "react-tooltip": "^4.4.3",
         "reactstrap": "^8.10.0",
         "socket.io": "^4.5.3",
