@@ -193,7 +193,7 @@ const ProjectColumn = (props) => {
                                     <Col xs="3" md="6" key={image} style={{ display: 'flex', justifyContent: 'center' }} >
                                         <div className={classes.projectImageContainer} >
                                             {context.currentUser && <div className={classes.deleteContainer}>
-                                                <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => deleteProjectImage(image)}></i>
+                                                <i className={`fas fa-times-circle ${classes.deleteIcon}`} onClick={() => props.deleteProjectImage(image)}></i>
                                             </div>}
                                             <img
                                                 alt="..."
