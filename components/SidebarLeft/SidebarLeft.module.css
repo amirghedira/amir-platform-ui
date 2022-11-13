@@ -20,16 +20,6 @@
     justify-content: flex-start
 }
 
-.items {
-
-    text-decoration: none;
-    transition: color .2s ease-out;
-    display: flex;
-    padding: .5rem 1rem;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: transparent;
-}
 
 .navItemText {
     color: inherit;
