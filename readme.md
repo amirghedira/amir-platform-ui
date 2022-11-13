@@ -22,6 +22,13 @@ The only difference is that we have updated the project fields. Instead of writi
 
 Not only that, but we have added a process that sync the markdown written to specific project to the `readme.md` of the project repository.  Which mean that whenever we add or update the documentation of a project in this website the `readme.md` file will be created or update in the Gihub repository
 
+This is how you edit the project documentation on the website with a preview of the markdown in the right side of the page
+
+![project_documentation](https://amirplatform.s3.eu-central-1.amazonaws.com/project/1668355697146-Screenshot%202022-11-13%20at%2017.08.07.png)
+
+When you save the changes, the `readme.md` file will be synced in the Github repository.
+
+![github_documentation](https://amirplatform.s3.eu-central-1.amazonaws.com/project/1668355891525-Screenshot%202022-11-13%20at%2017.11.21.png)
 
 
 
