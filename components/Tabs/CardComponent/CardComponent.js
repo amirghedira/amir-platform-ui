@@ -158,7 +158,7 @@ const CardComponent = (props) => {
                         </CardBody>
                         <CardFooter>
                             <hr style={{ width: '100%', marginBottom: '0' }} />
-                            <Row style={{ margin: '5px' }}>
+                            <Row style={{ margin: '5px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
                                 {props.status === 'Public' &&
                                     <Col sm="12" md="4"  >
