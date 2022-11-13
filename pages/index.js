@@ -90,8 +90,8 @@ function Index(props) {
                         <SidebarRight projects={currentUser ? projects : projects.filter(p => p.visibility)} topicsCount={props.topicsCount} />
                     </Col>
                 </Row>
-                <Support />
             </Container>
+            <Support />
         </main>
 
     );
