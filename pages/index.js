@@ -78,7 +78,7 @@ function Index(props) {
                 <meta property="og:image" content="https://www.amirghedira.com/logo.png" />
 
             </Head>
-            <Container fluid style={{ padding: '0' }}>
+            <Container fluid >
                 <Row style={{ justifyContent: 'center' }}>
                     <Col className={classes.sideBarMenu} >
                         <SidebarLeft xs="2" md="3" lg="2" />

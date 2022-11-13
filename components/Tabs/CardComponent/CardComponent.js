@@ -160,22 +160,23 @@ const CardComponent = (props) => {
                             <hr style={{ width: '100%', marginBottom: '0' }} />
                             <Row style={{ margin: '5px' }}>
 
-                                {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }} >
-                                    <a href={props.filelink} download
-                                        onClick={() => { context.UpdateDownloadCount(props._id); }}>
-                                        <Button
-                                            onMouseEnter={() => { setfocusedDownload(true) }}
-                                            onMouseLeave={() => { setfocusedDownload(false) }}
-                                            style={{ margin: 'auto', backgroundColor: focusedDownload ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
-                                            <div>
-                                                <i className="fas fa-download fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700', textAlign: 'center' }}>Download</p>
-                                            </div>
-                                        </Button>
-                                    </a>
+                                {props.status === 'Public' &&
+                                    <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }} >
+                                        <a href={props.filelink} download
+                                            onClick={() => { context.UpdateDownloadCount(props._id); }}>
+                                            <Button
+                                                onMouseEnter={() => { setfocusedDownload(true) }}
+                                                onMouseLeave={() => { setfocusedDownload(false) }}
+                                                style={{ margin: 'auto', backgroundColor: focusedDownload ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
+                                                <div>
+                                                    <i className="fas fa-download fa-2x" ></i>
+                                                    <p style={{ margin: '0', fontWeight: '700', textAlign: 'center' }}>Download</p>
+                                                </div>
+                                            </Button>
+                                        </a>
 
-                                </Col>}
-                                <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
+                                    </Col>}
+                                <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }}  >
                                     <Link
                                         href={`/project/${props.projectname}/${props.technologie}/${props._id}`}
                                         style={{ color: 'black', textDecoration: 'none' }}
@@ -194,25 +195,26 @@ const CardComponent = (props) => {
                                     </Link>
                                 </Col>
 
-                                {props.status === 'Public' && <Col style={{ marginLeft: '10px', marginRight: '10px' }}  >
-                                    <a
-                                        href={props.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        style={{ color: 'black', textDecoration: 'none' }}
-                                        onClick={() => { context.UpdateGitViewer(props._id) }}>
-                                        <Button
-                                            onMouseEnter={() => { setfocusedGithub(true) }}
-                                            onMouseLeave={() => { setfocusedGithub(false) }}
-                                            style={{ margin: 'auto', backgroundColor: focusedGithub ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
-                                            <div>
-                                                <i className="fab fa-github fa-2x" ></i>
-                                                <p style={{ margin: '0', fontWeight: '700', fontSize: '14px', textAlign: 'center' }}>Github</p>
-                                            </div>
+                                {props.status === 'Public' &&
+                                    <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }}  >
+                                        <a
+                                            href={props.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            style={{ color: 'black', textDecoration: 'none' }}
+                                            onClick={() => { context.UpdateGitViewer(props._id) }}>
+                                            <Button
+                                                onMouseEnter={() => { setfocusedGithub(true) }}
+                                                onMouseLeave={() => { setfocusedGithub(false) }}
+                                                style={{ margin: 'auto', backgroundColor: focusedGithub ? '#d9d9d9' : 'transparent', color: 'black', width: '100%', fontWeight: 'bold' }}>
+                                                <div>
+                                                    <i className="fab fa-github fa-2x" ></i>
+                                                    <p style={{ margin: '0', fontWeight: '700', fontSize: '14px', textAlign: 'center' }}>Github</p>
+                                                </div>
 
-                                        </Button>
-                                    </a>
-                                </Col>}
+                                            </Button>
+                                        </a>
+                                    </Col>}
                             </Row>
 
                         </CardFooter>

@@ -22,7 +22,7 @@ const Tabs = (props) => {
     }
     return (
 
-        <Row>
+        <React.Fragment>
             {projectImagesUrl && showProjectImage &&
                 <Lightbox
                     mainSrc={projectImagesUrl[displayImageIndex]}
@@ -37,8 +37,8 @@ const Tabs = (props) => {
                         setDisplayImageIndex((displayImageIndex + 1) % projectImagesUrl.length)
 
                     } />}
-            <Container style={{ marginTop: '70px', minHeight: '30vh' }}>
-                <React.Fragment>
+            <Row style={{ marginTop: '70px', minHeight: '30vh' }}>
+                <Col>
                     {props.projects.slice(0).reverse().map(project => {
                         return <CardComponent
                             deleteProject={props.deleteProject}
@@ -62,11 +62,9 @@ const Tabs = (props) => {
                         />
                     })
                     }
-                </React.Fragment>
-
-
-            </Container>
-        </Row>
+                </Col>
+            </Row>
+        </React.Fragment>
 
     )
 
