@@ -15,6 +15,27 @@ The deployment process and pipelines will be discussed on another project that w
 # Launch the project
 To launch the project, create a `.env` file which will hold the environment variables of the application. For instance, there is the API url that needs to be provided as an environment variable. (you can take a look at the `.env.example` file which provides the environment variables used in the application)
 
+After adding a `.env` file, you have to install the NodeJS packages
+
+To install the backend Node packages, simply run:
+``` bash
+npm install
+```
+To build the project, run:
+``` bash
+npm run build
+```
+and then you can launch it by running:
+To build the project, run:
+``` bash
+npm start
+```
+You can run the project in development mode, with:
+``` bash
+npm run dev
+```
+Note that the frontend will be accessible on port `3000`
+
 # Features
 
 The same features have remained the same as the previous version, which is right [here](https://www.amirghedira.com/project/Amir%20Platform%20(FRONT)/ReactJS/5e9f5646b6b4f000174ab1a6).
