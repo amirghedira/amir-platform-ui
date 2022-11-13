@@ -51,7 +51,7 @@ function Download() {
                             className="btn-neutral btn-icon btn-round"
                             style={{ margin: '0px 5px 0px 5px' }}
                             color="linkedin"
-                            href="https://www.linkedin.com/in/amir-ghedira-1053991a2/"
+                            href="https://www.linkedin.com/in/amirghedira"
                             id="tooltip647117716"
                             size="lg"
                             target="_blank"
