@@ -161,7 +161,7 @@ const CardComponent = (props) => {
                             <Row style={{ margin: '5px' }}>
 
                                 {props.status === 'Public' &&
-                                    <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }} >
+                                    <Col sm="12" md="4"  >
                                         <a href={props.filelink} download
                                             onClick={() => { context.UpdateDownloadCount(props._id); }}>
                                             <Button
@@ -176,7 +176,7 @@ const CardComponent = (props) => {
                                         </a>
 
                                     </Col>}
-                                <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }}  >
+                                <Col sm="12" md="4" >
                                     <Link
                                         href={`/project/${props.projectname}/${props.technologie}/${props._id}`}
                                         style={{ color: 'black', textDecoration: 'none' }}
@@ -196,7 +196,7 @@ const CardComponent = (props) => {
                                 </Col>
 
                                 {props.status === 'Public' &&
-                                    <Col sm="12" md="4" style={{ marginLeft: '10px', marginRight: '10px' }}  >
+                                    <Col sm="12" md="4" >
                                         <a
                                             href={props.github}
                                             target="_blank"
