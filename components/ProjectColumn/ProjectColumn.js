@@ -187,7 +187,7 @@ const ProjectColumn = (props) => {
                                 </Row>
                                 : null
                         }
-                        <Row >
+                        <Row style={{ maxHeight: '30vh', overflowY: 'auto' }}>
                             {
                                 props.project.imagesurl.map(image => (
                                     <Col xs="3" md="6" key={image} style={{ display: 'flex', justifyContent: 'center' }} >
