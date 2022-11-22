@@ -57,6 +57,9 @@ deploy_image:
     - ./ci/deploy.sh
   tags:
     - amirplatform
+  environment:
+    name: production
+    url: https://www.amirghedira.com
 
 
 
