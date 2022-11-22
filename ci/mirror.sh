@@ -6,6 +6,7 @@ git config --global user.email "amirghedira06@gmail.com"
 git config --global user.name "amirghedira"
 USER_PATH="/home/gitlab-runner"
 REPO_PATH="${USER_PATH}/save-amir-platform-ui"
+cd "${USER_PATH}"
 if [ ! -d "${REPO_PATH}" ]; then
     cd "${USER_PATH}"
     git clone "https://amirghedira:${GITLAB_TOKEN}@gitlab.com/amir-platform/amir-platform-ui.git" save-amir-platform-ui
