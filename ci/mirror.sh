@@ -10,6 +10,6 @@ if [ ! -d "${REPO_PATH}" ]; then
     git remote add github "https://amirghedira:${GITHUB_TOKEN}@github.com/amirghedira/mypersonalweb-nextjs.git"
 fi
 
-sudo cd "${REPO_PATH}" && git pull origin main || :
+cd "${REPO_PATH}" && git pull origin main || :
 git push github main -f
 exit 0
