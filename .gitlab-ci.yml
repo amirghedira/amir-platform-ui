@@ -56,7 +56,7 @@ deploy_image:
     - chmod +x ./ci/deploy.sh
     - ./ci/deploy.sh
   tags:
-    - imagesbuilder
+    - amirplatform
 
 
 
@@ -76,7 +76,7 @@ notify:
     - chmod +x ./ci/notify.sh
     - ./ci/notify.sh
   tags:
-    - imagesbuilder
+    - amirplatform
 
 
 cleanup:
@@ -95,4 +95,4 @@ cleanup:
     - chmod +x ./ci/cleanup.sh
     - ./ci/cleanup.sh
   tags:
-    - imagesbuilder
+    - amirplatform
