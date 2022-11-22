@@ -14,7 +14,7 @@ mirror:
     - chmod +x ./ci/deliver.sh
     - ./ci/mirror.sh
   tags:
-    - imagesbuilder
+    - amirplatform
 
 
 
