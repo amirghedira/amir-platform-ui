@@ -1,10 +1,9 @@
 #!/bin/bash
 
 
-sudo su -
-cd "/home/almalinux"
-pwd
-REPO_PATH="home/almalinux/save-amir-platform-ui"
+USER_PATH="/home/gitlab-runner"
+REPO_PATH="${USER_PATH}/save-amir-platform-ui"
+cd "${USER_PATH}"
 if [ ! -d "${REPO_PATH}" ]; then
 
     git clone "https://amirghedira:${GITLAB_TOKEN}@gitlab.com/amir-platform/amir-platform-ui.git" save-amir-platform-ui
