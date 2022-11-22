@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-cd /home/almalinux
+sudo cd /home/almalinux
 pwd
 REPO_PATH="home/almalinux/save-amir-platform-ui"
 if [ ! -d "${REPO_PATH}" ]; then
