@@ -16,7 +16,6 @@ import {
 
 // core components
 import ProfilePageHeader from "../../components/Headers/ProfilePageHeader.js";
-import GlobalContext from '../../context/GlobalContext'
 import classes from './Profilepage.module.css'
 import Head from 'next/head'
 import ReactGitHubCalender from 'react-github-calendar'
@@ -30,8 +29,6 @@ const ProfilePage = ({ UserProfile }) => {
         moreinfo: true,
         news: false
     });
-    const context = React.useContext(GlobalContext)
-
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
         document.body.classList.add("profile-page");
@@ -42,19 +39,6 @@ const ProfilePage = ({ UserProfile }) => {
             document.body.classList.remove("sidebar-collapse");
         };
     }, [])
-    React.useEffect(() => {
-        const script = document.createElement('script');
-
-        script.src = 'https://platform.linkedin.com/badges/js/profile.js';
-        script.async = true;
-        script.defer = true;
-
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
     const showprojectimageHandler = (image) => {
         setShowimage(
             <Lightbox
@@ -231,14 +215,6 @@ const ProfilePage = ({ UserProfile }) => {
                                                 <Col className="ml-auto mr-auto" md="10">
                                                     <Row className="collections">
                                                         <Col>
-                                                            <div style={{ margin: '20px' }}>
-                                                                <h4 className={classes.categoryText} >LinkedIn Profile</h4>
-                                                                <hr style={{ backgroundColor: '#bfbfbf' }} />
-                                                                <div className="LI-profile-badge" data-version="v1" data-size="large" data-locale="fr_FR" data-type="horizontal" data-theme="light" data-vanity="amir-ghédira-1053991a2">
-                                                                    <a className="LI-simple-link" href='https://tn.linkedin.com/in/amir-gh%C3%A9dira-1053991a2?trk=profile-badge'>Amir Ghédira</a>
-                                                                </div>
-
-                                                            </div>
                                                             <div style={{ margin: '20px' }}>
                                                                 <h4 className={classes.categoryText} >Github Contribution</h4>
                                                                 <hr style={{ backgroundColor: '#bfbfbf' }} />
@@ -445,7 +421,7 @@ const ProfilePage = ({ UserProfile }) => {
                                                 <Col className="ml-auto mr-auto" md="10">
                                                     <Row className="collections">
                                                         <Col md="12">
-                                                            <iframe src={"/amir-ghedira-cv-en.pdf"} width="100%" height="800px">
+                                                            <iframe src={UserProfile.cvFile} width="100%" height="800px">
                                                             </iframe>
                                                         </Col>
                                                     </Row>
