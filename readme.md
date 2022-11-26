@@ -17,6 +17,13 @@ To launch the project, create a `.env` file which will hold the environment vari
 
 After adding a `.env` file, you have to install the NodeJS packages
 
+## Using Docker
+Note: Docker must be installed on your machine.
+To launch the project, simply run:
+```bash
+docker-compose -f docker-compose-local.yml up --build --force-recreate
+```
+## Manually
 To install the backend Node packages, simply run:
 ``` bash
 npm install
