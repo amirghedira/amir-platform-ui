@@ -1,0 +1,20 @@
+version: '3.3'
+services:
+  amir_platform_ui:
+    restart: always
+    container_name: amir_platform_ui
+    image: amir_platform_ui:latest
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    env_file: 
+      - .env
+    networks:
+      - amir_platform
+    ports:
+      - "3000:3000"
+
+
+networks:
+  amir_platform:
+    driver: bridge
