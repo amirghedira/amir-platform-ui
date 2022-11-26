@@ -13,12 +13,14 @@ The reason why i added the project ([Frontend](https://gitlab.com/amir-platform/
 The deployment process and pipelines will be discussed on another project that will be soon added here.
 
 # Launch the project
+
 To launch the project, create a `.env` file which will hold the environment variables of the application. For instance, there is the API url that needs to be provided as an environment variable. (you can take a look at the `.env.example` file which provides the environment variables used in the application)
 
 After adding a `.env` file, you have to install the NodeJS packages
 
 ## Using Docker
 Note: Docker must be installed on your machine.
+
 To launch the project, simply run:
 ```bash
 docker-compose -f docker-compose-local.yml up --build --force-recreate
