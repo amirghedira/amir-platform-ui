@@ -1,13 +1,15 @@
 import React from 'react';
 import classes from './PostCard.module.css';
 import { Nav, Row, Col, UncontrolledDropdown, DropdownMenu, DropdownToggle, DropdownItem, NavItem, NavLink } from 'reactstrap'
-import GlobalContext from '../../context/GlobalContext'
 import FormatDate from '../../utils/FormatDate'
 import Link from 'next/link'
 const PostCard = (props) => {
-    const context = React.useContext(GlobalContext)
     const [width, setwidth] = React.useState(0)
 
+
+    React.useEffect(() => {
+        console.log(props.addedBy)
+    }, [props])
     React.useEffect(() => {
         setwidth(window.innerWidth)
         window.addEventListener('resize', handleFunction)
@@ -127,12 +129,24 @@ const PostCard = (props) => {
                 <Row className={classes.topicContent}>
                     {width > 800 ?
 
-                        <Col md="3" xl="2" style={{ display: 'flex', marginRight: '12px' }}>
-                            <img className="img-raised" src={props.addedBy ? props.addedBy.profileimage : '/default-avatar.png'}
-                                style={{
-                                    borderRadius: '50%', height: '150px', width: '150px', margin: 'auto', marginTop: '40px',
-                                    boxShadow: 'none'
-                                }} alt="Javascript programmer" />
+                        <Col md="3" xl="2" style={{ marginRight: '12px' }}>
+                            <Row>
+                                <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <img className="img-raised" src={props.addedBy ? props.addedBy.profileimage : '/default-avatar.png'}
+                                        style={{
+                                            borderRadius: '50%', height: '150px', width: '150px', margin: 'auto', marginTop: '40px',
+                                            boxShadow: 'none'
+                                        }} alt="Javascript programmer" />
+                                </Col>
+                            </Row>
+                            <Row style={{ marginTop: '20px' }}>
+                                <Col style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    {props.addedBy ? <span style={{ color: 'red', fontWeight: '800' }}>Administrator</span>
+                                        :
+                                        <span style={{ color: '#555555', fontWeight: '500' }}>User</span>
+                                    }
+                                </Col>
+                            </Row>
                         </Col>
                         :
                         null

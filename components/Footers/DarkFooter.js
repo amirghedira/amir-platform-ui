@@ -1,8 +1,13 @@
 import React from "react";
 import { Container } from "reactstrap";
 import Link from "next/link";
+import getConfig from 'next/config'
+const { publicRuntimeConfig: config } = getConfig()
 
 function DarkFooter() {
+    React.useEffect(() => {
+        console.log(config)
+    })
     return (
         <footer className="footer" data-background-color="black">
             <Container>
@@ -15,16 +20,20 @@ function DarkFooter() {
                 </nav>
                 <div className="copyright" id="copyright">
                     © {new Date().getFullYear()}{" "}
-                    Coded by{" "}
                     <a
-                        href="https://www.linkedin.com/in/amirghedira"
+                        href="https://gitlab.com/amir-platform/amir-platform-ui"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Amir Ghedira
+                        version
+                        <span style={{ marginLeft: '5px', fontWeight: '800', color: 'white', textDecoration: 'underline' }}>
+                            {config.VERSION}
+                        </span>
                     </a>
                     .
+
                 </div>
+
             </Container>
         </footer>
     );

@@ -277,6 +277,7 @@ const Details = (props) => {
                                             ip={comment.ip} autor={comment.autor}
                                             content={comment.content}
                                             date={comment.date}
+                                            addedBy={comment.addedBy}
                                             connected={context.currentUser || false}
                                             banMemberFunction={() => { context.banMember({ name: comment.autor, ip: comment.ip, content: comment.content }) }}
                                             deleteFunction={() => showdeletemodalHandler({ autor: comment.autor, _id: comment._id })} />
