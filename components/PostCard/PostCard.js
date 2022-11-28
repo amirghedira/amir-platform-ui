@@ -6,10 +6,6 @@ import Link from 'next/link'
 const PostCard = (props) => {
     const [width, setwidth] = React.useState(0)
 
-
-    React.useEffect(() => {
-        console.log(props.addedBy)
-    }, [props])
     React.useEffect(() => {
         setwidth(window.innerWidth)
         window.addEventListener('resize', handleFunction)

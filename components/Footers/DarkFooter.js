@@ -5,9 +5,6 @@ import getConfig from 'next/config'
 const { publicRuntimeConfig: config } = getConfig()
 
 function DarkFooter() {
-    React.useEffect(() => {
-        console.log(config)
-    })
     return (
         <footer className="footer" data-background-color="black">
             <Container>

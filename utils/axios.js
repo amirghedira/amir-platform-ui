@@ -8,13 +8,15 @@ const axiosInstance = axios.create({
 })
 
 axiosInstance.interceptors.request.use(
-    config => {
+    async (config) => {
         let accessToken = null
         if (typeof window !== 'undefined') {
             accessToken = LocalStorageService.getAccessToken()
             if (accessToken)
                 config.headers['Authorization'] = 'Bearer ' + accessToken;
         }
+        const responseIp = await axios.get('https://api.ipgeolocation.io/getip')
+        config.headers['X-User-IP'] = responseIp.data.ip
         return config;
     },
     error => {

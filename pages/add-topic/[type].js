@@ -19,7 +19,6 @@ const AddTopic = (props) => {
     const router = useRouter()
 
     const submitTopicHandler = (obj) => {
-        console.log('submit topic')
         if (obj.autor === "")
             SeterrorMessage('Taper votre nom')
         else if (obj.autor === 'admin' && !context.currentUser)
