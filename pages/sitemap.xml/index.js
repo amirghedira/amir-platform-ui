@@ -36,7 +36,7 @@ function generateSiteMap(projects) {
      ${projects.map(project => {
         return `
        <url>
-           <loc>${`https://www.amirghedira.com/project/${project.name?.replace(/ /g, '-')}/${project.technologie.replace(/ /g, '-')}/${project._id}`}</loc>
+           <loc>${`https://www.amirghedira.com/project/${project.name?.replace(/ /g, '-')}/${project._id}`}</loc>
            <lastmod>${new Date().toISOString()}</lastmod>
 
 

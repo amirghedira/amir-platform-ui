@@ -43,6 +43,8 @@ const Tabs = (props) => {
                         return <CardComponent
                             deleteProject={props.deleteProject}
                             updateProjectVisibility={props.updateProjectVisibility}
+                            updateGitViewer={props.updateGitViewer}
+                            updateDownloadCount={props.updateDownloadCount}
                             key={project._id}
                             _id={project._id}
                             userImage={project.addedBy.profileimage}

@@ -11,7 +11,7 @@ import GlobalContext from "../context/GlobalContext";
 function Index(props) {
 
     const [projects, setProjects] = React.useState(props.projects)
-    const { currentUser } = React.useContext(GlobalContext)
+    const { currentUser, ErrorAccureHandler } = React.useContext(GlobalContext)
 
     React.useEffect(() => {
         document.documentElement.scrollTop = 0;
@@ -36,7 +36,7 @@ function Index(props) {
                 NewProjects[index] = Newproject
                 setProjects([...NewProjects])
             })
-            .catch(err => { context.ErrorAccureHandler(); })
+            .catch(err => { ErrorAccureHandler(); })
 
     }
     const updateProjectVisibilityHandler = (id) => {
@@ -51,7 +51,7 @@ function Index(props) {
                 NewProjects[index] = Newproject
                 setProjects([...NewProjects])
             })
-            .catch(err => { context.ErrorAccureHandler(); })
+            .catch(err => { ErrorAccureHandler(); })
     }
 
     const deleteProjectHandler = (id) => {
@@ -63,6 +63,32 @@ function Index(props) {
                 setProjects([...newProjects])
             })
             .catch(err => {
+                ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+    }
+    const updateGitViewerHandler = (projectId) => {
+        axios.patch('/project/updategitviewers/' + projectId)
+            .then(result => {
+                const newProjects = [...projects];
+                const projectIndex = projects.findIndex(project => project._id === projectId)
+                newProjects[projectIndex].gitViewers = result.data.gitViewers
+                setProjects(newProjects)
+            })
+            .catch(err => {
+                console.log(err)
+                ErrorAccureHandler(500, "Connection to server has timedout")
+            })
+    }
+    const updateDownloadCountHandler = (projectId) => {
+        axios.patch('/project/updatedownloads/' + projectId)
+            .then(result => {
+                const newProjects = [...projects];
+                const projectIndex = projects.findIndex(project => project._id === projectId)
+                newProjects[projectIndex].downloadcount = result.data.downloadcount
+                setProjects(newProjects)
+            })
+            .catch(err => {
+                console.log(err)
                 ErrorAccureHandler(500, "Connection to server has timedout")
             })
     }
@@ -84,7 +110,12 @@ function Index(props) {
                         <SidebarLeft xs="2" md="3" lg="2" />
                     </Col>
                     <Col xs="12" sm="12" md="9" lg="8">
-                        <Tabs projects={currentUser ? projects : projects.filter(p => p.visibility)} deleteProject={deleteProjectHandler} updateProjectVisibility={updateProjectVisibilityHandler} savechanges={savechangesHandler} />
+                        <Tabs projects={currentUser ? projects : projects.filter(p => p.visibility)}
+                            deleteProject={deleteProjectHandler}
+                            updateGitViewer={updateGitViewerHandler}
+                            updateProjectVisibility={updateProjectVisibilityHandler}
+                            updateDownloadCount={updateDownloadCountHandler}
+                            savechanges={savechangesHandler} />
                     </Col>
                     <Col className={classes.sideBarProjects} xs="3" lg="2">
                         <SidebarRight projects={currentUser ? projects : projects.filter(p => p.visibility)} topicsCount={props.topicsCount} />

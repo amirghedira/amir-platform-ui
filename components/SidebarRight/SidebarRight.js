@@ -112,7 +112,7 @@ const Sidebar = (props) => {
 
                             {mostSeen ?
                                 <Link
-                                    href={`/project/${mostSeen.name.replace(/ /g, '-')}/${mostSeen.technologie.replace(/ /g, '-')}/${mostSeen._id}`}
+                                    href={`/project/${mostSeen.name.replace(/ /g, '-')}/${mostSeen._id}`}
                                     className={classes.items}>
                                     {mostSeen.name}
                                 </Link>
@@ -140,7 +140,7 @@ const Sidebar = (props) => {
                             {
                                 mostDownload ?
                                     <Link
-                                        href={`/project/${mostDownload.name.replace(/ /g, '-')}/${mostDownload.technologie.replace(/ /g, '-')}/${mostDownload._id}`}
+                                        href={`/project/${mostDownload.name.replace(/ /g, '-')}/${mostDownload._id}`}
                                         className={classes.items}>
                                         {mostDownload.name}
                                     </Link>

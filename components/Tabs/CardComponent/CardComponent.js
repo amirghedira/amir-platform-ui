@@ -63,7 +63,7 @@ const CardComponent = (props) => {
                                     </Link>
                                     <div style={{ marginLeft: '10px' }}>
                                         <Link
-                                            href={`/project/${props.projectname.replace(/ /g, '-')}/${props.technologie.replace(/ /g, '-')}/${props._id}`}
+                                            href={`/project/${props.projectname.replace(/ /g, '-')}/${props._id}`}
                                             style={{ color: '#2CA8FF', fontSize: '16px', fontWeight: '600', margin: '0', cursor: 'pointer' }}>
 
                                             {props.projectname}
@@ -163,7 +163,7 @@ const CardComponent = (props) => {
                                 {props.status === 'Public' &&
                                     <Col sm="12" md="4"  >
                                         <a href={props.filelink} download
-                                            onClick={() => { context.UpdateDownloadCount(props._id); }}>
+                                            onClick={() => { props.updateDownloadCount(props._id); }}>
                                             <Button
                                                 onMouseEnter={() => { setfocusedDownload(true) }}
                                                 onMouseLeave={() => { setfocusedDownload(false) }}
@@ -178,7 +178,7 @@ const CardComponent = (props) => {
                                     </Col>}
                                 <Col sm="12" md="4" >
                                     <Link
-                                        href={`/project/${props.projectname}/${props.technologie}/${props._id}`}
+                                        href={`/project/${props.projectname.replace(/ /g, '-')}/${props._id}`}
                                         style={{ color: 'black', textDecoration: 'none' }}
                                         legacyBehavior>
                                         <Button
@@ -202,7 +202,7 @@ const CardComponent = (props) => {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             style={{ color: 'black', textDecoration: 'none' }}
-                                            onClick={() => { context.UpdateGitViewer(props._id) }}>
+                                            onClick={() => props.updateGitViewer(props._id)}>
                                             <Button
                                                 onMouseEnter={() => { setfocusedGithub(true) }}
                                                 onMouseLeave={() => { setfocusedGithub(false) }}

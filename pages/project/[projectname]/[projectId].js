@@ -5,24 +5,21 @@ import {
     Container, Row, Col
 
 } from 'reactstrap'
-import Editmodal from '../../../../components/Editmodal/Editmodal'
-import DeleteModal from '../../../../components/DeleteModal/DeleteModal'
-import ProjectField from '../../../../components/ProjectField/ProjectField';
-import ProjectColumn from '../../../../components/ProjectColumn/ProjectColumn';
+import Editmodal from '../../../components/Editmodal/Editmodal'
+import DeleteModal from '../../../components/DeleteModal/DeleteModal'
+import ProjectField from '../../../components/ProjectField/ProjectField';
+import ProjectColumn from '../../../components/ProjectColumn/ProjectColumn';
 import { toast } from 'react-toastify';
-import GlobalContext from '../../../../context/GlobalContext'
-import PostCard from '../../../../components/PostCard/PostCard';
-import CommentSection from '../../../../components/CommentSection/CommentSection'
-import axios from '../../../../utils/axios';
+import GlobalContext from '../../../context/GlobalContext'
+import PostCard from '../../../components/PostCard/PostCard';
+import CommentSection from '../../../components/CommentSection/CommentSection'
+import axios from '../../../utils/axios';
 import Head from 'next/head'
-import EditDocumentationModal from '../../../../components/EditDocumentationModal/EditDocumentationModal';
+import EditDocumentationModal from '../../../components/EditDocumentationModal/EditDocumentationModal';
 
 const Details = (props) => {
     const context = React.useContext(GlobalContext)
-    //Loading Handlers
     const [project, setProject] = React.useState(props.project)
-
-    //========
     const [errorMessages, SetErrorMessqge] = React.useState('');
     const [showEditDocumentationModal, setShowEditDocumentationModal] = React.useState(false)
     const [modalprops, setmodalprops] = React.useState({
@@ -98,11 +95,11 @@ const Details = (props) => {
     }
 
     const UpdateGitViewerHandler = () => {
-        axios.patch('/project/updategitviewers/' + project._id, { gitviewers: project.gitViewers + 1 })
+        axios.patch('/project/updategitviewers/' + project._id)
             .then(result => {
                 const newProject = {
                     ...project,
-                    gitViewers: project.gitViewers + 1
+                    gitViewers: result.data.gitViewers
                 }
                 setProject(newProject)
             })
