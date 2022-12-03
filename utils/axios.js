@@ -15,8 +15,6 @@ axiosInstance.interceptors.request.use(
             if (accessToken)
                 config.headers['Authorization'] = 'Bearer ' + accessToken;
         }
-        const responseIp = await axios.get('https://api.ipgeolocation.io/getip')
-        config.headers['X-User-IP'] = responseIp.data.ip
         return config;
     },
     error => {
