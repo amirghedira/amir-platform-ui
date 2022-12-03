@@ -97,6 +97,7 @@ function Index(props) {
     );
 }
 
+
 export const getServerSideProps = async () => {
 
     const result = await axios.get(`/project`)
